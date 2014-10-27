@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 39349 $ $LastChangedDate: 2013-10-18 11:51:15 +0200 (Fri, 
+	18 Oct 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:base="http://www.flexagon.de/inhouse/base/"
+	xmlns:orderACS="http://www.flexagon.de/acs/orderACS/"
+	xmlns:segmentsACS="http://www.flexagon.de/acs/segments/"
+	xmlns:complexACS="http://www.flexagon.de/acs/complex/"
+	targetNamespace="http://www.flexagon.de/acs/orderACS/"
+	elementFormDefault="unqualified">
+	
+	<!-- Imports -->
+	<xs:import namespace="http://www.flexagon.de/acs/segments/"
+		schemaLocation="../segments/segmentsACS.xsd" />
+	<xs:import namespace="http://www.flexagon.de/acs/complex/"
+		schemaLocation="../complex/complexACS.xsd" />
+	<xs:import namespace="http://www.flexagon.de/inhouse/base/"
+		schemaLocation="../base/base.xsd" />
+		
+	<xs:complexType name="orderACSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="ordACMain" type="orderACS:ordACMainType" />
+			<xs:element name="ordACMacAmendment" type="orderACS:ordACMacAmendmentType" />
+			<xs:element name="ordRCMain" type="orderACS:ordRCMainType" />
+			<xs:element name="ordRCMacAmendment" type="orderACS:ordRCMacAmendmentType" />
+			<xs:element name="ordCCMain" type="orderACS:ordCCMainType" />
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="ordACMainType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="metaData" type="segmentsACS:R001-MetaDataType" />
+			<xs:element name="cpeData" type="complexACS:CpeACMainDataType" />
+			<xs:element name="delivery" type="complexACS:DeliveryType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ordRCMainType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeData" type="complexACS:CpeRCMainDataType" />
+			<xs:element name="delivery" type="complexACS:DeliveryType" />
+		</xs:sequence>
+	</xs:complexType>
+			
+	<xs:complexType name="ordCCMainType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeData" type="complexACS:CpeCCMainDataType" />
+		</xs:sequence>
+	</xs:complexType>
+			
+	<xs:complexType name="ordACMacAmendmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeData" type="complexACS:CpeACMacAmendmentDataType" />
+			<xs:element name="deliveryDate" type="segmentsACS:R004-DeliveryDateType"></xs:element>
+			<xs:element name="deliveryInfo" type="segmentsACS:R029-DeliveryInfoType"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+			
+	<xs:complexType name="ordRCMacAmendmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeData" type="complexACS:CpeRCMacAmendmentDataType" />
+			<xs:element name="deliveryDate" type="segmentsACS:R004-DeliveryDateType" />
+			<xs:element name="deliveryInfo" type="segmentsACS:R029-DeliveryInfoType"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ordPostponementType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="metaData" type="segmentsACS:R001-MetaDataType" />
+			<xs:element name="orderToPostpone" type="base:OrderToPosteponeType"/>
+			<xs:element name="dslData" type="segmentsACS:R002-DSLDataType" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="newDate" type="segmentsACS:R004-DeliveryDateType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ordCancellationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="metaData" type="segmentsACS:R001-MetaDataType" />
+			<xs:element name="orderToCancel" type="base:OrderToCancelType"/>
+			<xs:element name="dslData" type="segmentsACS:R002-DSLDataType" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

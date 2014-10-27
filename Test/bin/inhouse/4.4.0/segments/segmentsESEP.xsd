@@ -1,0 +1,281 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:segments="http://www.flexagon.de/esep/segments/"
+    xmlns:fields="http://www.flexagon.de/inhouse/fields/" 
+    targetNamespace="http://www.flexagon.de/esep/segments/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/" schemaLocation="../fields/fields.xsd"/>
+		
+	<xs:complexType name="E001-CarrierType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+             <xs:element name="carrierName" type="fields:CarrierNameType"/>
+             <xs:element name="contractNo" type="fields:ContractNoType"/>
+             <xs:element name="derangementNumber" type="fields:DerangementNumberType"/>
+             <xs:element name="contactName" type="fields:NameType"/>
+             <xs:element name="contactNumber" type="fields:PhoneNumberType"/>
+             <xs:element name="contactFaxNumber" type="fields:PhoneNumberType"/>
+             <xs:element name="contactEmailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E002-EndCustomerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="areaCode" type="fields:AreaCodeType"/>
+            <xs:element name="phoneNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="phoneNumberUntilNow" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="phoneNumberDefect" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="connectionArea" type="fields:ConnectionAreaType"/>
+            <xs:element name="surname" type="fields:NameType"/>
+            <xs:element name="givenName" minOccurs="0" type="fields:NameType"/>
+            <xs:element name="street" type="fields:StreetType"/>
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/>
+            <xs:element name="houseNumberAdd" minOccurs="0" type="fields:HouseNumberAddType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E003-FailureDescriptionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+             <xs:element name="noises" type="fields:YesNoType"/>
+             <xs:element name="lineDisruption" type="fields:YesNoType"/>
+             <xs:element name="doNotResponse" type="fields:YesNoType"/>
+             <xs:element name="noIncomingCall" type="fields:YesNoType"/>
+             <xs:element name="noUnderstanding" type="fields:YesNoType"/>
+             <xs:element name="oneWayUnderstanding" type="fields:YesNoType"/>
+             <xs:element name="other" type="fields:YesNoType"/>
+             <xs:element name="reclamation" type="fields:YesNoType"/>
+             <xs:element name="freeText" minOccurs="0" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E004-BaseDataOrderStandardType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="derangementNumberReclamation" minOccurs="0" type="fields:TcomDerangementNumberType"/>
+            <xs:element name="cancellation" type="fields:YesNoType"/>
+            <xs:element name="lineDescription" minOccurs="0" type="fields:LineDescriptionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E005-BaseDataOrderExpressType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="derangementNumberReclamation" minOccurs="0" type="fields:TcomDerangementNumberType"/>
+            <xs:element name="cancellation" type="fields:YesNoType"/>
+            <xs:element name="responseMessage" type="fields:YesNoType"/>
+            <xs:element name="intermediateMessage" type="fields:YesNoType"/>
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+            <xs:element name="numberPorting" type="fields:YesNoType"/>
+            <xs:element name="derangementAllocation" minOccurs="0" type="fields:YesNoType"/>
+            <xs:element name="allocationDate" minOccurs="0" type="fields:DateType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E006-CarrierType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="carrierName" type="fields:CarrierNameType"/>
+            <xs:element name="derangementNumber" type="fields:DerangementNumberType"/>
+            <xs:element name="contactName" type="fields:NameType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E007-TCOMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="placeOfBusiness" minOccurs="0" type="fields:PlaceOfBusinessType"/>
+            <xs:element name="carrierName" type="fields:CarrierNameType"/>
+            <xs:element name="contactNumber" type="fields:PhoneNumberType"/>
+            <xs:element name="contactFaxNumber" type="fields:PhoneNumberType"/>
+            <xs:element name="tcomDerangementNumber" type="fields:TcomDerangementNumberType"/>
+            <xs:element name="contactEmailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E008-EndCustomerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="surname" type="fields:NameType"/>
+            <xs:element name="givenName" minOccurs="0" type="fields:NameType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E009-BaseDataNewDateStandartType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="counter" type="fields:CounterType"/>
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+            <xs:element name="reason" type="fields:ReasonType"/>
+            <xs:element name="freeText" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E010-EndCustomerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="surname" type="fields:NameType"/>
+            <xs:element name="givenName" minOccurs="0" type="fields:NameType"/>
+            <xs:element name="contactNumber" type="fields:PhoneNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E011-DateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="date" type="fields:DateType"/>
+            <xs:element name="startTime" type="fields:TimeType"/>
+            <xs:element name="endTime" type="fields:TimeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E012-BaseDataNewDateExpressType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="tcomDerangementNumber" type="fields:TcomDerangementNumberType"/>
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+            <xs:element name="freeText" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E013-BaseDataIntermediateMessageType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="kind" type="fields:KindType"/>
+            <xs:element name="counter" minOccurs="0" type="fields:CounterType"/>
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+            <xs:element name="freeText" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E014-BaseDataDateTransactionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="tcomDerangementNumber" type="fields:TcomDerangementNumberType"/>
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+            <xs:element name="freeText" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E015-BaseDataEntstoermeldungType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+            <xs:element name="closingMessage" type="fields:ClosingMessageType"/>
+            <xs:element name="freeText" type="fields:FreeTextType"/>
+            <xs:element name="errorCode" minOccurs="0" type="fields:ErrorCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E016-TimesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="dateOfReceipt" type="fields:DateType"/>
+            <xs:element name="timeOfReceipt" type="fields:TimeType"/>
+            <xs:element name="dateFinished" type="fields:DateType"/>
+            <xs:element name="timeFinished" type="fields:TimeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E017-TEQType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="message" type="fields:Message2Type"/>
+            <xs:element name="errorCode" minOccurs="0" type="fields:ErrorCodeType"/>
+            <xs:element name="freeText" minOccurs="0" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E018-ErrorMessageType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="referenceGUID" type="fields:GUIDType"/>
+            <xs:element name="derangementNumber" type="fields:DerangementNumberType"/>
+            <xs:element name="tcomDerangementNumber" minOccurs="0" type="fields:TcomDerangementNumberType"/>
+            <xs:element name="errorCode" type="fields:ErrorCodeType"/>
+            <xs:element name="freeText" type="fields:FreeTextType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E019-ConnectionDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="taeLocation" minOccurs="0" type="fields:taeLocationType"/>
+            <xs:element name="transmissionCoding " minOccurs="0" type="fields:TransmissionCoding2Type"/>
+            <xs:element name="lineDescription" type="fields:LineDescriptionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="E020-GUIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="GUID" type="fields:GUIDType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

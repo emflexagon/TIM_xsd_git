@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderVine="http://www.flexagon.de/vine/orderVine/" 
+	xmlns:segmentsVine="http://www.flexagon.de/vine/segments/" 
+	xmlns:complexVine="http://www.flexagon.de/vine/complex/"
+	targetNamespace="http://www.flexagon.de/vine/orderVine/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/vine/segments/" schemaLocation="../segments/segmentsVine.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/vine/complex/" schemaLocation="../complex/complexVine.xsd"/>
+	
+	<xs:complexType name="OrderVineKeyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="complexVine:VineKeyType">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderVineType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderVine-CreateTT-BV" type="orderVine:OrderVine-CrTT-BVType"/>
+			<xs:element name="orderVine-SetTT-BV" type="orderVine:OrderVine-SeTT-BVType"/>
+			<xs:element name="orderVine-GetTT-BK" type="orderVine:OrderVine-GeTT-BKType"/>
+			<xs:element name="orderVine-CloseTT-BK" type="orderVine:OrderVine-ClTT-BKType"/>
+			<xs:element name="orderVine-CancelTT-BK" type="orderVine:OrderVine-CaTT-BKType"/>
+		</xs:choice>
+	</xs:complexType>
+    
+    <xs:complexType name="OrderBaseVineType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="troubleTicketKey" type="complexVine:TroubleTicketKeyType"></xs:element>
+		</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrderVine-CrTT-BVType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:complexContent>
+    		<xs:extension base="complexVine:TroubleTicketBaseType">
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="OrderVine-SeTT-BVType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:complexContent>
+    		<xs:extension base="complexVine:TroubleTicketBaseType">
+    			<xs:sequence>
+    				<xs:element name="reSync" type="segmentsVine:G032-ReSyncType"></xs:element>
+    			</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="OrderVine-GeTT-BKType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderVine:OrderBaseVineType">
+				<xs:sequence>
+					<xs:element name="attrNames" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G006-StringType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderVine-ClTT-BKType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderVine:OrderBaseVineType">
+				<xs:sequence>
+					<xs:element name="status" type="segmentsVine:G026-StatusType"/>
+					<xs:element name="closeOutNarr" type="segmentsVine:G027-CloseOutNarrType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderVine-CaTT-BKType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderVine:OrderBaseVineType">
+				<xs:sequence>
+					<xs:element name="status" type="segmentsVine:G026-StatusType"/>
+					<xs:element name="closeOutNarr" type="segmentsVine:G027-CloseOutNarrType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>

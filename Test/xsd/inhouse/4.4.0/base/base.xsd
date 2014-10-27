@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 52947 $ $LastChangedDate: 2014-07-18 14:09:08 +0200 (Fr, 18 Jul 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:base="http://www.flexagon.de/inhouse/base/"
+	targetNamespace="http://www.flexagon.de/inhouse/base/"
+	xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/"
+	xmlns:orderTAL="http://www.flexagon.de/wita/orderTAL/"
+	xmlns:messageTAL="http://www.flexagon.de/wita/messageTAL/" 
+	xmlns:orderFTTH="http://www.flexagon.de/wita/orderFTTH/"
+	xmlns:messageFTTH="http://www.flexagon.de/wita/messageFTTH/"
+    xmlns:orderXDSL="http://www.flexagon.de/wita/orderXDSL/"
+    xmlns:messageXDSL="http://www.flexagon.de/wita/messageXDSL/"
+    xmlns:orderXDSL-B="http://www.flexagon.de/wita/orderXDSL-B/"
+    xmlns:messageXDSL-B="http://www.flexagon.de/wita/messageXDSL-B/"
+    xmlns:orderADSL="http://www.flexagon.de/wita/orderADSL/"
+    xmlns:messageADSL="http://www.flexagon.de/wita/messageADSL/"
+    xmlns:orderCLS="http://www.flexagon.de/wita/orderCLS/"
+    xmlns:messageCLS="http://www.flexagon.de/wita/messageCLS/"
+    xmlns:orderPRES="http://www.flexagon.de/wita/orderPRES/"
+    xmlns:messagePRES="http://www.flexagon.de/wita/messagePRES/"  
+    xmlns:orderESEP="http://www.flexagon.de/esep/orderESEP/"
+    xmlns:messageESEP="http://www.flexagon.de/esep/messageESEP/"
+    xmlns:segmentsESEP="http://www.flexagon.de/esep/segments/"
+    xmlns:orderFTTX="http://www.flexagon.de/spri/orderFTTX/"
+    xmlns:messageFTTX="http://www.flexagon.de/spri/messageFTTX/"
+    xmlns:segmentsFTTX="http://www.flexagon.de/spri/segments/"
+ 	xmlns:orderWAR="http://www.flexagon.de/war/orderWAR/"
+    xmlns:messageWAR="http://www.flexagon.de/war/messageWAR/"
+    xmlns:segmentsWAR="http://www.flexagon.de/war/segments/"
+    xmlns:orderWBCI="http://www.flexagon.de/wbci/orderWBCI/"
+    xmlns:messageWBCI="http://www.flexagon.de/wbci/messageWBCI/"
+    xmlns:orderACS="http://www.flexagon.de/acs/orderACS/"
+    xmlns:messageACS="http://www.flexagon.de/acs/messageACS/"
+    xmlns:orderTIM="http://www.flexagon.de/tim/orderTIM/"
+    xmlns:messageTIM="http://www.flexagon.de/tim/messageTIM/"
+	xmlns:orderESS="http://www.flexagon.de/ess/orderESS/"
+    xmlns:messageESS="http://www.flexagon.de/ess/messageESS/"
+    xmlns:segmentsESS="http://www.flexagon.de/ess/segments/"
+    xmlns:orderVine="http://www.flexagon.de/vine/orderVine/"
+    xmlns:messageVine="http://www.flexagon.de/vine/messageVine/"
+    xmlns:segmentsVine="http://www.flexagon.de/vine/segments/"
+    xmlns:fields="http://www.flexagon.de/inhouse/fields/"  
+	elementFormDefault="unqualified">
+	
+ 
+ 
+	
+	<!-- Imports -->
+    <xs:include schemaLocation=""></xs:include>
+    <xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderTAL/" schemaLocation="../product/orderTAL.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messageTAL/" schemaLocation="../product/messageTAL.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderFTTH/" schemaLocation="../product/orderFTTH.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messageFTTH/" schemaLocation="../product/messageFTTH.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderXDSL/" schemaLocation="../product/orderXDSL.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messageXDSL/" schemaLocation="../product/messageXDSL.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderXDSL-B/" schemaLocation="../product/orderXDSL-B.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messageXDSL-B/" schemaLocation="../product/messageXDSL-B.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderADSL/" schemaLocation="../product/orderADSL.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messageADSL/" schemaLocation="../product/messageADSL.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderCLS/" schemaLocation="../product/orderCLS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messageCLS/" schemaLocation="../product/messageCLS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/orderPRES/" schemaLocation="../product/orderPRES.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wita/messagePRES/" schemaLocation="../product/messagePRES.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/esep/orderESEP/" schemaLocation="../product/orderESEP.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/esep/messageESEP/" schemaLocation="../product/messageESEP.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/esep/segments/" schemaLocation="../segments/segmentsESEP.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/spri/orderFTTX/" schemaLocation="../product/orderFTTX.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/spri/messageFTTX/" schemaLocation="../product/messageFTTX.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/spri/segments/" schemaLocation="../segments/segmentsFTTX.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/ess/orderESS/" schemaLocation="../product/orderESS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/ess/messageESS/" schemaLocation="../product/messageESS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/ess/segments/" schemaLocation="../segments/segmentsESS.xsd"/>
+	
+	<xs:import namespace="http://www.flexagon.de/vine/orderVine/" schemaLocation="../product/orderVine.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/vine/messageVine/" schemaLocation="../product/messageVine.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/vine/segments/" schemaLocation="../segments/segmentsVine.xsd"/>
+ 
+	<xs:import namespace="http://www.flexagon.de/war/orderWAR/" schemaLocation="../product/orderWAR.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/war/messageWAR/" schemaLocation="../product/messageWAR.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/wbci/orderWBCI/" schemaLocation="../product/orderWBCI.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/wbci/messageWBCI/" schemaLocation="../product/messageWBCI.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/acs/orderACS/" schemaLocation="../product/orderACS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/acs/messageACS/" schemaLocation="../product/messageACS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/acs/segments/" schemaLocation="../segments/segmentsACS.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/tim/orderTIM/" schemaLocation="../product/orderTIM.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/tim/messageTIM/" schemaLocation="../product/messageTIM.xsd"/>
+
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/" schemaLocation="../fields/fields.xsd"/>
+	
+	
+	
+	<xs:complexType name="CustomerRequestMessageType">
+		<xs:sequence>
+			<xs:element name="baseMessage" type="base:BaseMessageCustomerRequestType" />
+			<xs:choice>
+  				<xs:element name="WITA" type="base:CustomerRequestWITAType" />
+ 				<xs:element name="ESEP" type="base:CustomerRequestESEPType" />
+				<xs:element name="SPRI" type="base:CustomerRequestSPRIType" />
+				<xs:element name="WBCI" type="base:CustomerRequestWBCIType" />
+ 				<xs:element name="ESS" type="base:CustomerRequestESSType"/>
+				<xs:element name="VINE" type="base:CustomerRequestVineType"/>
+ 				<xs:element name="WAR" type="base:CustomerRequestWARType"/>
+				<xs:element name="ACS" type="base:CustomerRequestACSType"/>
+				<xs:element name="TIM" type="base:CustomerRequestTIMType"/>
+ 			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxResponseMessageType">
+		<xs:sequence>
+			<xs:element name="baseMessage" type="base:BaseMessageFtboxResponseType" />                        
+            <xs:choice>
+             	<xs:element name="WITA" type="base:FtboxResponseWITAType" />
+				<xs:element name="ESEP" type="base:FtboxResponseESEPType" />
+				<xs:element name="SPRI" type="base:FtboxResponseSPRIType" />
+				<xs:element name="WBCI" type="base:FtboxResponseWBCIType" />
+				<xs:element name="ESS" type="base:FtboxResponseESSType"/>
+				<xs:element name="VINE" type="base:FtboxResponseVineType"/>
+ 				<xs:element name="WAR" type="base:FtboxResponseWARType"/>
+				<xs:element name="ACS" type="base:FtboxResponseACSType" />
+				<xs:element name="TIM" type="base:FtboxResponseTIMType" />
+            </xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+
+    <xs:complexType name="FtboxRequestMessageType">
+        <xs:sequence>
+            <xs:element name="baseMessage" type="base:BaseMessageFtboxRequestType" /> 
+            <xs:choice>
+            	<xs:element name="WITA" type="base:FtboxRequestWITAType" />
+				<xs:element name="ESEP" type="base:FtboxRequestESEPType" />
+				<xs:element name="SPRI" type="base:FtboxRequestSPRIType" />
+				<xs:element name="WBCI" type="base:FtboxRequestWBCIType" />
+ 				<xs:element name="VINE" type="base:FtboxRequestVineType"/>
+ 				<xs:element name="ACS" type="base:FtboxRequestACSType"/>
+ 				<xs:element name="TIM" type="base:FtboxRequestTIMType"/>
+           </xs:choice> 
+         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="CustomerResponseMessageType">
+        <xs:sequence>
+            <xs:element name="baseMessage" type="base:BaseMessageCustomerResponseType" /> 
+            <xs:choice>
+            	<xs:element name="WITA" type="base:CustomerResponseWITAType" />
+				<xs:element name="ESEP" type="base:CustomerResponseESEPType" />
+				<xs:element name="SPRI" type="base:CustomerResponseSPRIType" />
+				<xs:element name="WBCI" type="base:CustomerResponseWBCIType" />
+            </xs:choice> 
+        </xs:sequence>
+    </xs:complexType>
+		
+	<xs:complexType name="ErrorResponseMessageType">
+		<xs:sequence>
+			<xs:element name="baseMessage" type="base:BaseMessageErrorType" />
+			<xs:element name="errorMessage" maxOccurs="unbounded" type="base:ErrorMessageType" />
+			<xs:element name="payload" minOccurs="0" type="base:PayloadType" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="ErrorMessageType">
+		<xs:sequence>
+			<xs:element name="code" type="base:AnswerCodeType"/>
+			<xs:element name="message" type="base:AnswerMessageType" minOccurs="0"/>
+		</xs:sequence>		
+	</xs:complexType>
+	
+	<xs:complexType name="TechnicalReceiptType">
+        <xs:sequence>
+            <xs:element name="message" type="base:TEQMessageType"/>
+            <xs:element name="code" type="base:TEQCodeType" minOccurs="0"/>
+            <xs:element name="text" type="base:TEQTextType" minOccurs="0"/>
+        </xs:sequence>      
+    </xs:complexType>
+	
+	<xs:complexType name="OrderCancellationType">          
+        <xs:sequence>
+            <xs:element name="orderToCancel" type="base:OrderToCancelType"/>
+        </xs:sequence>
+    </xs:complexType>
+	
+	<xs:complexType name="OrderToCancelType">          
+        <xs:sequence>
+            <xs:element name="customerOrderId" type="base:CustomerOrderIdType"/>
+            <xs:element name="ftboxOrderId" minOccurs="0" type="base:OrderIdType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="OrderPostponementType">
+        <xs:sequence>
+            <xs:element name="orderToPostpone" type="base:OrderToPosteponeType"/>
+        </xs:sequence>        
+    </xs:complexType>
+    
+    <xs:complexType name="OrderToPosteponeType">
+        <xs:sequence>
+            <xs:element name="customerOrderId" type="base:CustomerOrderIdType"/>
+            <xs:element name="ftboxOrderId" minOccurs="0" type="base:OrderIdType"/>
+            <xs:element name="requestDeliveryDate" type="base:I015-TargetDateType"/>
+            <xs:element name="installationServices" minOccurs="0" type="base:I014-InstallationServicesType"/>
+        </xs:sequence>        
+    </xs:complexType>       
+    
+	<xs:complexType name="BaseMessageCustomerRequestType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+        This is the standard element that each request communication act from inhouse-system towards the FTBOX shall have.
+      </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="customerOrderId"
+				type="base:CustomerOrderIdType" />
+			<xs:element name="ftboxOrderId" minOccurs="0"
+				type="base:OrderIdType" />
+			<xs:element name="messageCorrelationId" type="base:MessageCorrelationIdType" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="carrier" type="base:CarrierType" />
+			<xs:element name="provider" type="base:ProviderType" />
+			<xs:element name="communicationDate"
+				type="base:CommunicationDateType" />
+			<xs:element name="transactionType"
+				type="base:I001-TransactionCustomerRequestType" />
+			<!--
+				xs:documentation>date the message was
+				generated/send</xs:documentation
+			-->
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="BaseMessageFtboxResponseType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+        This is the standard element that each response message communication act from the FTBOX system to inhouse-system shall have.
+      </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ftboxOrderId" minOccurs="0"
+				type="base:OrderIdType" />
+			<xs:element name="customerOrderId" minOccurs="0"
+				type="base:CustomerOrderIdType" />
+			<xs:element name="messageCorrelationId" type="base:MessageCorrelationIdType" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="carrier" type="base:CarrierType" />
+			<xs:element name="provider" type="base:ProviderType" />
+			<xs:element name="communicationDate"
+				type="base:CommunicationDateType" />
+			<xs:element name="transactionType"
+				type="base:I001-TransactionFtboxResponseType" />
+			<xs:element name="ftboxPosition" minOccurs="0"
+				type="base:PositionType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="BaseMessageErrorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+        This is the standard element for each error message communication act from FTBOX to the in-house system and vise versa shall have.
+      </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ftboxOrderId" minOccurs="0"
+				type="base:OrderIdType" />
+			<xs:element name="customerOrderId"
+				type="base:CustomerOrderIdType" />
+			<xs:element name="messageCorrelationId" type="base:MessageCorrelationIdType" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="communicationDate"
+				type="base:CommunicationDateType" />
+			<xs:element name="transactionType" minOccurs="0"
+				type="base:I001-TransactionErrorResponseType" />
+			<xs:element name="ftboxPosition" minOccurs="0"
+				type="base:PositionType" />
+		</xs:sequence>
+	</xs:complexType>
+
+    <xs:complexType name="BaseMessageFtboxRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        This is the standard element for each request from FTBOX to the in-house system shall have in case the FTBOX system initializes the workflow.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="ftboxOrderId" minOccurs="0"
+        		type="base:OrderIdType" />
+        	<xs:element name="customerOrderId" minOccurs="0"
+        		type="base:CustomerOrderIdType" />
+        	<xs:element name="messageCorrelationId" type="base:MessageCorrelationIdType" maxOccurs="1" minOccurs="0"></xs:element>
+        	<xs:element name="contractId" minOccurs="0"
+        		type="base:ContractIdType" />
+        	<xs:element name="carrier" type="base:CarrierType" />
+        	<xs:element name="provider" type="base:ProviderType" />
+        	<xs:element name="communicationDate"
+        		type="base:CommunicationDateType" />
+        	<xs:element name="transactionType"
+        		type="base:I001-TransactionFtboxRequestType" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="BaseMessageCustomerResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        This is the standard element for each response from Customer to FTBOX shall have in case FTBOX initialized the workflow.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="customerOrderId" type="base:CustomerOrderIdType" />
+        	<xs:element name="ftboxOrderId" minOccurs="0" type="base:OrderIdType" />
+        	<xs:element name="messageCorrelationId" type="base:MessageCorrelationIdType" maxOccurs="1" minOccurs="0"></xs:element>
+        	<xs:element name="contractId" minOccurs="0" type="base:ContractIdType" />
+        	<xs:element name="carrier" type="base:CarrierType" />
+        	<xs:element name="provider" type="base:ProviderType" />
+        	<xs:element name="communicationDate" type="base:CommunicationDateType" />
+        	<xs:element name="transactionType" type="base:I001-TransactionCustomerResponseType" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="CustomerRequestWITAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+ 			<xs:element name="orderTAL" type="orderTAL:OrderTALType" />
+			<xs:element name="orderFTTH" type="orderFTTH:OrderFTTHType" />
+			<xs:element name="orderXDSL" type="orderXDSL:OrderXDSLType"/>
+            <xs:element name="orderXDSL-B" type="orderXDSL-B:OrderXDSL-BType"/>
+		    <xs:element name="orderADSL" type="orderADSL:OrderADSLType"/>
+		    <xs:element name="orderCLS" type="orderCLS:OrderCLSType"/>
+		    <xs:element name="orderPRES" type="orderPRES:OrderPRESType"/>
+ 			<xs:element name="orderCancellation" type="base:OrderCancellationType"/>
+			<xs:element name="orderPostponement" type="base:OrderPostponementType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerRequestESEPType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+ 			<xs:element name="orderESEP" type="orderESEP:OrderESEPType"/>
+ 			<xs:element name="orderCancellation" type="base:OrderCancellationType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerRequestSPRIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       			
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+ 			<xs:element name="orderFTTX" type="orderFTTX:OrderFTTX2Type"/>
+        		<xs:element name="orderCancellation" type="base:OrderCancellationType"/>
+			<xs:element name="orderPostponement" type="base:OrderPostponementType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerRequestWBCIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       			
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+ 			<xs:element name="orderWBCI-Auf" type="orderWBCI:OrderWBCIaufType"/>
+       		<xs:element name="orderWBCI-Abg" type="orderWBCI:OrderWBCIabgType"/>
+       		<xs:element name="messageWBCI" type="messageWBCI:MessageWBCIRequestType"/>
+ 		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerRequestESSType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:choice>
+      		<xs:element name="orderTAL" type="orderESS:OrderTALType"/>
+      		<xs:element name="orderXDSL" type="orderESS:OrderXDSLType"/>
+      		<xs:element name="orderCancellation" type="base:OrderToCancelESSType"/>
+      		<xs:element name="orderAnswerTAM" type="base:AnswerTAM_ESSType"/>
+      	</xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="CustomerRequestVineType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:sequence>
+      		<xs:element name="vineTTKey" minOccurs="0" type="orderVine:OrderVineKeyType"/>
+      		<xs:element name="orderVine" type="orderVine:OrderVineType"/>
+      	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CustomerRequestWARType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:choice>
+       		<xs:element name="orderWAR" type="orderWAR:OrderWARType"/>
+       	</xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="FtboxRequestACSType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:choice>
+      		<xs:element name="messageACS" type="messageACS:requestACSType"/>
+       	</xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="OrderToCancelESSType">
+      	<xs:annotation>
+      		<xs:documentation xml:lang="en">
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:complexContent>
+      		<xs:extension base="base:OrderToCancelType">
+      			<xs:sequence>
+            		<xs:element name="customerContractData" type="segmentsESS:D002-CustomerContractData"/>
+        			<xs:element name="resellerContractData" minOccurs="0" type="segmentsESS:D003-ResellerContractData"/> 			
+      				<xs:element name="reference" type="segmentsESS:D025-FaultClearanceReferenceType"/>
+      			</xs:sequence>
+      		</xs:extension>
+      	</xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="AnswerTAM_ESSType">
+      	<xs:annotation>
+      		<xs:documentation xml:lang="en">
+      		</xs:documentation>
+      	</xs:annotation>
+			<xs:sequence>
+			    <xs:element name="customerOrderId" type="base:CustomerOrderIdType"/>
+	            <xs:element name="ftboxOrderId" minOccurs="0" type="base:OrderIdType"/>
+	            <xs:element name="customerContractData" type="segmentsESS:D002-CustomerContractData"/>
+        		<xs:element name="resellerContractData" minOccurs="0" type="segmentsESS:D003-ResellerContractData"/> 		
+				<xs:element name="reference" type="segmentsESS:D025-FaultClearanceReferenceType"/>
+				<xs:element name="requestDeliveryDate" type="segmentsESS:D015-TargetDateType"/>
+			</xs:sequence>
+    </xs:complexType> 
+    
+	
+	<xs:complexType name="FtboxResponseWITAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageTAL" type="messageTAL:MessageTALType"/>
+			<xs:element name="messageFTTH" type="messageFTTH:MessageFTTHType"/>
+            <xs:element name="messageXDSL" type="messageXDSL:MessageXDSLType"/>
+            <xs:element name="messageXDSL-B" type="messageXDSL-B:MessageXDSL-BType"/>
+            <xs:element name="messageADSL" type="messageADSL:MessageADSLType"/>
+            <xs:element name="messageCLS" type="messageCLS:MessageCLSType"/>
+            <xs:element name="messagePRES" type="messagePRES:MessagePRESType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxResponseESEPType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageESEP" type="messageESEP:MessageESEPType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxResponseSPRIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageFTTX" type="messageFTTX:MessageFTTX2Type"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxResponseWBCIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       			
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageWBCI" type="messageWBCI:MessageWBCIType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxResponseESSType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:choice>
+      		<xs:element name="messageESS" type="messageESS:MessageESSType"/>
+      	</xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="FtboxResponseVineType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:sequence>
+      		<xs:element name="vineTTKey" minOccurs="0" type="messageVine:MessageVineKeyType"/>
+      		<xs:element name="messageVine" type="messageVine:MessageVineType"/>
+      	</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="FtboxResponseWARType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:choice>
+      		<xs:element name="messageWAR" type="messageWAR:MessageWARType"/>
+      	</xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="FtboxResponseTIMType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+      	</xs:annotation>
+      	<xs:choice>
+      		<xs:element name="messageTIM" type="messageTIM:responseTIMType"/>
+      	</xs:choice>
+    </xs:complexType>
+	
+	<xs:complexType name="FtboxRequestWITAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageTAL" type="messageTAL:MessageTALRequestType"/>
+			<xs:element name="messageFTTH" type="messageFTTH:MessageFTTHRequestType"/>
+			<xs:element name="messageXDSL" type="messageXDSL:MessageXDSLRequestType"/>
+            <xs:element name="messageXDSL-B" type="messageXDSL-B:MessageXDSL-BRequestType"/>
+            <xs:element name="messageADSL" type="messageADSL:MessageADSLRequestType"/>
+            <xs:element name="messageCLS" type="messageCLS:MessageCLSRequestType"/>
+            <xs:element name="messagePRES" type="messagePRES:MessagePRESRequestType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxRequestESEPType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxRequestSPRIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       	
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageFTTX" type="messageFTTX:MessageFTTXRequestType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxRequestWBCIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       			
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="orderWBCI-Auf" type="orderWBCI:OrderWBCIaufType"/>
+     		<xs:element name="orderWBCI-Abg" type="orderWBCI:OrderWBCIabgType"/>
+			<xs:element name="messageWBCI" type="messageWBCI:MessageWBCIRequestType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxRequestESSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxRequestVineType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="vineTTKey" minOccurs="0" type="messageVine:MessageVineKeyType"/>
+			<xs:element name="messageVine" type="messageVine:MessageVineRequestType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxRequestTIMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="orderTIM" type="orderTIM:orderTIM2Type"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="CustomerRequestACSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="orderACS" type="orderACS:orderACSType" />
+        	<xs:element name="orderCancellation" type="base:OrderCancellationType"></xs:element>
+        	<xs:element name="orderPostponement" type="base:OrderPostponementType"></xs:element>
+        </xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerRequestTIMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="orderTIM" type="orderTIM:orderTIMType" />
+        </xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerResponseWITAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+ 			<xs:element name="messageTAL" type="messageTAL:MessageTALResponseType"/>
+			<xs:element name="messageFTTH" type="messageFTTH:MessageFTTHResponseType"/>
+			<xs:element name="messageXDSL" type="messageXDSL:MessageXDSLResponseType"/>
+            <xs:element name="messageXDSL-B" type="messageXDSL-B:MessageXDSL-BResponseType"/>
+            <xs:element name="messageADSL" type="messageADSL:MessageADSLResponseType"/>
+            <xs:element name="messageCLS" type="messageCLS:MessageCLSResponseType"/>
+            <xs:element name="messagePRES" type="messagePRES:MessagePRESResponseType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerResponseESEPType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+       
+      		</xs:documentation>
+        </xs:annotation>
+       	<xs:choice>
+			<xs:element name="messageESEP" type="messageESEP:MessageESEPResponseType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerResponseSPRIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+     			  
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+				<xs:element name="messageFTTX" type="messageFTTX:MessageFTTXResponseType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerResponseWBCIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+     			  
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageWBCI" type="messageWBCI:MessageWBCIResponseType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="FtboxResponseACSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+     			  
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="messageACS" type="messageACS:responseACSType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+
+  <!-- simple types -->
+  <!-- answer url -->
+	<xs:simpleType name="AnswerUrlType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling an answer url.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- answer url -->
+  <!-- application answer code -->
+	<xs:simpleType name="AnswerCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling an application answer code.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- application answer code -->
+  <!-- application answer message -->
+	<xs:simpleType name="AnswerMessageType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling an application answer message.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- application answer message -->
+  <!-- technical receipt code -->
+    <xs:simpleType name="TEQCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        Modeling an application answer code. It is mandatory if message is ERROR.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="4" />
+            <xs:maxLength value="4" />
+        </xs:restriction>
+    </xs:simpleType>
+  <!-- technical receipt code -->
+  <!-- technical receipt message -->
+    <xs:simpleType name="TEQMessageType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        OK or ERROR.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OK"/>
+            <xs:enumeration value="ERROR"/>
+        </xs:restriction>
+    </xs:simpleType>
+  <!-- technical receipt message -->
+  <!-- technical receipt text -->
+    <xs:simpleType name="TEQTextType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        Modeling an application answer free text.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+  <!-- technical receipt message -->
+  
+  <!-- communication date -->
+	<xs:simpleType name="CommunicationDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling a communication date.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- communication date -->
+  <!-- reseller name -->
+	<xs:simpleType name="ResellerNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling a reseller name.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- reseller name -->
+  <!-- reseller workflow id -->
+	<xs:simpleType name="ResellerWorkflowIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        The reseller workflow id representation, to assign the
+        communication to specific reseller workflow steps.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- reseller workflow id -->
+  <!-- schema name -->
+	<xs:simpleType name="SchemaNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling a schema name.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- schema name -->
+  <!-- schema version -->
+	<xs:simpleType name="SchemaVersionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling a schema version.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- schema version -->
+  <!-- simple types -->
+  <!--
+  -->
+  <!-- simple types with restrictions -->
+  <!-- reseller id -->
+	<xs:simpleType name="ResellerIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling a reseller id.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long">
+			<xs:minExclusive value="0" />
+			<xs:maxExclusive value="10000000000" />
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- reseller id -->
+  <!-- reseller order id -->
+	<xs:simpleType name="ResellerOrderIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling a reseller order id.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- reseller order id -->
+  <!-- customer order id -->
+	<xs:simpleType name="CustomerOrderIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling the customer order id. Depending on the role of the inhouse system, i.e., in a Carrier scenario, this is the WITA order id of the customer.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- customer order id -->
+  
+   <!-- Correlation ID to correlate return messages to the correct request -->
+    <xs:simpleType name="MessageCorrelationIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">Correlation ID to correlate return messages to the correct request</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+        </xs:restriction>
+    </xs:simpleType>
+  
+  <!-- customer workflow id -->
+	<xs:simpleType name="CustomerWorkflowIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        The internal Customer workflow id representation, to assign the
+        communication to specific workflow steps.
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z0-9\.\-:]{4,32}" />
+      <!-- xs:maxLength value="32"/ -->
+      <!-- xs:minLength value="4"/ -->
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- contract id -->  <!-- customer order id -->
+	<xs:simpleType name="ContractIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling the contract id. In some cases, this is the only reference present (e.g. AKM-PV).
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="40" />
+		</xs:restriction>
+	</xs:simpleType>
+  <!-- contract id -->
+  <!-- version -->
+	<xs:simpleType name="VersionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+        Modeling protocol version according the std. interface/protocol
+
+      </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="\d+(\.\d+){0,2}" />
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<!-- customer workflow name -->    
+    <xs:simpleType name="WorkflowNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        modeling the workflow name
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- interface id -->    
+    <xs:simpleType name="IdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        modeling the interface id
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"> 
+            <xs:minLength value="1" />
+            <xs:maxLength value="40" />           
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- interface name -->    
+    <xs:simpleType name="InterfaceNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        modeling the interface name
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- target system name -->    
+    <xs:simpleType name="TargetSystemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        modeling the target system name
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- dtag order id -->    
+    <xs:simpleType name="OrderIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        modeling the dtag order id
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Generic workflow id -->
+    <xs:simpleType name="WorkflowIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        Generic Workflow Id representation
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9\.\-:]{4,32}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<!-- Generic carrier -->
+    <xs:simpleType name="CarrierType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        Name of the Carrier to or from which the order/message comes from or goes to
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+
+	<!-- Generic provider -->
+    <xs:simpleType name="ProviderType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        Name of the Provider to or from which the order/message comes from or goes to
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- ftbox position -->    
+    <xs:simpleType name="PositionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+				position of the message in FTBOX
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">            
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Payload -->
+    <xs:simpleType name="PayloadType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        is the payload whic coused the error
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+
+  <!-- complex types -->
+  <!-- application answer -->
+  <xs:complexType name="ApplicationAnswerType">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+
+        The content here is non normative only and provided for
+        debugging purposes. The application level result is delivered
+        in the attributes code.
+
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="code" type="base:AnswerCodeType"/>
+      <xs:element name="message" type="base:AnswerMessageType"/>
+    </xs:sequence>
+  </xs:complexType>
+	
+   <xs:complexType name="I001-TransactionType">
+  	<xs:sequence>
+    	<xs:element name="businessTransactionType" type="fields:BusinessTransactionTypeType"/>    
+        <xs:element name="businessTransaction" type="fields:BusinessTransactionType"/>
+        <xs:element name="changeIndicator" minOccurs="0" type="fields:ChangeIndicatorType"/>
+  	</xs:sequence>
+  </xs:complexType> 
+  
+  <xs:complexType name="I001-TransactionCustomerResponseType">
+		<xs:complexContent>
+			<xs:extension base="base:I001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageCustomerResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="I001-TransactionCustomerRequestType">
+		<xs:complexContent>
+			<xs:extension base="base:I001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="fields:MessageCustomerRequestType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="I001-TransactionFtboxRequestType">
+		<xs:complexContent>
+			<xs:extension base="base:I001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="fields:MessageFtboxRequestType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="I001-TransactionFtboxResponseType">
+		<xs:complexContent>
+			<xs:extension base="base:I001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageFtboxResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<xs:complexType name="I001-TransactionErrorResponseType">
+		<xs:complexContent>
+			<xs:extension base="base:I001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageErrorResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+
+	<!-- Termine -->
+    <xs:complexType name="I015-TargetDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="fields:DateType"/> 
+            <xs:element name="timeSlot" minOccurs="0" type="fields:TimeSlotType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Montageleistung -->
+    <xs:complexType name="I014-InstallationServicesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+            <xs:element name="emailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+            <xs:element name="installationService" minOccurs="0" type="fields:InstallationServicesType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

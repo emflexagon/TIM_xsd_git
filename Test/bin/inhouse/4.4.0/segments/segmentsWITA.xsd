@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:fields="http://www.flexagon.de/inhouse/fields/" xmlns:segments="http://www.flexagon.de/wita/segments/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://www.flexagon.de/wita/segments/">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/" schemaLocation="../fields/fields.xsd"/>
+		
+	<xs:complexType name="W001-TransactionType">
+        <xs:sequence>
+            <xs:element name="businessTransactionType" type="fields:BusinessTransactionTypeType"/>    
+            <xs:element name="businessTransaction" type="fields:BusinessTransactionType"/>
+            <xs:element name="changeIndicator" type="fields:ChangeIndicatorType"/>
+        <!--    <xs:choice>
+                <xs:element name="messageRequestType" type="fields:MessageRequestType"/>
+                <xs:element name="messageResponseType" type="fields:MessageResponseType"/>
+            </xs:choice>     -->
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="W001-TransactionCustomerResponseType">
+		<xs:complexContent>
+			<xs:extension base="segments:W001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageCustomerResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="W001-TransactionCustomerRequestType">
+		<xs:complexContent>
+			<xs:extension base="segments:W001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="fields:MessageCustomerRequestType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="W001-TransactionFtboxRequestType">
+		<xs:complexContent>
+			<xs:extension base="segments:W001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="fields:MessageFtboxRequestType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="W001-TransactionFtboxResponseType">
+		<xs:complexContent>
+			<xs:extension base="segments:W001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageFtboxResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<xs:complexType name="W001-TransactionErrorResponseType">
+		<xs:complexContent>
+			<xs:extension base="segments:W001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageErrorResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<!-- Kunde -->	
+    <xs:complexType name="W002-CustomerContractData">
+        <xs:sequence>
+            <xs:element name="customerId" type="fields:CustomerIdType"/>
+            <xs:element name="customerServiceId" type="fields:CustomerServiceIdType"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Besteller -->
+    <xs:complexType name="W003-ResellerContractData">
+        <xs:sequence>
+            <xs:element name="resellerId" type="fields:CustomerIdType"/>
+            <xs:element name="resellerServiceId" type="fields:CustomerServiceIdType"/>
+        </xs:sequence>
+    </xs:complexType>
+       
+	<!-- Debitor -->
+	<xs:complexType name="W004-DebitorType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="bookKeeping" type="fields:BookKeepingType"/>          
+        </xs:sequence>
+    </xs:complexType>	
+    
+    <!-- Project -->
+    <xs:complexType name="W005-ProjectType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="projectId" type="fields:ProjectIdType"/> 
+            <xs:element minOccurs="0" name="correlationId" type="fields:CorrelationIdType"/>           
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Vertragsdaten -->
+    <xs:complexType name="W006-DtagContractNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contractNo" type="fields:ContractNoType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Anlage -->
+    <xs:complexType name="W007-AttachmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="attachmentType" type="fields:AttachmentType"/> 
+            <xs:element name="filename" type="fields:FilenameType"/> 
+            <xs:element name="fileType" type="fields:FileTypeType"/> 
+            <xs:element minOccurs="0" name="description" type="fields:DescriptionType"/> 
+            <xs:element name="fileContent" type="fields:FileContentType"/>                      
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Ansprechspartner -->
+    <xs:complexType name="W008-ContactType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element minOccurs="0" name="givenName" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="contactPhone" type="fields:PhoneNumberType"/> 
+            <xs:element minOccurs="0" name="emailAddress" type="fields:EmailAddressType"/>
+            <xs:element minOccurs="0" name="contactRole" type="fields:RoleType"/>                      
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Vormieter -->
+    <xs:complexType name="W009-PreviousTenantType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element minOccurs="0" name="givenName" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element minOccurs="0" name="phoneNumber" type="fields:IptnType"/> 
+            <xs:element minOccurs="0" name="UFANumber" type="fields:UFANumberType"/>                      
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- StandordA -->
+    <xs:complexType name="W010-LocationAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:LocationAppellationType"/>
+        	<xs:choice>
+           		<xs:element name="person" type="fields:PersonType"/> 
+            	<xs:element name="company" type="fields:CompanyType"/> 
+        	</xs:choice>
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element minOccurs="0" name="houseNumberAdd" type="fields:HouseNumberAddType"/>
+            <xs:element minOccurs="0" name="buildingBlockName" type="fields:BuildingBlockNameType"/> 
+            <xs:element minOccurs="0" name="buildingBlockAppendix" type="fields:BuildingBlockAppendixType"/> 
+            <xs:element minOccurs="0" name="country" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element minOccurs="0" name="cityAdd" type="fields:CityAddType"/>
+            <xs:element minOccurs="0" name="taeLocation" type="fields:taeLocationType"/>                    
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- StandordB -->
+    <xs:complexType name="W011-LocationBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element minOccurs="0" name="houseNumberAppendix" type="fields:HouseNumberAddType"/>
+            <xs:element minOccurs="0" name="country" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element minOccurs="0" name="cityAdd" type="fields:CityAddType"/>
+            <xs:element name="ndc" type="fields:NdcType"/>
+            <xs:element name="azc" type="fields:AzcType"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+	<!-- Standord Anschlussinhaber -->
+    <xs:complexType name="W012-LocationConnectionOwnerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:LocationAppellationType"/> 
+            <xs:choice>
+           		<xs:element name="person" type="fields:PersonType"/> 
+            	<xs:element name="company" type="fields:CompanyType"/> 
+        	</xs:choice>             
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element minOccurs="0" name="houseNumberAdd" type="fields:HouseNumberAddType"/>
+            <xs:element minOccurs="0" name="country" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element minOccurs="0" name="cityAdd" type="fields:CityAddType"/>                    
+        </xs:sequence>
+    </xs:complexType>
+
+	<!-- Standord Versand -->
+    <xs:complexType name="W013-LocationShipping">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:LocationAppellationType"/> 
+            <xs:choice>
+           		<xs:element name="person" type="fields:PersonType"/> 
+            	<xs:element name="company" type="fields:CompanyType"/> 
+        	</xs:choice>             
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element minOccurs="0" name="houseNumberAdd" type="fields:HouseNumberAddType"/>
+            <xs:element minOccurs="0" name="country" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element minOccurs="0" name="cityAdd" type="fields:CityAddType"/>                   
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Montageleistung -->
+    <xs:complexType name="W014-InstallationServicesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element minOccurs="0" name="givenName" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+            <xs:element minOccurs="0" name="emailAddress" type="fields:EmailAddressType"/>
+            <xs:element minOccurs="0" name="installationService" type="fields:InstallationServicesType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="W014-InstallationServicesWithReservationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+        	<xs:extension base="segments:W014-InstallationServicesType">
+	        	<xs:sequence>            
+		            <xs:element minOccurs="0" name="reservationNumber" type="fields:ReservationNumberType"/>
+	        	</xs:sequence>
+	        </xs:extension>
+		</xs:complexContent>
+    </xs:complexType>  
+
+    <!-- Termine -->
+    <xs:complexType name="W015-TargetDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="fields:DateType"/> 
+            <xs:element name="timeSlot" type="fields:TimeSlotType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Produkt -->
+    <xs:complexType name="W016-ProductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="productName" type="fields:ProductNameType"/>  
+        </xs:sequence>
+    </xs:complexType>  
+    
+     <xs:complexType name="W016-ProductWithActionCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+			<xs:extension base="segments:W016-ProductType">		         
+            	<xs:sequence>  
+            		<xs:element name="actionCode" type="fields:ActionCodeType"/>   
+            	</xs:sequence>  
+       		</xs:extension>
+       	</xs:complexContent>
+    </xs:complexType>
+
+	<!-- ID-Bestandssuche -->
+    <xs:complexType name="W017-StockSearchType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="phoneNumber" type="fields:IptnType"/> 
+        </xs:sequence>
+    </xs:complexType>
+
+	<!-- Leitungsbezeichnung -->
+    <xs:complexType name="W018-LineIndicationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="lineKeycode" type="fields:LineKeycodeType"/> 
+            <xs:element name="ndc-A" type="fields:NdcType"/> 
+            <xs:element name="ndc-B" type="fields:NdcType"/> 
+            <xs:element name="lineNumber" type="fields:LineIdType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+	<!-- ID3-Bestandsvalidierung -->
+    <xs:complexType name="W019-ID-InventoryValidationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="street" type="fields:StreetType"/>  
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Uebertragungsverfahren -->
+    <xs:complexType name="W020-TransmissionCodingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="transmissionCoding" type="fields:TransmissionCodingType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Schaltangaben Kupfer -->
+    <xs:complexType name="W021-SwitchDataCopperType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="UEVT" type="fields:UEVTType"/> 
+            <xs:element name="EVS" type="fields:EVSType"/> 
+            <xs:element name="doubleWire" type="fields:DoubleWireType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Schaltangaben Glasfaser -->
+    <xs:complexType name="W022-SwitchDataFiberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="UEVT" type="fields:UEVTType"/> 
+            <xs:element name="EVS" type="fields:EVSType"/> 
+            <xs:element name="clutch" type="fields:ClutchType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Schaltangaben ISIS / OPAL -->
+    <xs:complexType name="W023-SwitchDataISISOPALType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="UEVT" type="fields:UEVTType"/>             
+            <xs:element name="connectionType" type="fields:ConnectionTypeType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Schaltangaben KVZ -->
+    <xs:complexType name="W024-SwitchDataKVZType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="KVZNo" type="fields:KVZNoType"/> 
+            <xs:element name="KVZconnectionId" type="fields:KVZconnectionIdType"/>  
+        </xs:sequence>
+    </xs:complexType>   
+
+	<!-- RNR Portierung Anlagenanschluss  -->
+    <xs:complexType name="W025-PrivateBranchExchangeDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="privateBranchExchangeDataMainNumber" type="fields:QuestionIdType"/>         
+            <xs:element name="privateBranchExchangeDataFirst" type="fields:PhoneNoStartBlockType"/> 
+            <xs:element name="privateBranchExchangeDataLast" type="fields:PhoneNoEndBlockType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Portierung Teilnehmeranschluss -->
+    <xs:complexType name="W026-PortingNumberDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element minOccurs="0" name="cc" type="fields:CcType"/>
+            <!-- ndc = national destination code = Vorwahl -->
+            <xs:element name="ndc" type="fields:NdcType"/>
+            <!-- sn = subscriber number = Rufnummer -->
+            <xs:element name="sn" type="fields:SnType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Portierungskenner -->
+    <xs:complexType name="W027-PortingIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="portingId" type="fields:PortingIdType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+	<!-- Termin -->
+    <xs:complexType name="W028-TargetDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>           
+            <xs:element name="targetDate" type="fields:DateType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+	<!-- Link -->
+    <xs:complexType name="W029-LinkType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="link" type="fields:LinkType"/>          
+        </xs:sequence>
+    </xs:complexType> 
+
+    <!-- Abgebender Provider -->
+    <xs:complexType name="W030-CurrentProviderType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element minOccurs="0" name="providerName" type="fields:ProviderNameType"/>         
+            <xs:element minOccurs="0" name="closingDate" type="fields:DateType"/> 
+            <xs:element name="changeAcceptance" type="fields:DecisionType"/> 
+            <xs:element minOccurs="0" name="responseCode" type="fields:ResponseCodeType"/> 
+            <xs:element minOccurs="0" name="responseText" type="fields:ResponseTextType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+
+	<!-- Standord Korrektur -->
+    <xs:complexType name="W031-LocationCorrectionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>                         
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element minOccurs="0" name="houseNumberAdd" type="fields:HouseNumberAddType"/>
+            <xs:element minOccurs="0" name="buildingBlockName" type="fields:BuildingBlockNameType"/> 
+            <xs:element minOccurs="0" name="buildingBlockAppendix" type="fields:BuildingBlockAppendixType"/> 
+            <xs:element minOccurs="0" name="country" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element minOccurs="0" name="cityAdd" type="fields:CityAddType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<!-- V5.1 Schnittstelle  -->
+    <xs:complexType name="W032-V51InterfaceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="V51Id" type="fields:V51IdType"/>         
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Zeitschlitz  -->
+    <xs:complexType name="W033-TimeslotType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="timeSlot" type="fields:TimeSlot2Type"/>         
+        </xs:sequence>
+    </xs:complexType>  
+
+	<!-- Leitungsabschnitt -->
+    <xs:complexType name="W034-LineSegmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="segmentId" type="fields:CableSegmentIdType"/>         
+            <xs:element name="length" type="fields:CableLengthType"/> 
+            <xs:element name="diameter" type="fields:CableDiameterType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!-- Max Brutto Bitrate -->
+    <xs:complexType name="W035-MaxBruttoBitrateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="maxBruttoBitrate" type="fields:MaxBruttoBitrateType"/>         
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <!-- Kenner Anlagenanschluss -->
+    <xs:complexType name="W036-PrivateBranchType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+        </xs:sequence>
+    </xs:complexType>
+     
+    <!-- ONKZ Rufnummer -->
+    <xs:complexType name="W037-PhoneNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Meldungscode  -->
+    <xs:complexType name="W038-MessageCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="messageCode" type="fields:MessageCodeType"/>
+            <xs:element name="messageText" type="fields:MessageTextType"/>         
+        </xs:sequence>
+    </xs:complexType>
+    
+	<!-- Kundennummer -->
+    <xs:complexType name="W039-CustomerIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>             
+            <xs:element name="customerId" type="fields:CustomerIdType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+
+	<!-- Kuendigungskenner RNR  -->
+    <xs:complexType name="W040-CancelRemainingNumbersType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="phoneNoTermination" type="fields:DecisionType"/>         
+        </xs:sequence>
+    </xs:complexType> 
+
+    <!-- Verbraucher -->
+    <xs:complexType name="W041-ConsumerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="consumerId" type="fields:ConsumerIdType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Leitungswiderstand -->
+    <xs:complexType name="W042-LoopResistanceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="cableResistance" type="fields:CableResistanceType"/>         
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Aufnehmender Provider -->
+    <xs:complexType name="W043-ReceivingProviderType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+        	<xs:element name="providerName" type="fields:ProviderNameType"/>
+            <xs:element name="requestedTakeoverDate" type="fields:DateType"/>          
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W043-ReceivingProviderWithResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+        	<xs:extension base="segments:W043-ReceivingProviderType">
+        		<xs:sequence> 
+        		    <xs:element name="expectedResponseDate" type="fields:DateType"/>          
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
+    <!-- ID1 Bestandsvalidierung -->
+    <xs:complexType name="W044-Id1StockValidationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Anschluss -->
+    <xs:complexType name="W045-TelefonConnectionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Alternativ Produkt -->
+    <xs:complexType name="W046-AnternativProductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="productName" type="fields:ProductNameType"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+    <!-- Erste MSN -->
+    <xs:complexType name="W047-FirstMSNType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="phoneNumber" type="fields:IptnType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Endkunde -->
+    <xs:complexType name="W048-EndCustomerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="salutation" type="fields:LocationAppellationType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element minOccurs="0" name="givenName" type="fields:GivenNameType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Frist -->
+    <xs:complexType name="W049-DeadlineType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="deadline" type="fields:DateType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Produktbezeichner -->
+    <xs:complexType name="W050-SubproductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="actionCode" type="fields:ActionCodeType"/>            
+            <xs:element name="productName" type="fields:ProductNameType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Klammer -->
+    <xs:complexType name="W051-orderGroupType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="orderGroupId" type="fields:OrderGroupIdType"/> 
+            <xs:element name="orderCount" type="fields:OrderCountType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Terminverschiebung -->
+    <xs:complexType name="W052-PostponementType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="fields:DateType"/>
+            <xs:element name="timeslot" type="fields:TimeSlotType"/>
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="W054-ErrorOrderNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="orderNumber" type="fields:OrderNumberType"/> 
+        </xs:sequence>
+    </xs:complexType>
+       
+	<xs:complexType name="W055-ConnectionSearchType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="mainNumber" type="fields:QuestionIdType"/> 
+            <xs:element name="ndc" type="fields:NdcType"/>
+            <xs:element name="extensionNumber" type="fields:ExtensionNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W056-ConnectionNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="mainNumber" type="fields:QuestionIdType"/> 
+            <xs:element name="ndc" type="fields:NdcType"/>
+            <xs:element name="extensionNumber" type="fields:ExtensionNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+     
+	<xs:complexType name="W057-NumberBlockType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="numberBlockFirst" type="fields:PhoneNoStartBlockType"/> 
+            <xs:element name="numberBlockLast" type="fields:PhoneNoEndBlockType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W058-AllNumberExportType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="allNumberExport" type="fields:DecisionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W059-PartialExecutionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="partialExecution" type="fields:DecisionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W060-VLanIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="vLanId" type="fields:vlanNrType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    
+     <xs:complexType name="W061-NegotiationIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="negotiationId" type="fields:negotiationType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+     <xs:complexType name="W062-IpTvUserpinType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="ipTvUserPin" type="fields:UserpinType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W063-IpTvOnlineIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="ipTvProviderID" type="fields:IptvprovideridType"/>
+        	<xs:element name="ipTvBasicUser" type="fields:IptvbasicuserType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W071-TerminReservationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="reservationNumber" type="fields:ReservationNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="W064-IpTvUserpinchangeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="ipTvUserPinChange" type="fields:DecisionType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+     <xs:complexType name="W065-IpTvTakeOverType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">  
+            	OrderNumber of the related order for NEU/KUE-KD. If this order is NEU, the OrderNumber of the related KUE-KD have to be filled here and otherwise              
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="relatedOrderNumber" type="fields:OrderNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="NumberPortingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:choice>
+            	<xs:element name="trunkConnection" type="segments:TrunkConnectionPortingType"/>
+            	<xs:element name="singleConnection" type="segments:SingleConnectionPortingType"/>
+        	</xs:choice>
+        	<xs:element name="carrierIds" type="segments:W027-PortingIdType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="TrunkConnectionPortingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="connectionNumber" type="segments:W056-ConnectionNumberType"/>
+       	    <xs:element maxOccurs="5" name="numberPortingBlocks" type="segments:W057-NumberBlockType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SingleConnectionPortingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="numberList" type="segments:NumberListType"/>
+       	    <xs:element name="allNumbers" type="segments:W058-AllNumberExportType"/>
+        </xs:choice>
+    </xs:complexType>    
+    
+    <xs:complexType name="NumberListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element maxOccurs="10" name="portingNumber" type="segments:W026-PortingNumberDataType"/>
+        </xs:choice>
+    </xs:complexType>    
+    
+    <xs:complexType name="MessageNumberPortingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:choice>
+        	    <xs:element name="numberBlocksPorting" type="segments:MessagePortingNumberBlockDataType"/>
+        	    <xs:element name="numbersPorting" type="segments:MessagePortingNumberDataType"/>
+        	</xs:choice>
+        </xs:sequence>
+    </xs:complexType>   
+
+	<xs:complexType name="MessagePortingNumberBlockDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="connectionNumber" type="segments:W056-ConnectionNumberType"/>
+       	    <xs:element maxOccurs="5" name="numberPortingBlocks" type="segments:W057-NumberBlockType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessagePortingNumberDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="10" name="portingNumber" type="segments:W026-PortingNumberDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="SwitchingDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element maxOccurs="2" name="switchDataCopper" type="segments:W021-SwitchDataCopperType"/>
+            <xs:element maxOccurs="2" name="switchDataFiber" type="segments:W022-SwitchDataFiberType"/>
+            <xs:element maxOccurs="2" name="switchDataISISOPAL" type="segments:W023-SwitchDataISISOPALType"/>
+            <xs:element maxOccurs="2" name="switchDataKVZ" type="segments:W024-SwitchDataKVZType"/>
+        </xs:choice>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageSwitchDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element maxOccurs="2" minOccurs="0" name="switchDataCopper" type="segments:W021-SwitchDataCopperType"/>
+            <xs:element minOccurs="0" name="V51Interface" type="segments:W032-V51InterfaceType"/>
+            <xs:element maxOccurs="2" minOccurs="0" name="timeslot" type="segments:W033-TimeslotType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="LineDetailsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="lineIndication" type="segments:W018-LineIndicationType"/>
+            <xs:element minOccurs="0" name="loopResistance" type="segments:W042-LoopResistanceType"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="lineSegment" type="segments:W034-LineSegmentType"/>
+            <xs:element minOccurs="0" name="maxBruttoBitrate" type="segments:W035-MaxBruttoBitrateType"/>
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="StockConnectionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+       	    <xs:element name="connectionNumber" type="segments:W056-ConnectionNumberType"/>
+       	    <xs:element maxOccurs="5" name="numberBlocks" type="segments:W057-NumberBlockType"/>
+        </xs:sequence>
+    </xs:complexType>    
+      
+    <xs:complexType name="ExtendedStockSearchType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+       	    <xs:element name="singleLine" type="segments:W017-StockSearchType"/>
+       	    <xs:element name="systemLine" type="segments:W056-ConnectionNumberType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+</xs:schema>

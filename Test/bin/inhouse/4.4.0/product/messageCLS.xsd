@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 53059 $ $LastChangedDate: 2014-07-29 09:42:41 +0200 (Di, 29 Jul 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageCLS="http://www.flexagon.de/wita/messageCLS/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/" 
+    targetNamespace="http://www.flexagon.de/wita/messageCLS/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/message/" schemaLocation="message.xsd"/>
+		
+	<xs:complexType name="MessageCLSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageCLS-QEB" type="messageCLS:MessageCLS-QEBType"/>
+            <xs:element name="messageCLS-ABM" type="messageCLS:MessageCLS-ABMType"/>
+            <xs:element name="messageCLS-ERLM" type="messageCLS:MessageCLS-ERLMType"/>
+            <xs:element name="messageCLS-ENTM" type="messageCLS:MessageCLS-ENTMType"/>
+            <xs:element name="messageCLS-VZM" type="messageCLS:MessageCLS-VZMType"/>
+            <xs:element name="messageCLS-TAM" type="messageCLS:MessageCLS-TAMType"/>
+            <xs:element name="messageCLS-MTAM" type="messageCLS:MessageCLS-MTAMType"/>
+            <xs:element name="messageCLS-ABBM" type="messageCLS:MessageCLS-ABBMType"/>           
+            <xs:element name="messageCLS-ABM-PV" type="messageCLS:MessageCLS-ABM-PVType"/>
+            <xs:element name="messageCLS-ERLM-PV" type="messageCLS:MessageCLS-ERLM-PVType"/>
+            <xs:element name="messageCLS-ENTM-PV" type="messageCLS:MessageCLS-ENTM-PVType"/>
+            <xs:element name="messageCLS-ABBM-PV" type="messageCLS:MessageCLS-ABBM-PVType"/>
+            <xs:element name="messageCLS-VZM-PV" type="messageCLS:MessageCLS-VZM-PVType"/>
+        </xs:choice>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCLSRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageCLS-AKM-PV" type="messageCLS:MessageCLS-AKM-PVType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCLSResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageCLS-RUEM-PV" type="messageCLS:MessageCLS-RUEM-PVType"/>
+            <xs:element name="messageCLS-ERLM-K" type="messageCLS:MessageCLS-ERLM-KType"/>
+        </xs:choice>
+    </xs:complexType> 
+    
+    
+    
+    
+    <xs:complexType name="MessageCLS-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageQEBType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeQEB" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-QEBType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+     
+	<xs:complexType name="MessageCLS-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="message:MessageABMType">        
+		        <xs:sequence>
+		        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+		        	<xs:element name="lineDetails" minOccurs="0" type="segmentsWITA:LineDetailsType"/>
+		        	<xs:element name="telefonConnection" minOccurs="0" type="segmentsWITA:W045-TelefonConnectionType"/>
+		        	<xs:element name="productCLS-ABM" maxOccurs="unbounded" type="messageCLS:ProductCLS-ABMType"/>
+		            <xs:element name="messageCodeABM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ABMType"/> 
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>	  
+
+    <xs:complexType name="MessageCLS-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLMType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" minOccurs="0" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="productCLS-ERLM" maxOccurs="unbounded" type="messageCLS:ProductCLS-ERLMType"/>
+                	<xs:element name="messageCodeERLM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ERLMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ERLM-KType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLM-KType">        
+                <xs:sequence>
+                    <xs:element name="messageCodeERLM-K" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ERLM-KType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageENTMType">        
+                <xs:sequence>
+                	<xs:element name="productCLS-ENTM" maxOccurs="unbounded" type="messageCLS:ProductCLS-ENTMType"/>
+                	<xs:element name="messageCodeENTM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ENTMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageVZMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeVZM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-VZMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABBMType">        
+                <xs:sequence>
+                	<xs:element name="lineDetails" minOccurs="0" type="segmentsWITA:LineDetailsType"/>
+                	<xs:element name="messageCodeABBM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ABBMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCLS-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageTAMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeTAM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-TAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCLS-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageMTAMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeMTAM" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-MTAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+
+    <xs:complexType name="MessageCLS-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageAKM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+        			<xs:element name="messageCodeAKM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-AKM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageRUEM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="messageCodeRUEM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-RUEM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="messageCodeABM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ABM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="messageCodeERLM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ERLM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageENTM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeENTM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ENTM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageCLS-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABBM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeABBM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-ABBM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+    
+    <xs:complexType name="MessageCLS-VZM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageVZM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeVZM-PV" maxOccurs="unbounded" type="messageCLS:MessageCodeCLS-VZM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductCLS-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductCLS-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductCLS-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+   
+    
+        
+     
+     <xs:complexType name="MessageCodeCLS-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="contactTelekom" minOccurs="0" type="segmentsWITA:W008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeCLS-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="contactTelekom" minOccurs="0" type="segmentsWITA:W008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeCLS-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="closingDateOpenOrder" minOccurs="0" type="segmentsWITA:W028-TargetDateType"/>
+            <xs:element name="alternativeProduct" minOccurs="0" type="segmentsWITA:W046-AnternativProductType"/>
+            <xs:element name="locationCorrection" minOccurs="0" type="segmentsWITA:W031-LocationCorrectionType"/>
+            <xs:element name="errorOrderNumber" minOccurs="0" type="segmentsWITA:W054-ErrorOrderNumberType"/>  
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeCLS-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeCLS-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeCLS-VZM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeCLS-ERLM-KType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>     
+     
+</xs:schema>

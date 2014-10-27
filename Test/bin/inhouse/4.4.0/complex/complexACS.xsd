@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:complexACS="http://www.flexagon.de/acs/complex/" 
+	xmlns:segmentsACS="http://www.flexagon.de/acs/segments/" 
+	targetNamespace="http://www.flexagon.de/acs/complex/" 
+	elementFormDefault="unqualified">
+
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/acs/segments/" schemaLocation="../segments/segmentsACS.xsd"/>
+	
+	
+	<xs:complexType name="CpeACMainDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+					<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeACDeviceType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeRCMainDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+					<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeRCDeviceType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeCCMainDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+					<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeCCDeviceType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeACMacAmendmentDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+					<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeACMacAmendmentDeviceType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeRCMacAmendmentDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+					<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeRCMacAmendmentDeviceType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeMsgDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+				<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeMsgDeviceType" />
+			</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeMsgDataWithStatusType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+			<xs:sequence>
+				<xs:element name="cpeDevice" minOccurs="1" maxOccurs="unbounded" type="complexACS:CpeMsgDeviceWithStatusType" />
+			</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CpeACDeviceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeDetail" type="segmentsACS:R021-CpeACDetailType"/>
+			<xs:element name="voipData" minOccurs="0" maxOccurs="1" type="complexACS:VoipDataType" />
+			<xs:element name="umtsBackup" minOccurs="0" maxOccurs="1" type="segmentsACS:R009-UmtsBackupType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeRCDeviceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeDetail" type="segmentsACS:R022-CpeRCDetailType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeCCDeviceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeDetail" type="segmentsACS:R023-CpeCCDetailType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeACMacAmendmentDeviceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeDetail" type="segmentsACS:R024-CpeACMacAmendmentDetailType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeRCMacAmendmentDeviceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeDetail" type="segmentsACS:R025-CpeRCMacAmendmentDetailType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CpeMsgDeviceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeDetail" type="segmentsACS:R026-CpeMsgDetailType"/>
+			<xs:element name="voipData" minOccurs="0" maxOccurs="1" type="complexACS:VoipDataType" />
+			<xs:element name="umtsBackup" minOccurs="0" maxOccurs="1" type="segmentsACS:R009-UmtsBackupType"/>
+			<xs:element name="cpeStatus" minOccurs="0" maxOccurs="1" type="segmentsACS:R028-StatusType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CpeMsgDeviceWithStatusType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en"></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="complexACS:CpeMsgDeviceType">
+				<xs:sequence>
+					<xs:element name="status" type="segmentsACS:R028-StatusType"></xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- VoIP data -->
+	<xs:complexType name="VoipDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="voipInformation" type="segmentsACS:R006-VoipInformationType" />
+			<xs:element name="voipDetail" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R007-VoipDetailType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+
+	<!-- Delivery data -->
+	<xs:complexType name="DeliveryType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="deliveryAddress" type="segmentsACS:R003-DeliveryAddressType" />
+			<xs:element name="deliveryDate" type="segmentsACS:R004-DeliveryDateType" />
+			<xs:element name="deliveryRemark" type="segmentsACS:R005-DeliveryRemarkType" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+
+</xs:schema>

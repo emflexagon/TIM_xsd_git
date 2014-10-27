@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 39349 $ $LastChangedDate: 2013-10-18 11:51:15 +0200 (Fri, 
+	18 Oct 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:orderTIM="http://www.flexagon.de/tim/orderTIM/"
+	xmlns:segmentsTIM="http://www.flexagon.de/tim/segments/"
+	targetNamespace="http://www.flexagon.de/tim/orderTIM/"
+	elementFormDefault="unqualified">
+	
+	<!-- Imports -->
+	<xs:import namespace="http://www.flexagon.de/tim/segments/"
+		schemaLocation="../segments/segmentsTIM.xsd" />
+		
+	<xs:complexType name="orderTIMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">      
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="preCreate" type="orderTIM:preCreateType" />
+			<xs:element name="preModify" type="orderTIM:preModifyType" />
+			<xs:element name="preAttachment" type="orderTIM:preAttachmentType" />
+			<xs:element name="preGetStatus" type="orderTIM:preGetStatusType" />
+			<xs:element name="prodCreate" type="orderTIM:prodCreateType" />
+			<xs:element name="prodModify" type="orderTIM:prodModifyType" />
+			<xs:element name="prodAttachment" type="orderTIM:prodAttachmentType" />
+			<xs:element name="prodGetStatus" type="orderTIM:prodGetStatusType" />
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="orderTIM2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">     
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+			<xs:element name="create" type="orderTIM:createType" />
+			<xs:element name="modify" type="orderTIM:modifyType" />
+			<xs:element name="attachment" type="orderTIM:attachmentType" />
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="createType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="basics" type="segmentsTIM:I007-GrunddatenType" />
+			<xs:element name="additional" type="segmentsTIM:I009-GrunddatenType" />
+			<xs:element name="attachment" minOccurs="0" type="segmentsTIM:I011-AttachmentType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="modifyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="custticket" minOccurs="0" type="segmentsTIM:I006-CustomerTicketIdType" />
+			<xs:element name="basics" type="segmentsTIM:I010-GrunddatenType" />
+			<xs:element name="additional" minOccurs="0" type="segmentsTIM:I008-GrunddatenType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="attachmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="attachment" type="segmentsTIM:I012-AttachmentType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="preCreateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="transaktion" minOccurs="0" type="segmentsTIM:I005-TransaktionIdType" />
+			<xs:element name="custticket" type="segmentsTIM:I006-CustomerTicketIdType" />
+			<xs:element name="basics" type="segmentsTIM:I007-GrunddatenType" />
+			<xs:element name="details" type="segmentsTIM:I013-DetailsType" />
+			<xs:element name="attachment" minOccurs="0" type="segmentsTIM:I011-AttachmentType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="preModifyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="custticket" type="segmentsTIM:I006-CustomerTicketIdType" />
+			<xs:element name="additional" minOccurs="0" type="segmentsTIM:I008-GrunddatenType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="preAttachmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="attachment" type="segmentsTIM:I012-AttachmentType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="preGetStatusType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ticket" minOccurs="0" type="segmentsTIM:I003-TicketIdType" />
+			<xs:element name="custticket" minOccurs="0" type="segmentsTIM:I006-CustomerTicketIdType" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="prodCreateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="transaktion" minOccurs="0" type="segmentsTIM:I005-TransaktionIdType" />
+			<xs:element name="custticket" type="segmentsTIM:I006-CustomerTicketIdType" />
+			<xs:element name="basics" type="segmentsTIM:I007-GrunddatenType" />
+			<xs:element name="details" type="segmentsTIM:I013-DetailsType" />
+			<xs:element name="attachment" minOccurs="0" type="segmentsTIM:I011-AttachmentType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="prodModifyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="custticket" type="segmentsTIM:I006-CustomerTicketIdType" />
+			<xs:element name="additional" minOccurs="0" type="segmentsTIM:I008-GrunddatenType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="prodAttachmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ids" type="segmentsTIM:I004-IdsType" />
+			<xs:element name="attachment" type="segmentsTIM:I012-AttachmentType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="prodGetStatusType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="ticket" minOccurs="0" type="segmentsTIM:I003-TicketIdType" />
+			<xs:element name="custticket" minOccurs="0" type="segmentsTIM:I006-CustomerTicketIdType" />
+		</xs:sequence>
+	</xs:complexType>
+		
+</xs:schema>
+	

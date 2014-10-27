@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:complexVine="http://www.flexagon.de/vine/complex/" 
+	xmlns:segmentsVine="http://www.flexagon.de/vine/segments/" 
+	targetNamespace="http://www.flexagon.de/vine/complex/" 
+	elementFormDefault="unqualified">
+
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/vine/segments/" schemaLocation="../segments/segmentsVine.xsd"/>
+	
+	<xs:complexType name="VineKeyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="mainKey" type="segmentsVine:G001-TroubleTicketType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ApplicationContextType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="applicationContext" type="segmentsVine:G002-ApplicationContextType"/>
+			<xs:element name="properties" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G016-PropertyType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="TroubleTicketKeyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="mainKey" type="segmentsVine:G001-TroubleTicketType"/>
+			<xs:element name="extApplicationContext" minOccurs="0" type="complexVine:ApplicationContextType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AktivityDurationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modifier" type="segmentsVine:G017-ModifierType"/>
+			<xs:element name="durations" minOccurs="0" maxOccurs="unbounded" type="complexVine:DurationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="DurationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="aktvitiy" type="segmentsVine:G005-ActivityDurationsType"/>
+			<xs:element name="durations" minOccurs="0" type="segmentsVine:G009-TimeLengthType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AuthorizationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="authorization" minOccurs="0" type="segmentsVine:G007-AuthorizationType"/>
+			<xs:element name="authPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="authPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="CustomerRoleType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="role" minOccurs="0" type="segmentsVine:G008-CustomerRoleAssignmentType"/>
+			<xs:element name="contactPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="contactPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="EscalationListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modifier" type="segmentsVine:G017-ModifierType"/>
+			<xs:element name="escalation" minOccurs="0" maxOccurs="unbounded" type="complexVine:EscalationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="EscalationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="escPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="escPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+			<xs:element name="requestPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="requestPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+			<xs:element name="escData" minOccurs="0" type="segmentsVine:G010-EscalationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AlarmListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modifier" type="segmentsVine:G017-ModifierType"/>
+			<xs:element name="alarm" minOccurs="0" maxOccurs="unbounded" type="complexVine:AlarmType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AlarmType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="version" minOccurs="0" type="segmentsVine:G003-VersionNumberType"/>
+			<xs:element name="alarmData" minOccurs="0" type="segmentsVine:G011-AlarmType"/>
+			<xs:element name="troubleTicketKey" minOccurs="0" type="complexVine:TroubleTicketKeyType"/>
+			<xs:element name="correlatedNotifications" minOccurs="0" maxOccurs="unbounded" type="complexVine:NotificationType"/>
+			<xs:element name="thresholdInfo" minOccurs="0" type="segmentsVine:G020-ThresholdInfoType"/>
+			<xs:element name="attributeChanges" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G015-AttributeChangeType"/>
+			<xs:element name="monitoredAttributes" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G014-AttributeType"/>
+			<xs:element name="comments" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G013-CommentType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="NotificationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="notification" type="segmentsVine:G012-CorrelatedNotificationsType"/>
+			<xs:element name="notificationIds" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G006-StringType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="RepairActivityListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modifier" type="segmentsVine:G017-ModifierType"/>
+			<xs:element name="repairActivity" minOccurs="0" maxOccurs="unbounded" type="complexVine:RepairActivityType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="RepairActivityType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="repairActivity" minOccurs="0" type="segmentsVine:G021-ActivityType"/>
+			<xs:element name="activityPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="activityPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SpRoleAssignmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="role" minOccurs="0"  type="segmentsVine:G022-RoleAssignmentType"/>
+			<xs:element name="contactPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="contactPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="TroubleLocationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="location" minOccurs="0"  type="segmentsVine:G024-TroubleLocationType"/>
+			<xs:element name="locationPerson" minOccurs="0" type="segmentsVine:G004-PersonReachType"/>
+			<xs:element name="locationPersonAddress" minOccurs="0" type="segmentsVine:G041-AddressInfoType"/>
+			<xs:element name="accessHours" minOccurs="0" type="complexVine:AccessHoursType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="AccessHoursType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dayOfWeek" minOccurs="0" type="segmentsVine:G031-DayOfWeekType"/>
+			<xs:element name="accessHours" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G025-AccessHourListType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ManagedEntityKeyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="troubleTicket" type="segmentsVine:G038-ManagedEntityKeyType"/>
+			<xs:element name="applicationContext" minOccurs="0" type="segmentsVine:G002-ApplicationContextType"/>
+			<xs:element name="properties" minOccurs="0" maxOccurs="unbounded" type="segmentsVine:G016-PropertyType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+
+	<xs:complexType name="PersonReachType">
+		<xs:sequence>
+			<xs:element name="person" type="segmentsVine:G004-PersonReachType" maxOccurs="1" minOccurs="0"></xs:element>
+			<xs:element name="address" type="segmentsVine:G041-AddressInfoType" maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="SuspectObjectListType">
+		<xs:sequence>
+			<xs:element name="suspectObject" type="segmentsVine:G023-ObjectType" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TroubleNumListType">
+		<xs:sequence>
+			<xs:element name="troubleNum" type="segmentsVine:G006-StringType" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StatusNarrListType">
+		<xs:sequence>
+			<xs:element name="statusNarr" type="segmentsVine:G040-StatusNarrType" maxOccurs="unbounded" minOccurs="0"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+    <xs:complexType name="TroubleTicketBaseType">
+    	 <xs:annotation>
+            <xs:documentation xml:lang="en">   
+            	Base data for TroubleTicket. This base data appears in most complex request/reponse/event             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+		    <xs:element name="version" minOccurs="0" type="segmentsVine:G003-VersionNumberType"/>
+			<xs:element name="troubleTicketKey" minOccurs="0" type="complexVine:TroubleTicketKeyType"/>
+<!--			<xs:element name="accountOwner" minOccurs="0" type="complexVine:PersonReachType"/>-->
+			<xs:element name="activityDuration" minOccurs="0" type="complexVine:AktivityDurationType"/>
+			<xs:element name="additionalTroubleInfos" minOccurs="0" maxOccurs="1" type="segmentsVine:G042-AddTroubleInfoType"/>
+			<xs:element name="generalData" minOccurs="0" type="segmentsVine:G018-GeneralRequestDataType"/>
+<!--			<xs:element name="authorization" minOccurs="0" maxOccurs="unbounded" type="complexVine:AuthorizationType"/>-->
+			<xs:element name="clearancePerson" minOccurs="0" type="complexVine:PersonReachType"/>
+			<xs:element name="customer" minOccurs="0" type="complexVine:PersonReachType"/>
+			<xs:element name="customerRoleAssignment" minOccurs="0" maxOccurs="unbounded" type="complexVine:CustomerRoleType"/>
+<!--			<xs:element name="escalationList" minOccurs="0" type="complexVine:EscalationListType"/>-->
+			<xs:element name="outageDuration" minOccurs="0" type="segmentsVine:G009-TimeLengthType"/>
+<!--			<xs:element name="alarmList" minOccurs="0" type="complexVine:AlarmListType"/>-->
+			<xs:element name="relatedTroubleTicketKey" minOccurs="0" maxOccurs="unbounded" type="complexVine:TroubleTicketKeyType"/>
+<!--			<xs:element name="repairActivityListType" minOccurs="0" type="complexVine:RepairActivityListType"/>-->
+			<xs:element name="spRoleAssignment" minOccurs="0" maxOccurs="unbounded" type="complexVine:SpRoleAssignmentType"/>
+			<xs:element name="suspectObjectList" minOccurs="0" maxOccurs="1" type="complexVine:SuspectObjectListType"/>
+<!--			<xs:element name="troubleNumList" minOccurs="0" maxOccurs="1" type="complexVine:TroubleNumListType"/>-->
+<!--			<xs:element name="troubleLocationList" minOccurs="0" maxOccurs="unbounded" type="complexVine:TroubleLocationType"/>-->
+<!--			<xs:element name="troubleObjectAccessHours" minOccurs="0" maxOccurs="unbounded" type="complexVine:AccessHoursType"/>-->
+			<xs:element name="attachment" minOccurs="0" type="segmentsVine:G039-AttachmentType"/>
+			<xs:element name="statusNarrList" minOccurs="0" maxOccurs="1" type="complexVine:StatusNarrListType"/>
+		</xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageTIM="http://www.flexagon.de/tim/messageTIM/"
+    xmlns:segmentsTIM="http://www.flexagon.de/tim/segments/" 
+    targetNamespace="http://www.flexagon.de/tim/messageTIM/"    
+    elementFormDefault="unqualified">
+    
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/tim/segments/" schemaLocation="../segments/segmentsTIM.xsd"/>
+	
+	<xs:complexType name="responseTIMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="teq" type="messageTIM:TimTeqType"/>
+        	<xs:element name="status" type="messageTIM:TimStatusReturnType"/>
+        	<xs:element name="error" type="messageTIM:TimErrorType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="TimTeqType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="transaktion" type="segmentsTIM:I005-TransaktionIdType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="TimStatusReturnType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="transaktion" type="segmentsTIM:I005-TransaktionIdType" />
+			<xs:element name="custticket" minOccurs="0" type="segmentsTIM:I006-CustomerTicketIdType" />
+			<xs:element name="ticket" type="segmentsTIM:I003-TicketIdType" />
+			<xs:element name="status" type="segmentsTIM:I014-StatusType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="TimErrorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="header" type="segmentsTIM:I001-HeaderType" />
+			<xs:element name="error" type="segmentsTIM:I015-ErrorType" />
+		</xs:sequence>
+	</xs:complexType>
+    
+</xs:schema>

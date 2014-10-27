@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 47001 $ $LastChangedDate: 2014-03-13 13:04:16 +0100 (Do, 13 Mrz 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:orderFTTH="http://www.flexagon.de/wita/orderFTTH/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:order="http://www.flexagon.de/inhouse/order/" 
+    targetNamespace="http://www.flexagon.de/wita/orderFTTH/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+		
+	<xs:complexType name="OrderFTTHType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>        	        	
+        	<xs:element name="orderFTTH-NEU" type="orderFTTH:OrderFTTH-NEUType"/>        	       
+            <xs:element name="orderFTTH-KUE-KD" type="orderFTTH:OrderFTTH-KUE-KDType"/>             
+            <xs:element name="orderFTTH-LAE" type="orderFTTH:OrderFTTH-LAEType"/> 
+            <xs:element name="orderFTTH-AEN-LMAE" type="orderFTTH:OrderFTTH-AEN-LMAEType"/> 
+            <xs:element name="orderFTTH-PV" type="orderFTTH:OrderFTTH-PVType"/> 
+            <xs:element name="orderFTTH-VBL" type="orderFTTH:OrderFTTH-VBLType"/>  
+    	</xs:choice>
+    </xs:complexType>  
+     
+	<xs:complexType name="OrderFTTH-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="order:OrderNEUType">        
+		        <xs:sequence>
+		            <xs:element name="productFTTH-NEU" type="orderFTTH:ProductFTTH-NEUType"/> 
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>	
+
+    <xs:complexType name="OrderFTTH-KUE-KDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderKUE-KDType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-KUE-KD" type="orderFTTH:ProductFTTH-KUE-KDType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderFTTH-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderAEN-LMAEType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-AEN-LMAE" type="orderFTTH:ProductFTTH-AEN-LMAEType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderFTTH-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderLAEType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-LAE" type="orderFTTH:ProductFTTH-LAEType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="OrderFTTH-PGWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderPGWType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-PGW" type="orderFTTH:ProductFTTH-PGWType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+
+    <xs:complexType name="OrderFTTH-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderPVType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-PV" type="orderFTTH:ProductFTTH-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderFTTH-VBLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderVBLType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-VBL" type="orderFTTH:ProductFTTH-VBLType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+    
+    <xs:complexType name="ProductFTTH-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoFTTH-NEU" type="orderFTTH:ProductInfoFTTH-NEU"/>
+            <xs:element name="subproductFTTH-NEU" minOccurs="0" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-NEUType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-NEU" minOccurs="0" type="orderFTTH:ProductInfoFTTH-NEU"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-NEU">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+        	<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>            
+            <xs:element name="locationA" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="previousTenant" minOccurs="0" type="segmentsWITA:W009-PreviousTenantType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesWithReservationType"/>
+            <xs:element name="ipTvOnlineID" minOccurs="0" type="segmentsWITA:W063-IpTvOnlineIDType"/>  
+            <xs:element name="ipTvTakeover" minOccurs="0" type="segmentsWITA:W065-IpTvTakeOverType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+	<xs:complexType name="ProductFTTH-KUE-KDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoFTTH-KUE-KD" type="orderFTTH:ProductInfoFTTH-KUE-KD"/> 
+            <xs:element name="subproductFTTH-KUE-KD" minOccurs="0" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-KUE-KDType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-KUE-KDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-KUE-KD" minOccurs="0" type="orderFTTH:ProductInfoFTTH-KUE-KD"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-KUE-KD">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+        	<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>           
+        	<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+        	<xs:element name="ipTvTakeover" type="segmentsWITA:W065-IpTvTakeOverType" maxOccurs="1" minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductFTTH-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>          
+            <xs:element name="productInfoFTTH-AEN-LMAE" type="orderFTTH:ProductInfoFTTH-AEN-LMAE"/> 
+            <xs:element name="subproductFTTH-AEN-LMAE" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-AEN-LMAEType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-AEN-LMAE" minOccurs="0" type="orderFTTH:ProductInfoFTTH-AEN-LMAE"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-AEN-LMAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+        	<xs:element name="ipTvUserPinChange" type="segmentsWITA:W064-IpTvUserpinchangeType" maxOccurs="1" minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+	<xs:complexType name="ProductFTTH-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>          
+            <xs:element name="productInfoFTTH-LAE" type="orderFTTH:ProductInfoFTTH-LAE"/> 
+            <xs:element name="subproductFTTH-LAE" minOccurs="0" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-LAEType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-LAE" minOccurs="0" type="orderFTTH:ProductInfoFTTH-LAE"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-LAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+            <xs:element name="ipTvOnlineID" minOccurs="0" type="segmentsWITA:W063-IpTvOnlineIDType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductFTTH-PGWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>          
+            <xs:element name="productInfoFTTH-PGW" type="orderFTTH:ProductInfoFTTH-PGW"/> 
+            <xs:element name="subproductFTTH-PGW" minOccurs="0" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-PGWType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-PGWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-PGW" minOccurs="0" type="orderFTTH:ProductInfoFTTH-PGW"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-PGW">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductFTTH-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoFTTH-PV" type="orderFTTH:ProductInfoFTTH-PV"/> 
+            <xs:element name="subproductFTTH-PV" minOccurs="0" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-PVType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-PV" minOccurs="0" type="orderFTTH:ProductInfoFTTH-PV"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-PV">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>              
+        	<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesWithReservationType"/>
+            <xs:element name="ipTvOnlineID" minOccurs="0" type="segmentsWITA:W063-IpTvOnlineIDType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductFTTH-VBLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoFTTH-VBL" type="orderFTTH:ProductInfoFTTH-VBL"/> 
+            <xs:element name="subproductFTTH-VBL" minOccurs="0" maxOccurs="unbounded" type="orderFTTH:SubproductFTTH-VBLType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTH-VBLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoFTTH-VBL" minOccurs="0" type="orderFTTH:ProductInfoFTTH-VBL"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTH-VBL">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+        	<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>            
+        	<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesWithReservationType"/>
+            <xs:element name="stockSearch" minOccurs="0" type="segmentsWITA:W017-StockSearchType"/>
+            <xs:element name="numberPorting" minOccurs="0" type="segmentsWITA:NumberPortingType"/>
+            <xs:element name="ipTvOnlineID" minOccurs="0" type="segmentsWITA:W063-IpTvOnlineIDType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+
+      
+</xs:schema>

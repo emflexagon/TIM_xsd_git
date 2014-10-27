@@ -1,0 +1,549 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:segmentsVine="http://www.flexagon.de/vine/segments/" 
+    targetNamespace="http://www.flexagon.de/vine/segments/"    
+    elementFormDefault="unqualified">
+	
+    <!-- Trouble Ticket -->
+    <xs:complexType name="G001-TroubleTicketType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="primaryKey" type="xs:string"/> 
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="applicationDN" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Application Context -->
+    <xs:complexType name="G002-ApplicationContextType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="factoryClass" type="xs:string"/> 
+            <xs:element name="url" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Version Number -->
+    <xs:complexType name="G003-VersionNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="lastUpdateVersionNumber" type="xs:long"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Person Reach -->
+    <xs:complexType name="G004-PersonReachType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="email" minOccurs="0" type="xs:string"/> 
+            <xs:element name="fax" minOccurs="0" type="xs:string"/> 
+            <xs:element name="name" minOccurs="0" type="xs:string"/> 
+            <xs:element name="number" minOccurs="0" type="xs:string"/> 
+            <xs:element name="organizationName" minOccurs="0" type="xs:string"/>
+            <xs:element name="phone" minOccurs="0" type="xs:string"/> 
+            <xs:element name="responsible" minOccurs="0" type="xs:string"/> 
+            <xs:element name="smsAddress" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Activity Durations -->
+    <xs:complexType name="G005-ActivityDurationsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="baseActivityType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="billable" minOccurs="0" type="xs:boolean"/> 
+        </xs:sequence>
+    </xs:complexType>   
+        
+    <!-- String -->
+    <xs:complexType name="G006-StringType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="item" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Authorization -->
+    <xs:complexType name="G007-AuthorizationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="baseActivityType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="authTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="requestState" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+
+    <!-- Customer Role Assignment -->
+    <xs:complexType name="G008-CustomerRoleAssignmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="baseRole" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Time Length -->
+    <xs:complexType name="G009-TimeLengthType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="year" minOccurs="0" type="xs:string"/> 
+            <xs:element name="month" minOccurs="0" type="xs:string"/> 
+            <xs:element name="day" minOccurs="0" type="xs:string"/> 
+            <xs:element name="hours" minOccurs="0" type="xs:string"/> 
+            <xs:element name="minutes" minOccurs="0" type="xs:string"/> 
+            <xs:element name="seconds" minOccurs="0" type="xs:string"/> 
+            <xs:element name="msecs" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Escalation -->
+    <xs:complexType name="G010-EscalationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="escTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="requestState" minOccurs="0" type="xs:string"/> 
+            <xs:element name="orgLevel" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Alarm -->
+    <xs:complexType name="G011-AlarmType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="lastUpdateVersionNumber" minOccurs="0" type="xs:long"/> 
+            <xs:element name="alarmRaisedTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="managedObjectClass" minOccurs="0" type="xs:string"/> 
+            <xs:element name="managedObjectInstance" minOccurs="0" type="xs:string"/> 
+            <xs:element name="systemDN" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseAlarmType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="notificationID" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseProbableAlarmCause" minOccurs="0" type="xs:string"/> 
+            <xs:element name="basePerceivedAlarmSeverity" minOccurs="0" type="xs:string"/> 
+            <xs:element name="specificProblem" minOccurs="0" type="xs:string"/> 
+            <xs:element name="backedUpStatus" minOccurs="0" type="xs:boolean"/> 
+            <xs:element name="backUpObject" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseTrendIndicationType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="proposedRepairActions" minOccurs="0" type="xs:string"/> 
+            <xs:element name="additionalText" minOccurs="0" type="xs:string"/> 
+            <xs:element name="ackUserID" minOccurs="0" type="xs:string"/> 
+            <xs:element name="ackTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="baseAlarmAckState" minOccurs="0" type="xs:string"/> 
+            <xs:element name="ackSystemID" minOccurs="0" type="xs:string"/> 
+            <xs:element name="alarmClearedTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="alarmChangedTime" minOccurs="0" type="xs:dateTime"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Correlated Notifications -->
+    <xs:complexType name="G012-CorrelatedNotificationsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="managedObjectInstance" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Comments -->
+    <xs:complexType name="G013-CommentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="userID" type="xs:string"/> 
+            <xs:element name="time" type="xs:dateTime"/> 
+            <xs:element name="text" type="xs:string"/> 
+            <xs:element name="systemID" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Attribute -->
+    <xs:complexType name="G014-AttributeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/> 
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="value" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Attribute Change -->
+    <xs:complexType name="G015-AttributeChangeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/> 
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="oldValue" minOccurs="0" type="xs:string"/> 
+            <xs:element name="newValue" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Property -->
+    <xs:complexType name="G016-PropertyType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/> 
+            <xs:element name="value" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Modifier -->
+    <xs:complexType name="G017-ModifierType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="modifier" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- General Request Data -->
+    <xs:complexType name="G018-GeneralRequestDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="afterHourRepairAuthority" minOccurs="0" type="xs:boolean"/> 
+            <xs:element name="cancelRequestByCustomer" minOccurs="0" type="xs:boolean"/> 
+            <xs:element name="closeOutNarr" minOccurs="0" type="xs:string"/> 
+            <xs:element name="closeOutVerification" minOccurs="0" type="xs:string"/> 
+            <xs:element name="commitmentTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="commitmentTimeRequest" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="customerTroubleNum" minOccurs="0" type="xs:string"/> 
+            <xs:element name="dialog" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseInitiatingMode" minOccurs="0" type="xs:string"/> 
+            <xs:element name="lastUpdateTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="mainServiceChange" minOccurs="0" type="xs:boolean"/> 
+            <xs:element name="originator" minOccurs="0" type="xs:string"/> 
+            <xs:element name="receivedTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="baseRepeatReport" minOccurs="0" type="xs:string"/> 
+            <xs:element name="restoreTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="serviceUnavailableBeginTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="serviceUnavailableEndTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="troubleDescription" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseFoundType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="troubleLocation" minOccurs="0" type="xs:string"/> 
+            <xs:element name="troubleObject" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseTroubleType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseState" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseStatus" minOccurs="0" type="xs:string"/> 
+            <xs:element name="troubleStatusTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="basePerceivedTroubleSeverity" minOccurs="0" type="xs:string"/> 
+            <xs:element name="basePreferredPriority" minOccurs="0" type="xs:string"/> 
+            <xs:element name="troubleDetectionTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="troubleObjectAccessFromTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="troubleObjectAccessToTime" minOccurs="0" type="xs:dateTime"/> 
+            <xs:element name="troubleSystemDN" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Alarm Key -->
+    <xs:complexType name="G019-AlarmKeyType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="alarmPrimaryKey" type="xs:string"/> 
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="applicationDN" minOccurs="0" type="xs:string"/> 
+       </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Threshold Info -->
+    <xs:complexType name="G020-ThresholdInfoType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="observedObject" type="xs:string"/> 
+            <xs:element name="observerValue" type="xs:string"/> 
+            <xs:element name="armTime" type="xs:dateTime"/> 
+            <xs:element name="thresholdName" type="xs:string"/> 
+            <xs:element name="thresholdValue" type="xs:string"/> 
+            <xs:element name="thresholdOffset" type="xs:string"/> 
+            <xs:element name="thresholdDirection" type="xs:string"/> 
+            <xs:element name="thresholdAttributeTypes" type="xs:string"/> 
+            <xs:element name="thresholdCollectionMethods" type="xs:string"/> 
+            <xs:element name="thresholdsArray" type="xs:boolean"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Activity -->
+    <xs:complexType name="G021-ActivityType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="activityCode" minOccurs="0" type="xs:string"/> 
+            <xs:element name="activityInfo" minOccurs="0" type="xs:string"/> 
+            <xs:element name="entryTime" minOccurs="0" type="xs:dateTime"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Role Assignment -->
+    <xs:complexType name="G022-RoleAssignmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="baseRole" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Object -->
+    <xs:complexType name="G023-ObjectType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="suspectObjectType" minOccurs="0" type="xs:string"/> 
+            <xs:element name="suspectObjectID" minOccurs="0" type="xs:string"/> 
+            <xs:element name="failureProbability" minOccurs="0" type="xs:integer"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Trouble Location -->
+    <xs:complexType name="G024-TroubleLocationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="objectDN" minOccurs="0" type="xs:string"/> 
+            <xs:element name="premiseAddress" minOccurs="0" type="xs:string"/> 
+            <xs:element name="premiseName" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Access Hour List -->
+    <xs:complexType name="G025-AccessHourListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="startHours" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="startMinutes" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="startSeconds" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="startMsecs" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="startUtcOffset" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="endHours" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="endMinutes" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="endSeconds" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="endMsecs" minOccurs="0" type="xs:integer"/> 
+            <xs:element name="endUtcOffset" minOccurs="0" type="xs:integer"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Status -->
+    <xs:complexType name="G026-StatusType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="status" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Close Out Narr -->
+    <xs:complexType name="G027-CloseOutNarrType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="closeOutNarr" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- General Change Event -->
+    <xs:complexType name="G028-GeneralChangeEventType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="applicationDN" type="xs:string"/> 
+            <xs:element name="eventTime" type="xs:dateTime"/> 
+            <xs:element name="baseState" minOccurs="0" type="xs:string"/> 
+            <xs:element name="baseStatus" minOccurs="0" type="xs:string"/> 
+            <xs:element name="statusTime" minOccurs="0" type="xs:dateTime"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- General Event -->
+    <xs:complexType name="G029-GeneralEventType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="applicationDN" type="xs:string"/> 
+            <xs:element name="eventTime" type="xs:dateTime"/> 
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- Notification ID -->
+    <xs:complexType name="G030-NotificationIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="notificationID" type="xs:integer"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Day of Week -->
+    <xs:complexType name="G031-DayOfWeekType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dayOfWeek" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+     
+	<!-- resync -->
+    <xs:complexType name="G032-ReSyncType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="required" type="xs:boolean"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="G037-ExceptionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="message" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="G038-ManagedEntityKeyType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="type" type="xs:string"/> 
+            <xs:element name="applicationDN" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="G039-AttachmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="fileName" type="xs:string"/> 
+            <xs:element name="data" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="G040-StatusNarrType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="snState" type="xs:string"/> 
+            <xs:element name="snStatus" type="xs:string"/> 
+            <xs:element name="snSubject" minOccurs="0" type="xs:string"/> 
+            <xs:element name="snDescription" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="G041-AddressInfoType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="addressInfo" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="civicAddress"  minOccurs="0" type="xs:string"/> 
+            <xs:element name="city"  minOccurs="0" type="xs:string"/> 
+            <xs:element name="state"  minOccurs="0" type="xs:string"/> 
+            <xs:element name="zip"  minOccurs="0" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="G042-AddTroubleInfoType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="troubleDescriptionSubject" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="closeOutNarrSubject" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="spInterimReport" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="businessCase" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="problemType" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="customerDevice" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="customerInterimSubject" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="customerInterimReport" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="spInterimSubject" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="time" type="xs:string" maxOccurs="1" minOccurs="0"/> 
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

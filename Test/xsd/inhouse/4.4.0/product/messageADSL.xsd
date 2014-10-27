@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 53059 $ $LastChangedDate: 2014-07-29 09:42:41 +0200 (Di, 29 Jul 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageADSL="http://www.flexagon.de/wita/messageADSL/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/" 
+    targetNamespace="http://www.flexagon.de/wita/messageADSL/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/message/" schemaLocation="message.xsd"/>
+		
+	<xs:complexType name="MessageADSLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageADSL-QEB" type="messageADSL:MessageADSL-QEBType"/>
+            <xs:element name="messageADSL-ABM" type="messageADSL:MessageADSL-ABMType"/>
+            <xs:element name="messageADSL-ERLM" type="messageADSL:MessageADSL-ERLMType"/>
+            <xs:element name="messageADSL-ENTM" type="messageADSL:MessageADSL-ENTMType"/>
+            <xs:element name="messageADSL-VZM" type="messageADSL:MessageADSL-VZMType"/>
+            <xs:element name="messageADSL-TAM" type="messageADSL:MessageADSL-TAMType"/>
+            <xs:element name="messageADSL-MTAM" type="messageADSL:MessageADSL-MTAMType"/>
+            <xs:element name="messageADSL-ABBM" type="messageADSL:MessageADSL-ABBMType"/>           
+            <xs:element name="messageADSL-ABM-PV" type="messageADSL:MessageADSL-ABM-PVType"/>
+            <xs:element name="messageADSL-ERLM-PV" type="messageADSL:MessageADSL-ERLM-PVType"/>
+            <xs:element name="messageADSL-ENTM-PV" type="messageADSL:MessageADSL-ENTM-PVType"/>
+            <xs:element name="messageADSL-ABBM-PV" type="messageADSL:MessageADSL-ABBM-PVType"/>
+            <xs:element name="messageADSL-VZM-PV" type="messageADSL:MessageADSL-VZM-PVType"/>
+        </xs:choice>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageADSLRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageADSL-AKM-PV" type="messageADSL:MessageADSL-AKM-PVType"/>
+			<xs:element name="messageADSL-ERLM" type="messageADSL:MessageADSL-ERLMType"/> 
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageADSLResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageADSL-RUEM-PV" type="messageADSL:MessageADSL-RUEM-PVType"/>
+            <xs:element name="messageADSL-ERLM-K" type="messageADSL:MessageADSL-ERLM-KType"/>       
+        </xs:choice>
+    </xs:complexType> 
+     
+     
+     
+     
+     <xs:complexType name="MessageADSL-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageQEBType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeQEB" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-QEBType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+	<xs:complexType name="MessageADSL-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="message:MessageABMType">        
+		        <xs:sequence>
+		        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType" />		        	
+		        	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+		        	<xs:element name="productADSL-ABM" maxOccurs="unbounded" type="messageADSL:ProductADSL-ABMType"/>
+		            <xs:element name="messageCodeABM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ABMType"/> 
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLMType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" minOccurs="0" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="productADSL-ERLM" minOccurs="0" maxOccurs="unbounded" type="messageADSL:ProductADSL-ERLMType"/>
+                	<xs:element name="messageCodeERLM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ERLMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ERLM-KType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLM-KType">        
+                <xs:sequence>
+                    <xs:element name="messageCodeERLM-K" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ERLM-KType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageENTMType">        
+                <xs:sequence>
+                	<xs:element name="productADSL-ENTM" maxOccurs="unbounded" type="messageADSL:ProductADSL-ENTMType"/>
+                	<xs:element name="messageCodeENTM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ENTMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageVZMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeVZM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-VZMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABBMType">        
+                <xs:sequence>
+                	
+                	<xs:element name="messageCodeABBM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ABBMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageADSL-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageTAMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeTAM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-TAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+     <xs:complexType name="MessageADSL-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageMTAMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeMTAM" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-MTAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+
+    <xs:complexType name="MessageADSL-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageAKM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+        			<xs:element name="messageCodeAKM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-AKM-PVType"/>
+        			<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageRUEM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="messageCodeRUEM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-RUEM-PVType"/>
+                	<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="messageCodeABM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ABM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLM-PVType">        
+                <xs:sequence>
+                	<xs:element name="telefonConnection" type="segmentsWITA:W045-TelefonConnectionType"/>
+                	<xs:element name="messageCodeERLM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ERLM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageENTM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeENTM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ENTM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageADSL-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABBM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeABBM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-ABBM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageADSL-VZM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageVZM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeVZM-PV" maxOccurs="unbounded" type="messageADSL:MessageCodeADSL-VZM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>              
+     
+     <xs:complexType name="ProductADSL-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductADSL-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductADSL-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+     
+    
+     <xs:complexType name="MessageCodeADSL-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="contactTelekom" minOccurs="0" type="segmentsWITA:W008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeADSL-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="contactTelekom" minOccurs="0" type="segmentsWITA:W008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeADSL-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="closingDateOpenOrder" minOccurs="0" type="segmentsWITA:W028-TargetDateType"/>
+            <xs:element name="alternativeProduct" minOccurs="0" type="segmentsWITA:W046-AnternativProductType"/>
+            <xs:element name="locationCorrection" minOccurs="0" type="segmentsWITA:W031-LocationCorrectionType"/>
+            <xs:element name="errorOrderNumber" minOccurs="0" type="segmentsWITA:W054-ErrorOrderNumberType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeADSL-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeADSL-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeADSL-VZM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeADSL-ERLM-KType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>     
+    
+</xs:schema>

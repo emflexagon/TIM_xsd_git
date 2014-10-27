@@ -1,0 +1,668 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:segmentsESS="http://www.flexagon.de/ess/segments/" 
+    xmlns:fields="http://www.flexagon.de/inhouse/fields/" 
+    targetNamespace="http://www.flexagon.de/ess/segments/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/" schemaLocation="../fields/fields.xsd"/>
+		
+	<xs:complexType name="D001-TransactionType">
+        <xs:sequence>
+            <xs:element name="businessTransactionType" type="xs:string"/>    
+            <xs:element name="businessTransaction" type="xs:string"/>
+            <xs:element name="changeIndicator" type="xs:string"/>
+            <!--xs:element name="businessTransactionType" type="fields:BusinessTransactionTypeType"/>    
+            <xs:element name="businessTransaction" type="fields:BusinessTransactionType"/>
+            <xs:element name="changeIndicator" type="fields:ChangeIndicatorType"/-->
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="D001-TransactionCustomerResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsESS:D001-TransactionType">
+				<xs:sequence>
+				    <xs:element name="messagesResponseType" type="xs:string"/>
+					<!--xs:element name="messagesResponseType" type="fields:MessageCustomerResponseType"/-->
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="D001-TransactionCustomerRequestType">
+		<xs:complexContent>
+			<xs:extension base="segmentsESS:D001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="xs:string"/>
+					<!--xs:element name="messagesRequestType" type="fields:MessageCustomerRequestType"/-->
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<!-- xs:complexType name="D001-TransactionFtboxRequestType">
+		<xs:complexContent>
+			<xs:extension base="segments:D001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType-->
+	
+	<xs:complexType name="D001-TransactionFtboxResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsESS:D001-TransactionType">
+				<xs:sequence>
+					<!--xs:element name="messagesResponseType" type="fields:MessageFtboxResponseType"/-->
+					<xs:element name="messagesResponseType" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<xs:complexType name="D001-TransactionErrorResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsESS:D001-TransactionType">
+				<xs:sequence>
+					<!--xs:element name="messagesResponseType" type="fields:MessageErrorResponseType"/-->
+					<xs:element name="messagesResponseType" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<!-- Kunde -->	
+    <xs:complexType name="D002-CustomerContractData">
+        <xs:sequence>
+            <!--xs:element name="customerId" type="fields:CustomerIdType"/>
+            <xs:element name="customerServiceId" type="fields:CustomerServiceIdType"/-->
+            <xs:element name="customerId" type="xs:string"/>
+            <xs:element name="customerServiceId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Besteller -->
+    <xs:complexType name="D003-ResellerContractData">
+        <xs:sequence>
+            <!--xs:element name="resellerId" type="fields:CustomerIdType"/>
+            <xs:element name="resellerServiceId" type="fields:CustomerServiceIdType"/-->
+            <xs:element name="resellerId" type="xs:string"/>
+            <xs:element name="resellerServiceId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+       
+	
+    <!-- Vertragsdaten -->
+    <xs:complexType name="D006-DtagContractNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <!--xs:element name="contractNo" type="fields:ContractNoType"/--> 
+            <xs:element name="contractNo" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    
+    <!-- Ansprechspartner -->
+    <xs:complexType name="D008-ContactCustomerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="salutation" type="xs:string"/> 
+            <xs:element name="givenName" minOccurs="0" type="xs:string"/> 
+            <xs:element name="surname" type="xs:string"/> 
+            <xs:element name="phoneNumber" minOccurs="0" type="xs:string"/> 
+            <xs:element name="emailAddress" minOccurs="0" type="xs:string"/>
+            <xs:element name="contactForbidden" minOccurs="0" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>   
+  
+    
+    <xs:complexType name="D009-ContactCustomerAddressType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/> 
+            <xs:element name="housenumber" type="xs:string"/> 
+            <xs:element name="houseNumberAdd" minOccurs="0" type="xs:string"/> 
+            <xs:element name="city" type="xs:string"/> 
+            <xs:element name="cityAdd" minOccurs="0" type="xs:string"/>  
+            <xs:element name="postalCode"  type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>    
+     
+    
+    <!-- Ansprechspartner -->
+    <xs:complexType name="D010-ProductAttributeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+             <xs:element name="attribute" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Expressentstoerung -->
+    <xs:complexType name="D011-ExpressFaultClearanceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+             <xs:element name="intermediateInfoRequired" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Optionale Serviceleistung -->
+    <xs:complexType name="D012-OptionalServiceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+             <xs:element name="optionalService" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+     <!-- Zusatzfelder zur Stoerungsangabe-->
+    <xs:complexType name="D013-FaultDescOptionalFieldsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+             <xs:element name="Id" type="xs:string"/> 
+             <xs:element name="Content" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>   
+    
+     <!-- Lage TAE-Dose -->
+    <xs:complexType name="D014-LocationTAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+             <xs:element name="TAE_ONT" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+ 
+      <!-- Kundentermin -->
+    <xs:complexType name="D015-TargetDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="xs:string"/> 
+            <xs:element name="timeSlot"   type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>   
+    
+    
+    <!-- Produkt -->
+    <xs:complexType name="D016-ProductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <!--xs:element name="productName" type="fields:ProductNameType"/-->  
+            <xs:element name="productName" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="ProductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="product" type="segmentsESS:D016-ProductType"/>
+       	    <xs:element name="serviceAttribute" minOccurs="0" maxOccurs="99" type="segmentsESS:D010-ProductAttributeType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    
+    <!-- Stoerungsbeschreibung -->
+    <xs:complexType name="FaultDescriptionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="question" minOccurs="1" maxOccurs="99" type="segmentsESS:D019-FaultQuestionType" />  
+        </xs:sequence>
+    </xs:complexType>   
+     
+      <!-- Stoerungsbeschreibung -->
+    <xs:complexType name="FaultDescriptionTypeXDSL">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="question" minOccurs="2" maxOccurs="99" type="segmentsESS:D019-FaultQuestionType" />  
+        </xs:sequence>
+    </xs:complexType>    
+    
+   
+     <!-- BemerkungZurStoerung -->
+    <xs:complexType name="D017-FaultNoteType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="note" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Zusatzfeld -->
+    <xs:complexType name="D018-FaultNoteWithCategoryType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="note" minOccurs="0" type="xs:string"/>  
+            <xs:element name="categoryId" minOccurs="0" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>    
+    
+    
+    <!-- Stoerungsbeschreibung -->
+    <xs:complexType name="D019-FaultQuestionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="questionId" type="xs:string"/>  
+            <xs:element name="answerId" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <xs:complexType name="FaultDetailsTALType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="additionalField" minOccurs="0" maxOccurs="15" type="segmentsESS:D013-FaultDescOptionalFieldsType"/>
+        	<xs:element name="locationTAE_ONT" minOccurs="0" type="segmentsESS:D014-LocationTAE"/>
+        	<xs:element name="faultNote" minOccurs="0" type="segmentsESS:D017-FaultNoteType"/>
+        	<xs:choice>
+            	<!--xs:element name="faultDescription" type="segmentsESS:FaultDescriptionType"/-->
+            	<xs:element name="faultQuestioning" minOccurs="1" maxOccurs="99" type="segmentsESS:D019-FaultQuestionType"/>
+            	<xs:element name="portingFault" type="segmentsESS:PortingFaultType"/>
+        	</xs:choice>
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="PortingFaultType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+         	<xs:choice>
+            	<xs:element name="trunkConnection" type="segmentsESS:TrunkConnectionPortingType"/>
+            	<xs:element name="singleConnection" type="segmentsESS:SingleConnectionPortingType"/>
+        	</xs:choice>
+        </xs:sequence>
+    </xs:complexType>     	  
+
+
+    <xs:complexType name="SingleConnectionPortingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="areaCode" type="segmentsESS:D021-SubscriberTerminalONKZType"/>
+            <xs:element name="localNumber" minOccurs="1" maxOccurs="10" type="segmentsESS:D022-SubscriberTerminalLocalNumberType"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+
+    <xs:complexType name="TrunkConnectionPortingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="connectionNumber" type="segmentsESS:D023-PrivateBranchDataType"/>
+            <xs:element name="numberPortingBlocks" minOccurs="1" maxOccurs="5" type="segmentsESS:D024-PrivateBranchBlockType"/>
+         </xs:sequence>
+    </xs:complexType>   
+    
+
+	<xs:complexType name="FaultDetailsXDSLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="additionalField" minOccurs="0" maxOccurs="15" type="segmentsESS:D013-FaultDescOptionalFieldsType"/>
+        	<xs:element name="locationTAE_ONT" minOccurs="0" type="segmentsESS:D014-LocationTAE"/>
+        	<xs:element name="faultNote" minOccurs="0" type="segmentsESS:D018-FaultNoteWithCategoryType"/>
+        	<xs:choice>
+            	<xs:element name="diagnoseReference" type="segmentsESS:D020-OnlineDiagnoseReferenceType"/>
+            	<xs:element name="faultQuestioning" minOccurs="2" maxOccurs="99" type="segmentsESS:D019-FaultQuestionType"/>
+        	</xs:choice>
+        </xs:sequence>
+    </xs:complexType>   
+    
+    
+  	<xs:complexType name="ContactCustomerOptionalAddressType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contactCustomer"  type="segmentsESS:D008-ContactCustomerType"/>
+        	<xs:element name="address" minOccurs="0" type="segmentsESS:D009-ContactCustomerAddressType"/>
+        </xs:sequence>
+    </xs:complexType>     
+    
+
+     
+    <!-- ReferenzOnlineDiagnose -->
+    <xs:complexType name="D020-OnlineDiagnoseReferenceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="diagnoseId" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!-- Einzelanschluss ONKZ-->
+    <xs:complexType name="D021-SubscriberTerminalONKZType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="ndc" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!--Einzelanschluss Rufnummer  -->
+    <xs:complexType name="D022-SubscriberTerminalLocalNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="sn" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>   
+ 
+       <!-- Anlagenanschluss ONKZ-->
+    <xs:complexType name="D023-PrivateBranchDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="mainNumber" type="xs:string"/>  
+            <xs:element name="directAccess" type="xs:string"/> 
+            <xs:element name="extensionNumber" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!--Anlagenanschluss Rufnummer  -->
+    <xs:complexType name="D024-PrivateBranchBlockType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="numberBlockFirst" type="xs:string"/>  
+            <xs:element name="numberBlockLast" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>   
+  
+  
+    <!--Anlagenanschluss Rufnummer  -->
+    <xs:complexType name="D025-FaultClearanceReferenceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="FaultClearanceOrderReference" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>  
+    
+   
+    <!--XDSL Reklamationsinfo  -->
+    <xs:complexType name="D027-FaultRecNoteType">
+           <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <!--xs:choice>
+           	<xs:element name="STOERUNG_NICHT_BEHOBEN" type="xs:string"/>
+            <xs:element name="STOERUNG_NUR_TEILWEISE_BEHOBEN" type="xs:string"/>
+       	</xs:choice--> 
+        <xs:sequence>            
+            <xs:element name="note" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>    
+   
+    
+     <!-- Ansprechspartner -->
+    <xs:complexType name="D037-ContactSupplierType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="surname" type="xs:string"/> 
+            <xs:element name="phoneNumber" type="xs:string"/> 
+            <xs:element name="faxNumber" minOccurs="0" type="xs:string"/>
+            <xs:element name="emailAddress" minOccurs="0" type="xs:string"/>  
+        </xs:sequence>
+    </xs:complexType>    
+ 
+    
+    <!-- Meldungscode  -->
+    <xs:complexType name="D038-MessageCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="messageCode" type="fields:MessageCodeType"/>
+            <xs:element name="messageText" type="fields:MessageTextType"/>         
+        </xs:sequence>
+    </xs:complexType>
+    
+	<!-- Kundennummer -->
+    <xs:complexType name="D039-CustomerIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>             
+            <!--xs:element name="customerId" type="fields:CustomerIdType"/--> 
+            <xs:element name="customerId" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType> 
+
+
+    <!--TerminBeimKunden -->
+    <xs:complexType name="D040-CustomerDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="targetDate" type="xs:string"/> 
+            <xs:element name="begin" type="xs:string"/> 
+            <xs:element name="end" minOccurs="0" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>    
+
+    <!-- FehlerBeseitigtAm -->
+    <xs:complexType name="D041-FaultRemoved">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="faultRemoved" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+    
+     <!-- FakturaPosition -->
+    <xs:complexType name="D042-InvoicePosition">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="productName" type="xs:string"/> 
+            <xs:element name="invoiceRelevant" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <!-- Kunde - bei Meldungen -->	
+    <xs:complexType name="D050-CustomerIdData">
+        <xs:sequence>
+             <xs:element name="customerId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Besteller - bei Meldungen -->
+    <xs:complexType name="D051-ResellerIdData">
+        <xs:sequence>
+            <xs:element name="resellerId" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <!-- AnsprechpartnerCarrier -->
+    <xs:complexType name="D053-ContactCarrierType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="salutation" type="xs:string"/> 
+            <xs:element name="givenName" minOccurs="0" type="xs:string"/> 
+            <xs:element name="surname" type="xs:string"/> 
+            <xs:element name="phoneNumber" type="xs:string"/> 
+            <xs:element name="emailAddress" type="xs:string"/>
+            <xs:element name="faxNumber" minOccurs="0" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Terminverschiebung -->
+    <xs:complexType name="D052-PostponementType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="fields:DateType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="D090-ErrorOrderNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="orderNumber" type="fields:OrderNumberType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D054-ReclamationNoteType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="note" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D055-ExternalDiagnosisNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="externalDiagnosisNumber" type="fields:OrderNumberType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D056-ResultTimeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="resultTime" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D057-ResultType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="result" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D058-MeasurementType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="name" type="xs:string"/> 
+            <xs:element name="value" type="xs:string"/> 
+             <xs:element name="unit" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D059-MeasureType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="measure" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="D060-DiagnosisResultNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="name" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

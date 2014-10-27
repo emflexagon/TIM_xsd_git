@@ -1,0 +1,1890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 47001 $ $LastChangedDate: 2014-03-13 13:04:16 +0100 (Do, 13 Mrz 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:fields="http://www.flexagon.de/inhouse/fields/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.flexagon.de/inhouse/fields/"
+    elementFormDefault="unqualified">
+	
+     <!-- modelling the phone number information -->
+    <xs:complexType name="IptnType">
+            <xs:sequence>
+            <!-- cc = country code = Landesvorwahl -->
+            <xs:element name="cc" minOccurs="0" type="fields:CcType" fixed="49"/>
+            <!-- ndc = national destination code = Vorwahl -->
+            <xs:element name="ndc" type="fields:NdcType"/>
+            <!-- sn = subscriber number = Rufnummer -->
+            <xs:element name="sn" type="fields:SnType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PersonType">
+            <xs:sequence>
+            	<xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/>
+            	<xs:element name="surname" type="fields:SurNameType"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CompanyType">
+            <xs:sequence>
+            	<xs:element name="companyName" type="fields:GivenNameType"/>
+            	<xs:element name="companyNamePart2"  minOccurs="0" type="fields:SurNameType"/>           	
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="PersonWithNumberType">
+            <xs:sequence>
+            	<xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/>
+            	<xs:element name="surname" type="fields:SurNameType"/> 
+            	<xs:element name="PhoneNumber" minOccurs="0" type="fields:PhoneNumberType"/> 
+            	<xs:element name="mobileNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="CompanyWithNumberType">
+            <xs:sequence>
+            	<xs:element name="companyName" type="fields:GivenNameType"/>
+            	<xs:element name="companyNamePart2"  minOccurs="0" type="fields:SurNameType"/>
+            	<xs:element name="PhoneNumber" minOccurs="0" type="fields:PhoneNumberType"/> 
+            	<xs:element name="mobileNumber" minOccurs="0" type="fields:PhoneNumberType"/>           	
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <!-- Geschaeftsfallart (W001.2) -->
+    <xs:simpleType name="BusinessTransactionTypeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the key for the choise of business case type  
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>            
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Geschaeftsfall (W001.3)-->
+    <xs:simpleType name="BusinessTransactionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the key for the choise of business case
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Aenderungskennzeichen (W001.4) -->
+    <xs:simpleType name="ChangeIndicatorType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">specifies an order as  Standard, Storno or Terminverschiebung</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+     <!-- Art des Requests -->
+    <xs:simpleType name="MessageCustomerRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the type of the request
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+	
+	<xs:simpleType name="MessageFtboxRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the type of the request
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Art der Response -->
+    <xs:simpleType name="MessageFtboxResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the type of the response
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+	<xs:simpleType name="MessageCustomerResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the type of the response
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="MessageErrorResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the type of the response
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <!-- Art der Response -->
+    <xs:simpleType name="MessageResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                the type of the response
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Kundennummer (W002.2/W003.2) -->
+    <xs:simpleType name="CustomerIdType">
+	    <xs:annotation>
+	        <xs:documentation xml:lang="en">
+	           the reseller/orderer identifier, in WITA it has to be 10 characters exactly, however, so pad with 0
+	        </xs:documentation>
+	    </xs:annotation>
+	    <xs:restriction base="xs:string">
+	        <xs:minLength value="10"/>
+	        <xs:maxLength value="10"/>
+	    </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Rahmenvertragsnummer (W002.3/W003.3) -->
+    <xs:simpleType name="CustomerServiceIdType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">
+               the master agreement identifier
+            </xs:documentation>
+        </xs:annotation>
+    	<xs:restriction base="xs:string">
+            <xs:minLength value="10"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+            
+    <!-- Faktura  (W004.2) -->
+    <xs:simpleType name="BookKeepingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Nummer, die zur Fakturierung heranzuziehen ist
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Bestand  (W004.3) -->
+    <xs:simpleType name="InventoryType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Nummer, die zur Fakturierung heranzuziehen ist
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Projektkenner  (W005.2, S005.2) -->
+    <xs:simpleType name="ProjectIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Eindeutige Identifikation eines Projektes.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Kopplungskenner  (W005.3, S005.3) -->
+    <xs:simpleType name="CorrelationIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Eindeutige Identifikation zur Kopplung mehrerer Auftraege innerhalb eines Projektes.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Vertragsnummer  (W006.2) -->
+    <xs:simpleType name="ContractNoType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Bezeichnet den Einzelvertrag, auf den sich der Auftrag bezieht
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Anlagetyp  (W007.2) -->
+    <xs:simpleType name="AttachmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Kennzeichnet die Art der Anlage
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>            
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Dateiname  (W007.3)  -->
+    <xs:simpleType name="FilenameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               File name with file type
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Datentyp   (W007.4) -->
+    <xs:simpleType name="FileTypeType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="255"/>
+            <xs:enumeration value="image/tiff"/>
+            <xs:enumeration value="image/jpeg"/>
+            <xs:enumeration value="application/msword"/>
+            <xs:enumeration value="application/excel"/>
+            <xs:enumeration value="application/pdf"/>
+        </xs:restriction>
+    </xs:simpleType>
+     
+    <!-- Beschreibung   (W007.5) -->
+    <xs:simpleType name="DescriptionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            	Freitext zur Beschreibung des Inhaltes der Anlage
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="160"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Dateiinhalt   (W007.6) -->
+    <xs:simpleType name="FileContentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            	Pfad zur Datei. Zulässige Dateiformate : .tif, .doc, .jpg, .xls, .pdf. Zulässige Dateigröße: max. 1 MB pro Anlage, max. 4 MB gesamt
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xsd:base64Binary">
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Anrede (W008.2/W014.3) -->
+    <xs:simpleType name="SalutationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               1=Herr 2=Frau 9=keine Anrede 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Vorname (W008.3/W009.2/W010.4/W012.4/W013.4/W014.5/W048.4) -->
+    <xs:simpleType name="GivenNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Vorname des Ansprechpartners/Vormieters 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Nachname (W008.4/W009.3/W010.3/W012.3/W013.3/W014.4/W048.3) -->
+    <xs:simpleType name="SurNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Nachname des Ansprechpartners/Vormieters 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Emailadresse (W008.6/W014.7) -->
+    <xs:simpleType name="EmailAddressType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Bsp.: Herbert.Mustermann@customer.de. Nur wenn Rolle vorhanden
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="320"/>
+            <xs:whiteSpace value="collapse"/>
+            <xs:pattern value=".+@(.+\.)+\w+"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Rolle (W008.7) -->
+    <xs:simpleType name="RoleType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Ansprechpartner des Kunden fuer vertriebliche, technische Nachfragen. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+            <xs:enumeration value="Technik"/>
+            <xs:enumeration value="Auftragsmanagement"/> 
+            <xs:enumeration value="Endkunde"/>           
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- ONKZ (W009.4/W011.9/W026.2) -->
+    <xs:simpleType name="AreaCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Ortsnetzkennzahl des Anschlusses
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
+            <xs:maxLength value="5"/>
+            <xs:pattern value="\d{2,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    
+    <!-- UFANummer (W009.6) -->
+    <xs:simpleType name="UFANumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+              UFA-Nummer
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="15"/> 
+            <xsd:pattern value="\d{2,5}C\d{6,7}"/> 
+            <xsd:pattern value="[0-9a-zA-Z]{1,15}"/>          
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Anrede StandortA (W010.2/W012.2/W013.2/W048.2) -->
+    <xs:simpleType name="LocationAppellationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+              1=Herr 2=Frau 4=Firma 9=keine Anrede 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:length value="1"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="9"/>     
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Strassenname (W010.5/W011.2/W012.5/W013.5/W019.2/W031.2) -->
+    <xs:simpleType name="StreetType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="40"/>       
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Hausnummer (W010.6/W011.3//W012.6/W013.6/W031.3) -->
+    <xs:simpleType name="HouseNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="4"/>       
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Hausnummernzusatz (W010.7/W011.4/W012.7/W013.7/W031.4) -->
+    <xs:simpleType name="HouseNumberAddType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="6"/>       
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- GebaudeteilName (W010.8/W012.8/W013.8/W031.5) -->
+    <xs:simpleType name="BuildingBlockNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Gebäudeteil am Standort
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:minLength value="1"/>
+            <xs:maxLength value="25"/> 
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- GebaudeteilZusatz (W010.9/W012.9/W013.9/W031.6) -->
+    <xs:simpleType name="BuildingBlockAppendixType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Gebäudeteilzusatz am Standort.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:minLength value="1"/>
+            <xs:maxLength value="25"/> 
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Land (W010.10/W011.5/W012.10/W013.10/W031.7) -->
+    <xs:simpleType name="CountryType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Vorbelegt mit Ländercode: DE  (Deutschland)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:length value="2"/>
+            <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Postleitzahl (W010.11/W011.6/W012.11/W013.11/W031.8) -->
+    <xs:simpleType name="PostalCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Vorbelegt mit Ländercode: DE  (Deutschland)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+            <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Ortsname (W010.12/W011.7/W012.12/W013.12/W031.9) -->
+    <xs:simpleType name="CityType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:minLength value="1"/>
+            <xs:maxLength value="40"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Ortsteil (W010.13/W011.8/W012.13/W013.13/W031.10) -->
+    <xs:simpleType name="CityAddType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- LageTAEDose (W010.14) -->
+    <xs:simpleType name="taeLocationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="160"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Anschlussbereich (W010.14) -->
+    <xs:simpleType name="ConnectionAreaType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">   
+                Anschlussbereich (ASB), in dem sich der Kollokationsraum befindet             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="4"/>
+            <xs:pattern value="\d{1,4}"/> 
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Montagekenner (W014.2) -->
+    <xs:simpleType name="InstallationIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                f = frueh (7.00-9.00 h),v =vormittags (9.00-12.00 h),n = nachmittags (13.00-18.00 h),s = spät (18.00-20.00 h),m = ganztägig  (9.00-18.00 h), k= Keine Montage. Vorbelegt mit k            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:length value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Montageleistung (W014.8) -->
+    <xs:simpleType name="InstallationServicesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Nähere Angaben zur Durchfuehrung der Montageleistung            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="160"/>
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <!-- Datum (W015.2/W052.3/W030.4/W028.3/W043.2) -->
+    <xs:simpleType name="DateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                    
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date">
+            <xs:pattern value="\d{4}-.*"/>            
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Zeitfenster (W015.3) -->
+    <xs:simpleType name="TimeSlotType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+               Eingrenzung des KWT  oder kKWT auf definierte Std.-Intervalle. Die Bedeutung der IDs muessen
+               in einer gesonderten Vereinbarung festgelegt werden. Die in den documentations angegebenen
+               Werte sind spezifisch fuer die WITA-Schnittstelle der DT      
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        <xs:length value="1"/>
+        <xsd:pattern value="[0-9a-z]"/>
+        </xs:restriction>        
+    </xs:simpleType>
+    
+    <!-- Zeitfenster (W033.2) -->
+    <xs:simpleType name="TimeSlot2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                     
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xs:length value="2"/>
+        	<xsd:pattern value="\d{1,2}"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+    <!--  (W061) -->
+    <xs:simpleType name="negotiationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                     
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="0"/>
+            <xs:maxLength value="21"/> 
+        	<xsd:pattern value="[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.V[0-9A-Z]{9}"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+       <!--  (W062) -->
+    <xs:simpleType name="UserpinType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                 Encrypted PIN value
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="0"/>
+            <xs:maxLength value="1024"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+     <!--  (W063) -->
+    <xs:simpleType name="IptvprovideridType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                     
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xs:maxLength value="15"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="IptvbasicuserType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                     
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xs:maxLength value="40"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+     <!--  (W064) -->
+    <xs:simpleType name="IptvuserchangeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                     
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="0"/>
+            <xs:maxLength value="1"/> 
+        	<xsd:pattern value=".*"/>
+    	</xs:restriction>
+    </xs:simpleType>
+    
+      <!--  (W065) -->
+    <xs:simpleType name="IptvsettingsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                     
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="0"/>
+            <xs:maxLength value="20"/> 
+        	<xsd:pattern value=".*"/>
+    	</xs:restriction>
+    </xs:simpleType>   
+    
+    
+    <!-- Produktbezeichner (W016.2/W050.3) -->
+    <xs:simpleType name="ProductNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Produktname des Produktes, das in der Auftragsposition zugebucht, in Wegfall gebracht oder geändert werden soll           
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                        
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Aktionscode (W016.3/W050.2) -->
+    <xs:simpleType name="ActionCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kenner fuer Zugang, Wegfall oder Änderung des Produktes           
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                        
+            <xs:length value="1"/>
+            <xs:enumeration value="A">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Änderung</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="W">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Wegfall</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Z">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Zugang</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Uebertragungsverfahren (W020.2) -->
+    <xs:simpleType name="TransmissionCodingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet dass  Uebertragungsverfahren            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                        
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- UEVT (W021.2/W022.2/W023.2) -->
+    <xs:simpleType name="UEVTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Nr. des Uebergabeverteilers       
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"> 
+        	<xsd:minLength value="1"/> 
+            <xs:maxLength value="4"/>                      
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- EVS (W021.3/W022.3) -->
+    <xs:simpleType name="EVSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Nr. des Endverschluss  
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+        	<xsd:minLength value="1"/>
+            <xs:maxLength value="2"/>                      
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Doppelader (W021.4) -->
+    <xs:simpleType name="DoubleWireType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Nr. der Doppelader
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+        	<xsd:minLength value="1"/>
+            <xs:maxLength value="2"/>                      
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Kupplung (W022.4) -->
+    <xs:simpleType name="ClutchType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Nr. der Kupplung
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+        	<xsd:minLength value="1"/>
+            <xs:maxLength value="2"/>                      
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Anbschlussart (W023.3) -->
+    <xs:simpleType name="ConnectionTypeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Nr. der Kupplung
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                    
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- KVZ-Nr (W024.2) -->
+    <xs:simpleType name="KVZNoType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Eindeutiger Identifier des Kabelverteilers
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"> 
+        	<xs:minLength value="1"/> 
+            <xs:maxLength value="8"/>                   
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- KVZ-Schaltnummer (W024.3) -->
+    <xs:simpleType name="KVZconnectionIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Angaben des Carriers zu seinen Schaltdaten. Bsp.: 3 K1 0060
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"> 
+        	<xs:minLength value="1"/> 
+            <xs:maxLength value="8"/>                   
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- VerbraucherID (W041.2) -->
+    <xs:simpleType name="ConsumerIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                ID dient zur Identifikation des Endkunden.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>              
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Auftragsklammer (W051.2) -->
+    <xs:simpleType name="OrderGroupIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet zusammengehörige Aufträge    
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{1,10}"/>                  
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- AnzahlAuftraege (W051.3) -->
+    <xs:simpleType name="OrderCountType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Gibt die Anzahl der Aufträge an, die zu einer Auftragsklammer gehören
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:pattern value="\d{1,3}"/>                  
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Auftragsklammer (S051.2) -->
+    <xs:simpleType name="OrderGroupId2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet zusammengehörige Aufträge    
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{1,10}"/>                  
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- AnzahlAuftraege (S051.3) -->
+    <xs:simpleType name="OrderCount2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Gibt die Anzahl der Aufträge an, die zu einer Auftragsklammer gehören
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{1,10}"/>                  
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Leitungsschluesselzahl (W018.2) -->
+    <xs:simpleType name="LineKeycodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet  die Art der Leitung Bsp.: 96 U
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">  
+            <xs:maxLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- LeitungsschluesselzahlErgaenzung (W018.3) -->
+    <xs:simpleType name="LineKeycodeExtensionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Zusatzangaben  zu Spezifizierung der Leitungsart
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ONKZ-A (W018.4) -->
+    <xs:simpleType name="AreacodeAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Bezeichnet die ONKZ am Standort A
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:minLength value="2"/>
+            <xs:maxLength value="5"/>
+            <xsd:whiteSpace value="collapse"/>
+            <xs:pattern value="\d{2,5}"/>    
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ONKZ-B (W018.5) -->
+    <xs:simpleType name="AreacodeBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Bezeichnet die ONKZ am Standort B
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:minLength value="2"/>
+            <xs:maxLength value="5"/>
+            <xsd:whiteSpace value="collapse"/>
+            <xs:pattern value="\d{2,5}"/>    
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Ordnungsnummer (W018.6) -->
+    <xs:simpleType name="LineIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Fortlaufende Nr. zur Kennzeichnung der Leitung
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+            <xsd:whiteSpace value="collapse"/>
+            <xs:pattern value="\d{1,10}"/>    
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="LineId2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Fortlaufende Nr. zur Kennzeichnung der Leitung
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:minLength value="7"/>
+            <xs:maxLength value="21"/>
+            <xsd:whiteSpace value="collapse"/>   
+        </xs:restriction>
+    </xs:simpleType>
+ 
+    <!-- Kundennummertyp (W039.2) -->
+    <xs:simpleType name="CustomertypIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                1: Kunde  2: Besteller
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:enumeration value="1" />
+            <xs:enumeration value="2" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Termintype (W028.2) -->
+    <xs:simpleType name="ScheduleTypeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                1: Kunde  2: Besteller
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">              
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en"> Entgelttermin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Erledigungstermin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Wiedervorlagetermin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="4">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Verzögerungstermin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="5">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Erledigungstermin offene Aufträge</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="6">
+                <xs:annotation>
+                    <xs:documentation xml:lang="en">Verbindlicher Liefertermin</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Providername (W030.2/W043.2) -->
+    <xs:simpleType name="ProviderNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Name des abgebenden Providers
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                         
+            <xs:maxLength value="60" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Zustimmung Providerwechsel (W030.4) -->
+    <xs:simpleType name="DecisionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Zustimmung zum Providerwechsel
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                         
+            <xs:enumeration value="Y"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Antwortcode (W030.5) -->
+    <xs:simpleType name="ResponseCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                    
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Antworttext (W030.6) -->
+    <xs:simpleType name="ResponseTextType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                    
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:maxLength value="1024"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Leitungswiderstand (W042.2) -->
+    <xs:simpleType name="CableResistanceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Widerstand in Ohm                    
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- LfdNrLeitungsabschnitt (W034.2) -->
+    <xs:simpleType name="CableSegmentIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                fortlaufende Nummer zur Identifikation des Leitungsabschnittes            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Leitungslänge (W034.3) -->
+    <xs:simpleType name="CableLengthType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                In Meter          
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Leitungsdurchmesser (W034.4) -->
+    <xs:simpleType name="CableDiameterType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                In Millimeter       
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- MAXBruttoBittrate (W035.2) -->
+    <xs:simpleType name="MaxBruttoBitrateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Abfragestelle (W025.2) -->
+    <xs:simpleType name="QuestionIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Nr. der Abfragestelle
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="6"/>
+            <xsd:pattern value="\d{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Anzahl vorhandener RNR (W025.3) -->
+
+    <!-- RNR-Block von (W025.4) -->
+    <xs:simpleType name="PhoneNoStartBlockType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Kennzeichnet die Unter-Grenze innerhalb des portierenden Rufnummer-Blocks
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="6"/>
+            <xs:pattern value="\d{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- RNR-Block bis (W025.5) -->
+    <xs:simpleType name="PhoneNoEndBlockType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Kennzeichnet die Ober-Grenze innerhalb des portierenden Rufnummer-Blocks
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xs:maxLength value="6"/>
+            <xs:pattern value="\d{1,6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Portierungskenner (W025.6) -->
+    <xs:simpleType name="PortingIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Format: PPPP-CCC
+                Code fuer den Carrier, zu dem 
+                die Rufnummern abgegeben werden
+                Wichtig bei Bestellung im Namen Dritter.
+                Bsp.:
+                P: Portierungskenner (z.B. D001)
+                C: Verbindungsnetz-Betreiber-Kennzahl (z.B.: 033) 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:minLength value="1"/>
+            <xsd:whiteSpace value="collapse"/>
+            <xsd:pattern value="D\d{3}-\d{3}"/>
+   			<xsd:pattern value="\d{3}[A-X]\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- V5.1 Schnittstelle (W032.2) -->
+    <xs:simpleType name="V51IdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                ID der V5.1 Schnittstelle
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">                                     
+            <xs:maxLength value="8"/>
+            <xs:pattern value="\d{1,8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Meldungscode (W038.2) -->
+    <xs:simpleType name="MessageCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                Kurzbezeichnung zum Meldungstext
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>        
+    </xs:simpleType>
+
+    <!-- Meldungstext (W038.3) -->
+    <xs:simpleType name="MessageTextType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+                ausfuehrliche Beschreibung fuer den Meldungscode
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="255"/>
+        </xs:restriction>        
+    </xs:simpleType>
+    
+    <!-- Link (W029.2) -->
+    <xs:simpleType name="LinkType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xs:maxLength value="1024"/>
+        </xs:restriction>        
+    </xs:simpleType>
+    
+    <!-- Link (W060.2) -->
+    <xs:simpleType name="ReservationNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+			<xsd:pattern value="\d{1,20}"/>
+        </xs:restriction>        
+    </xs:simpleType>
+    
+    
+    
+    
+    
+    <!-- Name () -->
+    <xs:simpleType name="NameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Name
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- NetzbetreiberName () -->
+    <xs:simpleType name="CarrierNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Name of the Carrier
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="60"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Stoerungsnummer () -->
+    <xs:simpleType name="DerangementNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               trouble number of the Carrier
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- ja oder nein () -->
+    <xs:simpleType name="YesNoType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ja"/>
+            <xs:enumeration value="nein"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- J -> Ja oder N -> Nein () -->
+    <xs:simpleType name="YesNo2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="J"/>
+            <xs:enumeration value="N"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- true oder false () -->
+    <xs:simpleType name="BooleanType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Freitext () -->
+    <xs:simpleType name="FreeTextType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               free text area
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="1024"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Niederlassung () -->
+    <xs:simpleType name="PlaceOfBusinessType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               free text area
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="0"/>
+            <xs:maxLength value="1024"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- TCOM Stoerungsnummer () -->
+    <xs:simpleType name="TcomDerangementNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               trouble number of the Carrier
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Zaehler () -->
+    <xs:simpleType name="CounterType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               counts something
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+            <xs:pattern value="\d{1,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Leitungsbezeichnung () -->
+    <xs:simpleType name="LineDescriptionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               Leitungsschluesselzahl/ONKZA/ONKZB/Ordnugsnummer
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="16"/>
+            <xs:maxLength value="30"/>
+            <xs:pattern value=".{3}/\d{5}/\d{5}/.{1,16}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Grund () -->
+    <xs:simpleType name="ReasonType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Zeit () -->
+    <xs:simpleType name="TimeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               HH:MM
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="5"/>
+            <xs:maxLength value="5"/>
+             <xs:pattern value="\d{2}:\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="Time2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               HH:MM
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="8"/>
+            <xs:maxLength value="8"/>
+             <xs:pattern value="\d{2}:\d{2}:\d{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Art () -->
+    <xs:simpleType name="KindType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Abschlussmeldung () -->
+    <xs:simpleType name="ClosingMessageType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"> 
+        </xs:restriction>
+    </xs:simpleType>
+   
+    <!-- Fehelrcode () -->
+    <xs:simpleType name="ErrorCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Meldung () -->
+    <xs:simpleType name="Message2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="OK" />
+			<xs:enumeration value="ERROR" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Meldung () -->
+    <xs:simpleType name="Message3Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1024"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- GUID () -->
+    <xs:simpleType name="GUIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="40"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TransmissionCoding2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet dass  Uebertragungsverfahren            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xs:maxLength value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+     <xs:simpleType name="a10nspType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet dass  Uebertragungsverfahren            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+     <xs:simpleType name="PortType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                Kennzeichnet dass  Uebertragungsverfahren            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+     <xs:simpleType name="vlanType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                vlan Type            
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xs:minLength value="1"/>
+        	<xs:maxLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+	<xs:simpleType name="vlanNrType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">    
+                V-LAN ID vom Wholesale-Kunden, das den Endkunden identifiziert            
+            </xs:documentation>
+        </xs:annotation>
+        <xsd:restriction base="xsd:int">
+            <xsd:minInclusive value="1"/>
+            <xsd:maxInclusive value="4000"/>
+        </xsd:restriction>
+    </xs:simpleType>
+
+    
+    
+    
+    <xs:simpleType name="SnType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        E.164: 7.2.1 The ITU-T recommends that the maximum number of
+        digits of the National (Significant) Number, N(S)N, should be
+        equal to 15-n, where n is the number of digits of the country
+        code.
+
+        E.164: 7.2.2 The N(S)N is used to select the destination
+        subscriber. In selecting the destination subscriber, however,
+        it may be necessary to select a destination network. To
+        accomplish this selection, the N(S)N code field comprises a
+        National Destination Code (NDC) followed by the Subscriber s
+        Number (SN).
+
+        E.164: 7.2.4 The SN varies in length depending on the
+        requirements of the destination country.
+
+        This is a numeric string, not beginning with a '0', between 1
+        and 11 digits long.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{0,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="NdcType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        E.164: 7.2.1 The ITU-T recommends that the maximum number of
+        digits of the National (Significant) Number, N(S)N, should be
+        equal to 15-n, where n is the number of digits of the country
+        code.
+
+        E.164: 7.2.2 The N(S)N is used to select the destination
+        subscriber. In selecting the destination subscriber, however,
+        it may be necessary to select a destination network. To
+        accomplish this selection, the N(S)N code field comprises a
+        National Destination Code (NDC) followed by the Subscriber s
+        Number (SN)...
+
+        E.164: 7.2.3 The NDC field, if used, will be variable in
+        length depending upon the requirements of the destination
+        country...
+
+        This type is a numeric string, not beginning with a '0',
+        between 2 and 5 digits long.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AzcType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        E.164: 7.2.1 The ITU-T recommends that the maximum number of
+        digits of the National (Significant) Number, N(S)N, should be
+        equal to 15-n, where n is the number of digits of the country
+        code.
+
+        E.164: 7.2.2 The N(S)N is used to select the destination
+        subscriber. In selecting the destination subscriber, however,
+        it may be necessary to select a destination network. To
+        accomplish this selection, the N(S)N code field comprises a
+        National Destination Code (NDC) followed by the Subscriber s
+        Number (SN)...
+
+        E.164: 7.2.3 The NDC field, if used, will be variable in
+        length depending upon the requirements of the destination
+        country...
+
+        This type is a numeric string, between 1 and 4 digits long.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CcType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        E.164: 7.1 Country Code for geographic areas
+        The Country Code is used to select the destination country
+        and varies in length from 1 to 3 digits.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{0,2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+      
+    <xs:simpleType name="PhoneNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+	  Phone number pattern.
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="((\+\d{2} |0)\d{2,5} )?\d{1,14}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="PreliminaryTestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+	  
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="ResultType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="DateTimeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="AnnotationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="OrderNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+			<xsd:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+	<xs:simpleType name="ExtensionNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="8"/>
+            <xsd:pattern value="\d{1,8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CoordinationIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+   
+    <xs:simpleType name="SerialnumberONTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+     <xs:simpleType name="ShippingNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="40"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="Company2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CustomerPointOfTransferType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+     <xs:simpleType name="HomeIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+     <xs:simpleType name="SerialNumberOntType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+      		</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+        	<xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!--  Zeichenbereiche -->
+    <xsd:simpleType name="AllowedLettersType">
+    	<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Restriktion of UTF-8 letters. Allowed are: Tabulator, space, 0-9, a-z, A-Z, !"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_{}§°±²³ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ			 				
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[&#x0009;&#x0020;-&#x005F;&#x0061;-&#x007B;&#x007D;&#x007F;&#x00A7;&#x00B0;-&#x00B3;&#x00C0;-&#x00D6;&#x00D8;-&#x00F6;&#x00F8;-&#x00FF;]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+		
+    <xsd:simpleType name="AllowedLettersMultiLineType">
+    	<xsd:annotation>
+        	<xsd:documentation xml:lang="en">
+				Restriktion of UTF-8 letters. Allowed are: Tabulator, LineFeed, CarriageReturn, Leerzeichen, 0-9, a-z, A-Z, !"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_{}§°±²³ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿ			 				
+			</xsd:documentation>
+		</xsd:annotation>			        			
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="[&#x0009;&#x000A;&#x000D;&#x0020;-&#x005F;&#x0061;-&#x007B;&#x007D;&#x007F;&#x00A7;&#x00B0;-&#x00B3;&#x00C0;-&#x00D6;&#x00D8;-&#x00F6;&#x00F8;-&#x00FF;]*"/>
+    	</xsd:restriction>
+	</xsd:simpleType>
+	    
+   
+</xs:schema>

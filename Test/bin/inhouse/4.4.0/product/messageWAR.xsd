@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageWAR="http://www.flexagon.de/war/messageWAR/"
+    xmlns:segmentsWAR="http://www.flexagon.de/war/segments/" 
+    xmlns:complexWAR="http://www.flexagon.de/war/complex/" 
+    targetNamespace="http://www.flexagon.de/war/messageWAR/"    
+    elementFormDefault="unqualified">
+    
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/war/segments/" schemaLocation="../segments/segmentsWAR.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/war/complex/" schemaLocation="../complex/complexWAR.xsd"/>
+		
+	<xs:complexType name="MessageWARType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="MessageWAR-ADR-RES" type="messageWAR:MessageWAR-ADR-RESType"/>
+            <xs:element name="MessageWAR-ANS-RES" type="messageWAR:MessageWAR-ANS-RESType"/>
+        </xs:choice>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageWAR-ADR-RESType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       	<xs:sequence>
+            <xs:element name="adress" type="segmentsWAR:A002-Adress"/>
+            <xs:element name="adressHits" minOccurs="0" type="complexWAR:AdressHitsType"/>
+            <xs:element name="bandwidth" minOccurs="0" type="complexWAR:BandwidthsType"/>
+            <xs:element name="product" minOccurs="0" type="complexWAR:ProductsType"/>
+            <xs:element name="result" type="segmentsWAR:A006-Result"/>
+   		</xs:sequence>      
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageWAR-ANS-RESType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="phoneNumber" type="segmentsWAR:A007-Iptn"/>
+            <xs:element name="bandwidth" minOccurs="0" type="complexWAR:BandwidthsType"/>
+            <xs:element name="product" minOccurs="0" type="complexWAR:ProductsType"/>
+            <xs:element name="result" type="segmentsWAR:A006-Result"/>
+       	</xs:sequence>
+    </xs:complexType>  
+ 
+</xs:schema>

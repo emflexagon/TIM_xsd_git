@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderFTTX="http://www.flexagon.de/spri/orderFTTX/" 
+	xmlns:segmentsFTTX="http://www.flexagon.de/spri/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/spri/orderFTTX/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/spri/segments/" schemaLocation="../segments/segmentsFTTX.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	<xs:complexType name="OrderFTTX2Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderFTTX-NEU" type="orderFTTX:OrderFTTX-NEUType"/>        	       
+            <xs:element name="orderFTTX-KUE-AG" type="orderFTTX:OrderFTTX-KUE-AGType"/>             
+            <xs:element name="orderFTTX-LAE" type="orderFTTX:OrderFTTX-LAEType"/> 
+            <xs:element name="orderFTTX-AEN-LMAE" type="orderFTTX:OrderFTTX-AEN-LMAEType"/>
+            <xs:element name="orderFTTX-PV" type="orderFTTX:OrderFTTX-PVType"/>
+            <xs:element name="orderFTTX-EST" type="orderFTTX:OrderFTTX-ESTType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderFTTX-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>     
+		<xs:complexContent>
+	        <xs:extension base="order:OrderFTTXType">
+	        	<xs:sequence> 
+					<xs:element name="targetDate" type="segmentsFTTX:S015-TargetDateType"/> 
+					<xs:element name="productFTTX-NEU" type="orderFTTX:ProductFTTX-NEUType"/> 
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>	
+
+    <xs:complexType name="OrderFTTX-KUE-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>       
+        <xs:complexContent>
+	        <xs:extension base="order:OrderFTTXType">
+	        	<xs:sequence>
+        			<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/> 
+        			<xs:element name="lineId" type="segmentsFTTX:S065-LineIdType"/>
+        			<xs:element name="targetDate" type="segmentsFTTX:S015-TargetDateType"/> 
+         		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderFTTX-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+		<xs:complexContent>
+	        <xs:extension base="order:OrderFTTXType">
+	        	<xs:sequence>
+        			<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/> 
+        			<xs:element name="lineId" type="segmentsFTTX:S065-LineIdType"/>
+        			<xs:element name="targetDate" type="segmentsFTTX:S015-TargetDateType"/>
+        			<xs:element name="productFTTX-AEN-LMAE" type="orderFTTX:ProductFTTX-AEN-LMAEType"/>
+       		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderFTTX-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="order:OrderFTTXType">
+	        	<xs:sequence>
+	        		<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/> 
+        			<xs:element name="lineId" type="segmentsFTTX:S065-LineIdType"/>
+        			<xs:element name="targetDate" type="segmentsFTTX:S015-TargetDateType"/>
+        			<xs:element name="productFTTX-LAE" type="orderFTTX:ProductFTTX-LAEType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="OrderFTTX-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="order:OrderFTTXType">
+	        	<xs:sequence>
+	        		<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+        			<xs:element name="lineId" type="segmentsFTTX:S065-LineIdType"/>
+        			<xs:element name="coordinationId" minOccurs="0" type="segmentsFTTX:S070-CoordinationIdType"/>
+        			<xs:element name="targetDate" type="segmentsFTTX:S015-TargetDateType"/>
+        			<xs:element name="productFTTX-PV" type="orderFTTX:ProductFTTX-PVType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="OrderFTTX-ESTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="order:OrderFTTXType">
+	        	<xs:sequence>
+        			<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/> 
+        			<xs:element name="customerContact" type="segmentsFTTX:S055-ContactType"/>
+        			<xs:element name="targetDate" minOccurs="0" type="segmentsFTTX:S015-TargetDateType"/>
+        			<xs:element name="derangementNumber" type="segmentsFTTX:S056-DerangementNumberType"/>
+        			<xs:element name="reclamation" minOccurs="0" type="segmentsFTTX:S054-ReclamationType"/>
+        			<xs:element name="derangmentData" type="segmentsFTTX:S057-DerangementDataType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductFTTX-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsFTTX:S016-ProductType"/>          
+            <xs:element name="productInfoFTTX-NEU" type="orderFTTX:ProductInfoFTTX-NEU"/>
+            <xs:element name="subproductFTTX-NEU" minOccurs="0" maxOccurs="unbounded" type="orderFTTX:SubproductFTTX-NEUType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTX-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsFTTX:S050-SubproductType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTX-NEU">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="locationA" type="segmentsFTTX:S010-LocationAType"/> 
+            <xs:element name="previousTenant" minOccurs="0" type="segmentsFTTX:S009-PreviousTenantType"/> 
+            <xs:element name="locationShipping" minOccurs="0" type="segmentsFTTX:S013-LocationShipping"/> 
+            <xs:element name="installationService" minOccurs="0" type="segmentsFTTX:S014-InstallationServicesType"/>	
+        </xs:sequence>
+    </xs:complexType>   
+
+	<xs:complexType name="ProductFTTX-KUE-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTX-KUE-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTX-KUE-AG">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductFTTX-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsFTTX:S016-ProductWithActionCodeType"/>          
+            <xs:element name="subproductFTTX-AEN-LMAE" maxOccurs="unbounded" type="orderFTTX:SubproductFTTX-AEN-LMAEType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTX-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsFTTX:S050-SubproductType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTX-AEN-LMAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+
+        </xs:sequence>
+    </xs:complexType>
+    
+	<xs:complexType name="ProductFTTX-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsFTTX:S016-ProductWithActionCodeType"/>          
+            <xs:element name="subproductFTTX-LAE" minOccurs="0" maxOccurs="unbounded" type="orderFTTX:SubproductFTTX-LAEType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTX-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsFTTX:S050-SubproductType"/> 
+         </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTX-LAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductFTTX-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsFTTX:S016-ProductWithActionCodeType"/>   
+            <xs:element name="ProductInfoFTTX-PV" type="orderFTTX:ProductInfoFTTX-PV"/>       
+            <xs:element name="subproductFTTX-PV" minOccurs="0" maxOccurs="unbounded" type="orderFTTX:SubproductFTTX-PVType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductFTTX-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsFTTX:S050-SubproductType"/> 
+         </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoFTTX-PV">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+			<xs:element name="locationA" type="segmentsFTTX:S010-LocationAType"/> 
+            <xs:element name="installationService" minOccurs="0" type="segmentsFTTX:S014-InstallationServicesType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductFTTX-ESTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+
+        </xs:sequence>
+    </xs:complexType>
+	
+</xs:schema>

@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:order="http://www.flexagon.de/inhouse/order/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:segmentsESEP="http://www.flexagon.de/esep/segments/" 
+    xmlns:segmentsFTTX="http://www.flexagon.de/spri/segments/"
+    xmlns:segmentsESS="http://www.flexagon.de/ess/segments/"  
+    targetNamespace="http://www.flexagon.de/inhouse/order/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/esep/segments/" schemaLocation="../segments/segmentsESEP.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/spri/segments/" schemaLocation="../segments/segmentsFTTX.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/ess/segments/" schemaLocation="../segments/segmentsESS.xsd"/>
+	
+    <xs:complexType name="OrderWitaType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>        
+            <xs:sequence>
+                <xs:element name="customerContractData" type="segmentsWITA:W002-CustomerContractData"/>
+                <xs:element name="resellerContractData" minOccurs="0" type="segmentsWITA:W003-ResellerContractData"/>
+                <xs:element name="project" minOccurs="0" type="segmentsWITA:W005-ProjectType"/>
+                <xs:element name="orderGroup" minOccurs="0" type="segmentsWITA:W051-orderGroupType"/>
+            </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="OrderFTTXType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>        
+            <xs:sequence>
+				<xs:element name="customerContractData" type="segmentsFTTX:S002-CustomerContractData"/> 
+				<xs:element name="resellerContractData" minOccurs="0" type="segmentsFTTX:S003-ResellerContractData"/> 
+				<xs:element name="project" minOccurs="0" type="segmentsFTTX:S005-ProjectType"/>
+                <xs:element name="orderGroup" minOccurs="0" type="segmentsFTTX:S051-orderGroupType"/>
+                 <xs:element name="newTargetDate" minOccurs="0" type="segmentsFTTX:S028-TargetDateType"/>
+				<xs:element name="attachment" minOccurs="0" maxOccurs="99" type="segmentsFTTX:S007-AttachmentType"/> 
+				<xs:element name="contactOrderManagment" type="segmentsFTTX:S053-OrderManagmentType"/> 
+				<xs:element name="contact" minOccurs="0" type="segmentsFTTX:S008-ContactType"/> 
+            </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="OrderESSType" abstract="true">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="customerContractData" type="segmentsESS:D002-CustomerContractData"/>
+        	<xs:element name="resellerContractData" minOccurs="0" type="segmentsESS:D003-ResellerContractData"/>
+        	<xs:element name="requestedDeliveryDate" minOccurs="0" type="segmentsESS:D015-TargetDateType"/>
+        	<!--xs:element name="resellerContractData" minOccurs="0" maxOccurs="15" type="segmentsESS:D013-FaultDescOptionalFieldsType"/> 
+			    <xs:element name="requestedDeliveryDate" minOccurs="0" type="segmentsESS:D014-LocationTAE"/-->
+		</xs:sequence>
+	</xs:complexType>
+        
+    <xs:complexType name="OrderNEUType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+		        <xs:sequence>
+		            <xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/> 
+		            <xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+		            <xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+		            <xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+		            <xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/> 
+		            <xs:element name="partialExecution" minOccurs="0" type="segmentsWITA:W059-PartialExecutionType"/>            
+		        </xs:sequence>
+		    </xs:extension>
+		</xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderKUE-KDType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedTerminationDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderAEN-LMAEType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderLAEType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="OrderPGWType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+
+    <xs:complexType name="OrderPVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderVBLType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="dtagContractNumber" minOccurs="0" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderREX-MKType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+        		<xs:sequence>
+        			<xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+        			<xs:element name="consumer" minOccurs="0" type="segmentsWITA:W041-ConsumerType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        			<xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+        			<xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderSER-POWType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+                <xs:sequence>
+                    <xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/> 
+                    <xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+                    <xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+                    <xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+                    <xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>            
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="OrderAUS-BUEType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+                <xs:sequence>
+                    <xs:element name="debitor" minOccurs="0" type="segmentsWITA:W004-DebitorType"/>
+                    <xs:element name="assetDebitor" type="segmentsWITA:W004-DebitorType"/> 
+                    <xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+                     <xs:element name="contact" maxOccurs="unbounded" type="segmentsWITA:W008-ContactType"/>
+                    <xs:element name="requestedDeliveryDate" type="segmentsWITA:W015-TargetDateType"/>            
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="OrderAUFType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderWitaType">
+                <xs:sequence>
+                    <xs:element name="carrier" type="segmentsESEP:E001-CarrierType"/> 
+                    <xs:element name="endCustomer" type="segmentsESEP:E002-EndCustomerType"/>
+                    <xs:element name="failureDescription" type="segmentsESEP:E003-FailureDescriptionType"/>
+                    <xs:element name="connectionData" type="segmentsESEP:E019-ConnectionDataType"/>
+                    <xs:element name="executionDate" minOccurs="0" type="segmentsESEP:E011-DateType"/>                  
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+  
+</xs:schema>

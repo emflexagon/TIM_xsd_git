@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderWAR="http://www.flexagon.de/war/orderWAR/" 
+	xmlns:segmentsWAR="http://www.flexagon.de/war/segments/" 
+	targetNamespace="http://www.flexagon.de/war/orderWAR/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/war/segments/" schemaLocation="../segments/segmentsWAR.xsd"/>
+	
+	<xs:complexType name="OrderWARType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderWAR-ADR-REQ" type="orderWAR:OrderWAR-ADR-REQType"/>
+			<xs:element name="orderWAR-ANS-REQ" type="orderWAR:OrderWAR-ANS-REQType"/>
+		</xs:choice>
+	</xs:complexType>
+    
+    <xs:complexType name="OrderWAR-ADR-REQType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:sequence>
+    		 <xs:element name="adress" type="segmentsWAR:A002-Adress"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="OrderWAR-ANS-REQType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:sequence>
+    		<xs:element name="phoneNumber" type="segmentsWAR:A007-Iptn"/>
+    	</xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

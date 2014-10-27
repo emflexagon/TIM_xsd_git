@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://flexagon.de/ws/wita/1.0/ftbox" xmlns:impl="http://flexagon.de/ws/wita/1.0/ftbox" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://flexagon.de/ws/wita/1.0/ftbox" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:element name="xmlData" type="xsd:string"/>
+            <xsd:element name="executeReturn" type="xsd:string"/>
+        </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="executeRequest">
+    <wsdl:part name="body" element="impl:xmlData">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeResponse">
+    <wsdl:part name="body" element="impl:executeReturn">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FtboxInhousePort">
+    <wsdl:operation name="execute" parameterOrder="xmlData">
+      <wsdl:input name="executeRequest" message="impl:executeRequest">
+    </wsdl:input>
+      <wsdl:output name="executeResponse" message="impl:executeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FtboxInhouseBinding" type="impl:FtboxInhousePort">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="execute">
+      <wsdlsoap:operation soapAction="execute"/>
+      <wsdl:input name="executeRequest">
+        <wsdlsoap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://flexagon.de/ws/wita/1.0/ftbox"/>
+      </wsdl:input>
+      <wsdl:output name="executeResponse">
+        <wsdlsoap:body use="literal" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://flexagon.de/ws/wita/1.0/ftbox"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FtboxInhouseService">
+    <wsdl:port name="ftboxInhouseWita" binding="impl:FtboxInhouseBinding">
+      <wsdlsoap:address location="http:// url of the webservice"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

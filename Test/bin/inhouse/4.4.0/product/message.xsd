@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 53060 $ $LastChangedDate: 2014-07-29 09:44:15 +0200 (Di, 29 Jul 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:segmentsESEP="http://www.flexagon.de/esep/segments/" 
+    xmlns:segmentsFTTX="http://www.flexagon.de/spri/segments/" 
+    xmlns:segmentsESS="http://www.flexagon.de/ess/segments/"
+    xmlns:fields="http://www.flexagon.de/inhouse/fields/"
+    targetNamespace="http://www.flexagon.de/inhouse/message/"    
+    elementFormDefault="unqualified" >
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/esep/segments/" schemaLocation="../segments/segmentsESEP.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/spri/segments/" schemaLocation="../segments/segmentsFTTX.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/ess/segments/" schemaLocation="../segments/segmentsESS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/" schemaLocation="../fields/fields.xsd"/>
+	
+    <xs:complexType name="MessageType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en"> 
+            	               
+            </xs:documentation>
+        </xs:annotation>        
+		<xs:sequence>
+            <xs:element name="ftboxOrderId" minOccurs="0" type="message:OrderIdType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageFTTXType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+		        <xs:sequence>
+		            <xs:element name="customer" type="segmentsFTTX:S058-CustomerType"/>
+		             <xs:element name="reseller" minOccurs="0" type="segmentsFTTX:S064-ResellerType"/>
+		        </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageESSType" abstract="true">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+            	<xs:sequence>
+            		<xs:element name="customer" type="segmentsESS:D050-CustomerIdData"/>
+            		<xs:element name="reseller" minOccurs="0" type="segmentsESS:D051-ResellerIdData" />            		
+            		<xs:element name="reference" minOccurs="0" type="segmentsESS:D025-FaultClearanceReferenceType"/>
+            		<xs:element name="providerContractNumber" minOccurs="0" type="segmentsESS:D006-DtagContractNumberType"/>
+            		<xs:element name="messageCode" maxOccurs="unbounded" type="segmentsESS:D038-MessageCodeType"/>
+            	</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+        
+    <xs:complexType name="MessageABMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+		        <xs:sequence>
+		            <xs:element name="confirmedDeliverytDate" type="segmentsWITA:W028-TargetDateType"/>
+		            <xs:element name="currentProvider" minOccurs="0" type="segmentsWITA:W030-CurrentProviderType"/>
+		        </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageQEBType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageERLMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" minOccurs="0" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="executionDate" type="segmentsWITA:W028-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageERLM-KType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+                <xs:sequence>
+                    <xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/>
+                	<xs:element name="resellerId" minOccurs="0" type="segmentsWITA:W039-CustomerIDType"/>
+                    <xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>    
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="MessageENTMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="billingEventDate" type="segmentsWITA:W028-TargetDateType"/>
+        			<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageABBMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" minOccurs="0" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="followUpDate" minOccurs="0" type="segmentsWITA:W028-TargetDateType"/>
+        			<xs:element name="currentProvider" minOccurs="0" type="segmentsWITA:W030-CurrentProviderType"/>                	        			
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageVZMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" minOccurs="0" type="segmentsWITA:W006-DtagContractNumberType"/> 
+        			<xs:element name="delayDate" minOccurs="0" type="segmentsWITA:W028-TargetDateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageTAMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageMTAMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="MessageAKM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        	<xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/>        	
+        	<xs:element name="receivingProvider" type="segmentsWITA:W043-ReceivingProviderWithResponseType"/>
+        	<xs:element name="customer" minOccurs="0" type="segmentsWITA:W048-EndCustomerType"/>
+        	<xs:element name="attachment" minOccurs="0" maxOccurs="unbounded" type="segmentsWITA:W007-AttachmentType"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageRUEM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        	<xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/>
+        	<xs:element name="currentProvider" type="segmentsWITA:W030-CurrentProviderType"/>
+        </xs:sequence>
+    </xs:complexType>     
+
+    <xs:complexType name="MessageABM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType" />
+            <xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"></xs:element>
+            <xs:element name="receivingProvider" type="segmentsWITA:W043-ReceivingProviderType" />
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageERLM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        	<xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/>        	
+        	<xs:element name="executionDate" type="segmentsWITA:W028-TargetDateType"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageENTM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        	<xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/>
+        	<xs:element name="billingEventDate" type="segmentsWITA:W028-TargetDateType"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageABBM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        	<xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/>        	
+        </xs:sequence>
+    </xs:complexType> 
+    
+     <xs:complexType name="MessageVZM-PVType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        	<xs:element name="customerId" type="segmentsWITA:W039-CustomerIDType"/> 
+        	<xs:element name="delayDate" minOccurs="0" type="segmentsWITA:W028-TargetDateType"/>       	
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageERGMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+        			<xs:element name="resultLink" type="segmentsWITA:W029-LinkType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageTAType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="GUID" type="fields:GUIDType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageZMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="GUID" type="fields:GUIDType"/>
+        			<xs:element name="carrier" type="segmentsESEP:E006-CarrierType"/>
+        			<xs:element name="TCOM" type="segmentsESEP:E007-TCOMType"/>
+        			<xs:element name="suggestedDate" type="segmentsESEP:E011-DateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageESMType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="GUID" type="fields:GUIDType"/>
+        			<xs:element name="carrier" type="segmentsESEP:E006-CarrierType"/>
+        			<xs:element name="TCOM" type="segmentsESEP:E007-TCOMType"/>
+        			<xs:element name="times" type="segmentsESEP:E016-TimesType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageERRType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="GUID" type="fields:GUIDType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageTERType" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageType">
+        		<xs:sequence>
+        			<xs:element name="carrier" type="segmentsESEP:E001-CarrierType"/>
+        			<xs:element name="endCustomer" type="segmentsESEP:E010-EndCustomerType"/>
+        			<xs:element name="Date" type="segmentsESEP:E011-DateType"/>
+        		</xs:sequence>
+        	</xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
+	<!-- dtag order id -->    
+    <xs:simpleType name="OrderIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        modeling the dtag order id
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">            
+        </xs:restriction>
+    </xs:simpleType>
+  
+</xs:schema>

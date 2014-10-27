@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 47001 $ $LastChangedDate: 2014-03-13 13:04:16 +0100 (Do, 13 Mrz 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderADSL="http://www.flexagon.de/wita/orderADSL/" 
+	xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/wita/orderADSL/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	<xs:complexType name="OrderADSLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderADSL-NEU" type="orderADSL:OrderADSL-NEUType"/>
+			<xs:element name="orderADSL-KUE-KD" type="orderADSL:OrderADSL-KUE-KDType"/>
+			<xs:element name="orderADSL-AEN-LMAE" type="orderADSL:OrderADSL-AEN-LMAEType"/>
+			<xs:element name="orderADSL-LAE" type="orderADSL:OrderADSL-LAEType"/>
+			<xs:element name="orderADSL-PGW" type="orderADSL:OrderADSL-PGWType"/>
+			<xs:element name="orderADSL-PV" type="orderADSL:OrderADSL-PVType"/>
+			<xs:element name="orderADSL-VBL" type="orderADSL:OrderADSL-VBLType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderNEUType">
+				<xs:sequence>
+		            <xs:element name="productADSL-NEU" type="orderADSL:ProductADSL-NEUType"/> 
+		    	</xs:sequence>
+		    </xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderKUE-KDType">
+				<xs:sequence>
+		            <xs:element name="productADSL-KUE-KD" type="orderADSL:ProductADSL-KUE-KDType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderAEN-LMAEType">
+				<xs:sequence>
+		            <xs:element name="productADSL-AEN-LMAE" type="orderADSL:ProductADSL-AEN-LMAEType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-LAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderLAEType">
+				<xs:sequence>
+		            <xs:element name="productADSL-LAE" type="orderADSL:ProductADSL-LAEType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-PGWType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderPGWType">
+				<xs:sequence>
+		            <xs:element name="productADSL-PGW" type="orderADSL:ProductADSL-PGWType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderPVType">
+				<xs:sequence>
+		            <xs:element name="productADSL-PV" type="orderADSL:ProductADSL-PVType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderADSL-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderVBLType">
+				<xs:sequence>
+		            <xs:element name="productADSL-VBL" type="orderADSL:ProductADSL-VBLType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	
+	
+	<xs:complexType name="ProductADSL-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoADSL-NEU" type="orderADSL:ProductInfoADSL-NEU"/>
+			<xs:element name="subproductADSL-NEU" minOccurs="0" maxOccurs="unbounded" type="orderADSL:SubproductADSL-NEUType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-NEU" minOccurs="0" type="orderADSL:ProductInfoADSL-NEU"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-NEU">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+		    <xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>  
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="locationShipping" minOccurs="0" type="segmentsWITA:W013-LocationShipping"/>
+			<xs:element name="stockSearch" type="segmentsWITA:W017-StockSearchType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductADSL-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoADSL-KUE-KD" type="orderADSL:ProductInfoADSL-KUE-KD"/>
+			<xs:element name="subproductADSL-KUE-KD" minOccurs="0" maxOccurs="unbounded" type="orderADSL:SubproductADSL-KUE-KDType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-KUE-KD" minOccurs="0" type="orderADSL:ProductInfoADSL-KUE-KD"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-KUE-KD">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+		    <xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>  
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductADSL-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>
+			<xs:element name="productInfoADSL-AEN-LMAE" type="orderADSL:ProductInfoADSL-AEN-LMAE"/>
+			<xs:element name="subproductADSL-AEN-LMAE" maxOccurs="unbounded" type="orderADSL:SubproductADSL-AEN-LMAEType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-AEN-LMAE" minOccurs="0" type="orderADSL:ProductInfoADSL-AEN-LMAE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-AEN-LMAE">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductADSL-LAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>
+			<xs:element name="productInfoADSL-LAE" type="orderADSL:ProductInfoADSL-LAE"/>
+			<xs:element name="subproductADSL-LAE" minOccurs="0" maxOccurs="unbounded" type="orderADSL:SubproductADSL-LAEType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-LAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-LAE" minOccurs="0" type="orderADSL:ProductInfoADSL-LAE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-LAE">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductADSL-PGWType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoADSL-PGW" type="orderADSL:ProductInfoADSL-PGW"/>
+			<xs:element name="subproductADSL-PGW" minOccurs="0" maxOccurs="unbounded" type="orderADSL:SubproductADSL-PGWType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-PGWType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-PGW" minOccurs="0" type="orderADSL:ProductInfoADSL-PGW"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-PGW">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductADSL-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoADSL-PV" type="orderADSL:ProductInfoADSL-PV"/>
+			<xs:element name="subproductADSL-PV" minOccurs="0" maxOccurs="unbounded" type="orderADSL:SubproductADSL-PVType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-PV" minOccurs="0" type="orderADSL:ProductInfoADSL-PV"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-PV">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>  
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductADSL-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoADSL-VBL" type="orderADSL:ProductInfoADSL-VBL"/>
+			<xs:element name="subproductADSL-VBL" minOccurs="0" maxOccurs="unbounded" type="orderADSL:SubproductADSL-VBLType"/>			
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductADSL-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoADSL-VBL" minOccurs="0" type="orderADSL:ProductInfoADSL-VBL"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoADSL-VBL">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>  
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="locationShipping" minOccurs="0" type="segmentsWITA:W013-LocationShipping"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockSearch" minOccurs="0" type="segmentsWITA:W017-StockSearchType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+		
+
+</xs:schema>

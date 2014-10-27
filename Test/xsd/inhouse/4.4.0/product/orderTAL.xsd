@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 53061 $ $LastChangedDate: 2014-07-29 09:45:53 +0200 (Di, 29 Jul 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:orderTAL="http://www.flexagon.de/wita/orderTAL/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:order="http://www.flexagon.de/inhouse/order/" 
+    targetNamespace="http://www.flexagon.de/wita/orderTAL/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+		
+	<xs:complexType name="OrderTALType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>        	        	
+        	<xs:element name="orderTAL-NEU" type="orderTAL:OrderTAL-NEUType"/>        	       
+            <xs:element name="orderTAL-KUE-KD" type="orderTAL:OrderTAL-KUE-KDType"/>             
+            <xs:element name="orderTAL-LAE" type="orderTAL:OrderTAL-LAEType"/> 
+            <xs:element name="orderTAL-AEN-LMAE" type="orderTAL:OrderTAL-AEN-LMAEType"/> 
+            <xs:element name="orderTAL-PGW" type="orderTAL:OrderTAL-PGWType"/> 
+            <xs:element name="orderTAL-PV" type="orderTAL:OrderTAL-PVType"/> 
+            <xs:element name="orderTAL-VBL" type="orderTAL:OrderTAL-VBLType"/> 
+            <xs:element name="orderTAL-REX-MK" type="orderTAL:OrderTAL-REX-MKType"/>         
+            <xs:element name="orderTAL-SER-POW" type="orderTAL:OrderTAL-SER-POWType"/> 
+    	</xs:choice>
+    </xs:complexType>  
+     
+	<xs:complexType name="OrderTAL-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="order:OrderNEUType">        
+		        <xs:sequence>
+		            <xs:element name="productTAL-NEU" type="orderTAL:ProductTAL-NEUType"/> 
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>	
+
+    <xs:complexType name="OrderTAL-KUE-KDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderKUE-KDType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-KUE-KD" type="orderTAL:ProductTAL-KUE-KDType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderTAL-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderAEN-LMAEType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-AEN-LMAE" type="orderTAL:ProductTAL-AEN-LMAEType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderTAL-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderLAEType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-LAE" type="orderTAL:ProductTAL-LAEType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="OrderTAL-PGWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderPGWType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-PGW" type="orderTAL:ProductTAL-PGWType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+
+    <xs:complexType name="OrderTAL-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderPVType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-PV" type="orderTAL:ProductTAL-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderTAL-VBLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderVBLType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-VBL" type="orderTAL:ProductTAL-VBLType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderTAL-REX-MKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderREX-MKType">        
+                <xs:sequence>
+                	<xs:element name="productTAL-REX-MK" type="orderTAL:ProductTAL-REX-MKType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="OrderTAL-SER-POWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="order:OrderSER-POWType">        
+                <xs:sequence>
+                    <xs:element name="productTAL-SER-POW" type="orderTAL:ProductTAL-SER-POWType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+    
+    <xs:complexType name="ProductTAL-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-NEU" type="orderTAL:ProductInfoTAL-NEU"/>
+            <xs:element name="subproductTAL-NEU" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-NEUType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-NEUType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-NEU" minOccurs="0" type="orderTAL:ProductInfoTAL-NEU"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-NEU">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>         
+            <xs:element name="locationA" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+            <xs:element name="previousTenant" minOccurs="0" type="segmentsWITA:W009-PreviousTenantType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesWithReservationType"/>
+            <xs:element name="terminReservation" minOccurs="0" type="segmentsWITA:W071-TerminReservationType" />
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" type="segmentsWITA:SwitchingDataType"/>  
+        </xs:sequence>
+    </xs:complexType>   
+
+	<xs:complexType name="ProductTAL-KUE-KDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-KUE-KD" type="orderTAL:ProductInfoTAL-KUE-KD"/> 
+            <xs:element name="subproductTAL-KUE-KD" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-KUE-KDType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-KUE-KDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-KUE-KD" minOccurs="0" type="orderTAL:ProductInfoTAL-KUE-KD"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-KUE-KD">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>        
+        	<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W018-LineIndicationType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductTAL-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>          
+            <xs:element name="productInfoTAL-AEN-LMAE" type="orderTAL:ProductInfoTAL-AEN-LMAE"/> 
+            <xs:element name="subproductTAL-AEN-LMAE" maxOccurs="unbounded" type="orderTAL:SubproductTAL-AEN-LMAEType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-AEN-LMAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-AEN-LMAE" minOccurs="0" type="orderTAL:ProductInfoTAL-AEN-LMAE"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-AEN-LMAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>       
+            <xs:element name="stockLineIndication" minOccurs="0" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" minOccurs="0" type="segmentsWITA:SwitchingDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+	<xs:complexType name="ProductTAL-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>          
+            <xs:element name="productInfoTAL-LAE" type="orderTAL:ProductInfoTAL-LAE"/> 
+            <xs:element name="subproductTAL-LAE" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-LAEType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-LAEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-LAE" minOccurs="0" type="orderTAL:ProductInfoTAL-LAE"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-LAE">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+            <xs:element name="terminReservation" minOccurs="0" type="segmentsWITA:W071-TerminReservationType" />
+            <xs:element name="stockLineIndication" minOccurs="0" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" minOccurs="0" type="segmentsWITA:SwitchingDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ProductTAL-SER-POWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-SER-POW" type="orderTAL:ProductInfoTAL-SER-POW"/> 
+            <xs:element name="subproductTAL-SER-POW" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-SER-POWType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-SER-POWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-SER-POW" minOccurs="0" type="orderTAL:ProductInfoTAL-SER-POW"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-SER-POW">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+            <xs:element name="terminReservation" minOccurs="0" type="segmentsWITA:W071-TerminReservationType" />
+            <xs:element name="stockLineIndication" minOccurs="0" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="switchingData" type="segmentsWITA:SwitchingDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductTAL-PGWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-PGW" type="orderTAL:ProductInfoTAL-PGW"/> 
+            <xs:element name="subproductTAL-PGW" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-PGWType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-PGWType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-PGW" minOccurs="0" type="orderTAL:ProductInfoTAL-PGW"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-PGW">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+            <xs:element name="terminReservation" minOccurs="0" type="segmentsWITA:W071-TerminReservationType" />
+            <xs:element name="stockLineIndication" minOccurs="0" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" type="segmentsWITA:SwitchingDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductTAL-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-PV" type="orderTAL:ProductInfoTAL-PV"/> 
+            <xs:element name="subproductTAL-PV" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-PVType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-PV" minOccurs="0" type="orderTAL:ProductInfoTAL-PV"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-PV">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>        
+        	<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+            <xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesWithReservationType"/>
+            <xs:element name="terminReservation" minOccurs="0" type="segmentsWITA:W071-TerminReservationType" />
+            <xs:element name="stockLineIndication" minOccurs="0" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" type="segmentsWITA:SwitchingDataType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductTAL-VBLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-VBL" type="orderTAL:ProductInfoTAL-VBL"/> 
+            <xs:element name="subproductTAL-VBL" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-VBLType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-VBLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-VBL" minOccurs="0" type="orderTAL:ProductInfoTAL-VBL"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-VBL">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>              
+        	<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/> 
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+            <xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesWithReservationType"/>
+            <xs:element name="terminReservation" minOccurs="0" type="segmentsWITA:W071-TerminReservationType" />
+            <xs:element name="stockSearch" minOccurs="0" type="segmentsWITA:W017-StockSearchType"/>
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" type="segmentsWITA:SwitchingDataType"/>
+            <xs:element name="numberPorting" minOccurs="0" type="segmentsWITA:NumberPortingType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ProductTAL-REX-MKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductType"/>          
+            <xs:element name="productInfoTAL-REX-MK" type="orderTAL:ProductInfoTAL-REX-MK"/> 
+            <xs:element name="subproductTAL-REX-MK" minOccurs="0" maxOccurs="unbounded" type="orderTAL:SubproductTAL-REX-MKType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:complexType name="SubproductTAL-REX-MKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/> 
+            <xs:element name="productInfoTAL-REX-MK" minOccurs="0" type="orderTAL:ProductInfoTAL-REX-MK"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <xs:complexType name="ProductInfoTAL-REX-MK">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+        	<xs:element name="locationA" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>        	
+        	<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+        	<xs:element name="stockSearch" type="segmentsWITA:ExtendedStockSearchType"/>
+        	<xs:element name="numberPorting" type="segmentsWITA:NumberPortingType"/>
+        </xs:sequence>
+    </xs:complexType>   
+        
+      
+</xs:schema>

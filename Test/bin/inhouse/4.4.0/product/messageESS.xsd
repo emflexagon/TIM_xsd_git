@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 44178 $ $LastChangedDate: 2014-01-15 15:24:48 +0100 (Mi, 15 Jan 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageESS="http://www.flexagon.de/ess/messageESS/"
+    xmlns:segmentsESS="http://www.flexagon.de/ess/segments/" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/" 
+    targetNamespace="http://www.flexagon.de/ess/messageESS/"    
+    elementFormDefault="unqualified">
+    
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/ess/segments/" schemaLocation="../segments/segmentsESS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/message/" schemaLocation="message.xsd"/>
+		
+	<xs:complexType name="MessageESSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="MessageESS-TEQ" type="messageESS:MessageESS-TEQType"/>
+            <xs:element name="MessageESS-QEB" type="messageESS:MessageESS-QEBType"/>
+            <xs:element name="MessageESS-FAM" type="messageESS:MessageESS-FAMType"/>
+            <xs:element name="MessageESS-ABBM" type="messageESS:MessageESS-ABBMType"/>   
+            <xs:element name="MessageESS-ERLM" type="messageESS:MessageESS-ERLMType"/>
+            <xs:element name="MessageESS-ENTM" type="messageESS:MessageESS-ENTMType"/>
+            <xs:element name="MessageESS-TAM" type="messageESS:MessageESS-TAMType"/>
+            <xs:element name="MessageESS-ZWM" type="messageESS:MessageESS-ZWM-LEType"/>
+            <xs:element name="MessageESS-TBK-LE" type="messageESS:MessageESS-TBK-LEType"/>
+            <xs:element name="MessageESS-ERGM" type="messageESS:MessageESS-ERGMType"/>
+        </xs:choice>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageESS-TEQType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">  
+            	<xs:sequence>
+           		 	<!--xs:element name="messageCode" type="segmentsESS:D038-MessageCodeType"/-->
+       			 </xs:sequence>      
+		     </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageESS-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">  
+            	<xs:sequence>
+           		 	<!--xs:element name="messageCode" type="segmentsESS:D038-MessageCodeType"/-->
+       			 </xs:sequence>      
+		     </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    	
+	<xs:complexType name="MessageESS-FAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="message:MessageESSType">        
+		    </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>	
+
+    <xs:complexType name="MessageESS-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+                <xs:sequence>
+                	<xs:element name="faultNote" minOccurs="0" type="segmentsESS:D017-FaultNoteType"/>
+                	<xs:element name="contactSupplier" minOccurs="0" type="segmentsESS:D037-ContactSupplierType"/>
+           			<xs:element name="faultCleared" minOccurs="0" type="segmentsESS:D041-FaultRemoved"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>     
+
+    <xs:complexType name="MessageESS-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+                <xs:sequence>
+                	<xs:element name="contactSupplier" minOccurs="0" type="segmentsESS:D037-ContactSupplierType"/>
+                	<xs:element name="invoicePosition" minOccurs="0" maxOccurs="99" type="segmentsESS:D042-InvoicePosition"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+
+    <xs:complexType name="MessageESS-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+                <xs:sequence>
+            		<xs:element name="faultNote" minOccurs="0" type="segmentsESS:D017-FaultNoteType"/>
+                	<xs:element name="contactSupplier" minOccurs="0" type="segmentsESS:D037-ContactSupplierType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageESS-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+				<xs:sequence>       
+					<xs:element name="contactSupplier" minOccurs="0" type="segmentsESS:D037-ContactSupplierType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    
+    <xs:complexType name="MessageESS-ZWM-LEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+				<xs:sequence>       
+					<xs:element name="faultNote" minOccurs="0" type="segmentsESS:D017-FaultNoteType"/>
+                	<xs:element name="contactSupplier" minOccurs="0" type="segmentsESS:D037-ContactSupplierType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+
+    <xs:complexType name="MessageESS-TBK-LEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+				<xs:sequence>       
+					<xs:element name="contactSupplier" minOccurs="0" type="segmentsESS:D037-ContactSupplierType"/>
+					<xs:element name="appointedDate" type="segmentsESS:D040-CustomerDateType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageESS-ERGMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESSType">        
+                <xs:sequence>
+            		<xs:element name="onlineDiagnoseReference" type="segmentsESS:D020-OnlineDiagnoseReferenceType"/>
+                	<xs:element name="resultTime" type="segmentsESS:D056-ResultTimeType"/>
+                	<xs:element name="result" type="segmentsESS:D057-ResultType"/>
+                	<xs:element name="diagnosisResult" minOccurs="0" maxOccurs="99" type="messageESS:DiagnosisResultType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="DiagnosisResultType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+    	<xs:sequence>
+    		<xs:element name="resultName" type="segmentsESS:D060-DiagnosisResultNameType"/>
+    		<xs:element name="measurement" minOccurs="0" maxOccurs="99" type="segmentsESS:D058-MeasurementType"/>
+    		<xs:element name="measure" minOccurs="0" maxOccurs="99" type="segmentsESS:D059-MeasureType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+        
+</xs:schema>

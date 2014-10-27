@@ -1,0 +1,567 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:segments="http://www.flexagon.de/spri/segments/"
+    xmlns:fields="http://www.flexagon.de/inhouse/fields/" 
+    targetNamespace="http://www.flexagon.de/spri/segments/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/" schemaLocation="../fields/fields.xsd"/>
+		
+	<xs:complexType name="S001-TransactionType">
+        <xs:sequence>
+            <xs:element name="businessTransactionType" type="fields:BusinessTransactionTypeType"/>    
+            <xs:element name="businessTransaction" type="fields:BusinessTransactionType"/>
+            <xs:element name="changeIndicator" type="fields:ChangeIndicatorType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="S001-TransactionCustomerResponseType">
+		<xs:complexContent>
+			<xs:extension base="segments:S001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageCustomerResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="S001-TransactionCustomerRequestType">
+		<xs:complexContent>
+			<xs:extension base="segments:S001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="fields:MessageCustomerRequestType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="S001-TransactionFtboxRequestType">
+		<xs:complexContent>
+			<xs:extension base="segments:S001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="fields:MessageFtboxRequestType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="S001-TransactionFtboxResponseType">
+		<xs:complexContent>
+			<xs:extension base="segments:S001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageFtboxResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<xs:complexType name="S001-TransactionErrorResponseType">
+		<xs:complexContent>
+			<xs:extension base="segments:S001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="fields:MessageErrorResponseType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<!-- Kunde -->	
+    <xs:complexType name="S002-CustomerContractData">
+        <xs:sequence>
+            <xs:element name="customerId" type="fields:CustomerIdType"/>
+            <xs:element name="customerServiceId" type="fields:CustomerServiceIdType"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Besteller -->
+    <xs:complexType name="S003-ResellerContractData">
+        <xs:sequence>
+            <xs:element name="resellerId" type="fields:CustomerIdType"/>
+            <xs:element name="resellerServiceId" type="fields:CustomerServiceIdType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+     <!-- Project -->
+    <xs:complexType name="S005-ProjectType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="projectId" type="fields:ProjectIdType"/> 
+            <xs:element name="correlationId" minOccurs="0" type="fields:CorrelationIdType"/>           
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Vertragsdaten -->
+    <xs:complexType name="S006-ProviderContractNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="contractNo" type="fields:ContractNoType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Anlage -->
+    <xs:complexType name="S007-AttachmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="attachmentType" type="fields:AttachmentType"/> 
+            <xs:element name="filename" type="fields:FilenameType"/> 
+            <xs:element name="fileType" type="fields:FileTypeType"/> 
+            <xs:element name="description" minOccurs="0" type="fields:DescriptionType"/> 
+            <xs:element name="fileContent" type="fields:FileContentType"/>                      
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Ansprechspartner -->
+    <xs:complexType name="S008-ContactType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="contactPhone" type="fields:PhoneNumberType"/> 
+            <xs:element name="mobileNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="faxNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="emailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+            <xs:element name="contactRole" minOccurs="0" type="fields:RoleType"/>                      
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <!-- Vormieter -->
+    <xs:complexType name="S009-PreviousTenantType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="homeId" type="fields:HomeIdType"/> 
+            <xs:element name="serialNumberONT" type="fields:SerialNumberOntType"/>                      
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!-- StandordA -->
+    <xs:complexType name="S010-LocationAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:LocationAppellationType"/>
+        	<xs:choice>
+           		<xs:element name="person" type="fields:PersonWithNumberType"/> 
+            	<xs:element name="company" type="fields:CompanyWithNumberType"/> 
+        	</xs:choice>
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element name="houseNumberAdd" minOccurs="0" type="fields:HouseNumberAddType"/>
+            <xs:element name="buildingBlockName" minOccurs="0" type="fields:BuildingBlockNameType"/> 
+            <xs:element name="buildingBlockAppendix" minOccurs="0" type="fields:BuildingBlockAppendixType"/> 
+            <xs:element name="country" minOccurs="0" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element name="cityAdd" minOccurs="0" type="fields:CityAddType"/>
+            <xs:element name="tae_ontLocation" minOccurs="0" type="fields:taeLocationType"/>                    
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="S013-LocationShipping">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:LocationAppellationType"/> 
+            <xs:choice>
+           		<xs:element name="person" type="fields:PersonType"/> 
+            	<xs:element name="company" type="fields:CompanyType"/> 
+        	</xs:choice>             
+            <xs:element name="street" type="fields:StreetType"/> 
+            <xs:element name="houseNumber" type="fields:HouseNumberType"/> 
+            <xs:element name="houseNumberAdd" minOccurs="0" type="fields:HouseNumberAddType"/>
+            <xs:element name="country" minOccurs="0" type="fields:CountryType"/>
+            <xs:element name="postalCode" type="fields:PostalCodeType"/>
+            <xs:element name="city" type="fields:CityType"/>
+            <xs:element name="cityAdd" minOccurs="0" type="fields:CityAddType"/>                   
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!-- Montageleistung -->
+    <xs:complexType name="S014-InstallationServicesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="phoneNumber" type="fields:PhoneNumberType"/> 
+            <xs:element name="mobileNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="faxNumber" minOccurs="0" type="fields:PhoneNumberType"/> 
+            <xs:element name="emailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+            <xs:element name="installationService" minOccurs="0" type="fields:InstallationServicesType"/>
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Termine -->
+    <xs:complexType name="S015-TargetDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="fields:DateType"/> 
+            <xs:element name="timeSlot" minOccurs="0" type="fields:TimeSlotType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Produkt -->
+    <xs:complexType name="S016-ProductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="productName" type="fields:ProductNameType"/>  
+        </xs:sequence>
+    </xs:complexType>  
+    
+     <xs:complexType name="S016-ProductWithActionCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+			<xs:extension base="segments:S016-ProductType">		         
+            	<xs:sequence>  
+            		<xs:element name="actionCode" type="fields:ActionCodeType"/>   
+            	</xs:sequence>  
+       		</xs:extension>
+       	</xs:complexContent>
+    </xs:complexType>
+    
+    <!-- Termin -->
+    <xs:complexType name="S028-TargetDateType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>           
+            <xs:element name="targetDate" type="fields:DateType"/> 
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <!-- Meldungscode  -->
+    <xs:complexType name="S038-MessageCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="messageCode" type="fields:MessageCodeType"/>
+            <xs:element name="messageText" type="fields:MessageTextType"/>         
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Kundennummer -->
+    <xs:complexType name="S039-CustomerIDType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>             
+            <xs:element name="customerId" type="fields:CustomerIdType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <!-- Anschluss -->
+    <xs:complexType name="S045-ConnectionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>   
+            <xs:element name="a10nsp" type="fields:a10nspType"/> 
+            <xs:element name="port" type="fields:PortType"/>
+            <xs:element name="s-vlan" minOccurs="0" type="fields:vlanType"/> 
+            <xs:element name="c-vlan" minOccurs="0" type="fields:vlanType"/>
+            <xs:element name="lineId" type="fields:LineId2Type"/>
+            <xs:element name="customerPointOfTransfer" minOccurs="0"  type="fields:CustomerPointOfTransferType"/>  
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Produktbezeichner -->
+    <xs:complexType name="S050-SubproductType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence> 
+            <xs:element name="actionCode" type="fields:ActionCodeType"/>            
+            <xs:element name="productName" type="fields:ProductNameType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+
+    <!-- Klammer -->
+    <xs:complexType name="S051-orderGroupType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="orderGroupId" type="fields:OrderGroupId2Type"/> 
+            <xs:element name="orderCount" type="fields:OrderCount2Type"/> 
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- Terminverschiebung -->
+    <xs:complexType name="S052-PostponementType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>            
+            <xs:element name="targetDate" type="fields:DateType"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Auftragsmanagment -->
+    <xs:complexType name="S053-OrderManagmentType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="contactPhone" type="fields:PhoneNumberType"/> 
+            <xs:element name="mobileNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="faxNumber" minOccurs="0" type="fields:PhoneNumberType"/> 
+            <xs:element name="emailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Reklamation -->
+    <xs:complexType name="S054-ReclamationType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="derangementNumberProvider" type="fields:DerangementNumberType"/>
+        	<xs:element name="reasonOfReclamation" type="fields:ReasonType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Kontakt Endkunden -->
+    <xs:complexType name="S055-ContactType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="salutation" type="fields:SalutationType"/> 
+            <xs:element name="givenName" minOccurs="0" type="fields:GivenNameType"/> 
+            <xs:element name="surname" type="fields:SurNameType"/> 
+            <xs:element name="phoneNumber" minOccurs="0" type="fields:PhoneNumberType"/> 
+            <xs:element name="mobileNumber" minOccurs="0" type="fields:PhoneNumberType"/>
+            <xs:element name="faxNumber" minOccurs="0" type="fields:PhoneNumberType"/> 
+            <xs:element name="emailAddress" minOccurs="0" type="fields:EmailAddressType"/>
+            <xs:element name="contactingRequested" minOccurs="0" type="fields:BooleanType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Stoerungsnummer -->
+    <xs:complexType name="S056-DerangementNumberType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="derangementNumberCarrier" type="fields:DerangementNumberType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Stoerungsdaten -->
+    <xs:complexType name="S057-DerangementDataType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="lineId" type="fields:LineId2Type"/> 
+        	<xs:element name="preliminaryTest" type="fields:PreliminaryTestType"/>
+        	<xs:element name="description" type="fields:FreeTextType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Auftraggeber -->
+    <xs:complexType name="S058-CustomerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="customerId" type="fields:CustomerIdType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Stoerungsergebnis -->
+    <xs:complexType name="S059-DerangementResultType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="result" type="fields:ResultType"/>
+        	<xs:element name="effectiveDate" minOccurs="0" type="fields:DateTimeType"/>
+        	<xs:element name="annotation" minOccurs="0" type="fields:AnnotationType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Grund -->
+    <xs:complexType name="S060-ReasonType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="reason" type="fields:ReasonType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Nachricht -->
+    <xs:complexType name="S061-MessageType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="message" type="fields:Message3Type"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Termin mit Zeit -->
+    <xs:complexType name="S062-TerminType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="date" type="fields:DateType"/>
+        	<xs:element name="time" minOccurs="0" type="fields:Time2Type"/>
+        	<xs:element name="timeSlot" minOccurs="0" type="fields:TimeSlotType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- Abschaltgrund -->
+    <xs:complexType name="S063-DisconnectionReasonType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="disconnectionReason" type="fields:FreeTextType"/>
+    	</xs:sequence>
+    </xs:complexType>
+   
+   <!-- Besteller -->
+    <xs:complexType name="S064-ResellerType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="resellerId" type="fields:CustomerIdType"/>
+    	</xs:sequence>
+    </xs:complexType>
+   
+    <!-- Line ID -->
+    <xs:complexType name="S065-LineIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="lineId" type="fields:LineId2Type"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- abgebender Provider -->
+    <xs:complexType name="S066-CurrentProviderType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="providerName" minOccurs="0" type="fields:ProviderNameType"/>
+        	<xs:element name="changeAcceptance" type="fields:YesNo2Type"/>
+        	<xs:element name="responseCode" minOccurs="0" type="fields:ResponseCodeType"/>
+        	<xs:element name="responseText" minOccurs="0" type="fields:ResponseTextType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!--  versandt ONT -->
+    <xs:complexType name="S067-ShippingONTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="serialnumberONT" type="fields:SerialnumberONTType"/>
+        	<xs:element name="company" type="fields:Company2Type"/>
+        	<xs:element name="shippingNumber" type="fields:ShippingNumberType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- bestaetigung Providerwechsel -->
+    <xs:complexType name="S068-ChangeAcceptanceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="providerName" type="fields:ProviderNameType"/>
+        	<xs:element name="closingDate" type="fields:DateType"/>
+    	</xs:sequence>
+    </xs:complexType>
+  
+    <!-- aufnehmender Provider -->
+    <xs:complexType name="S069-ReceivingProviderType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="providerName" type="fields:ProviderNameType"/>
+        	<xs:element name="scheduledClosingDate" type="fields:DateType"/>
+        	<xs:element name="deadline" type="fields:DateType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+    <!-- vorabstimmung ID -->
+    <xs:complexType name="S070-CoordinationIdType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        	<xs:element name="coordinationId" type="fields:CoordinationIdType"/>
+    	</xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

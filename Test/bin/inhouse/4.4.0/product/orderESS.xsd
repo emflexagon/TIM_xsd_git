@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 50764 $ $LastChangedDate: 2014-04-28 13:30:12 +0200 (Mo, 28 Apr 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderESS="http://www.flexagon.de/ess/orderESS/" 
+	xmlns:segmentsESS="http://www.flexagon.de/ess/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/ess/orderESS/"
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/ess/segments/" schemaLocation="../segments/segmentsESS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	
+	<xs:complexType name="OrderTALType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>        	        	
+        	<xs:element name="orderTAL-EST" type="orderESS:OrderTAL-ESTType"/>        	       
+            <xs:element name="orderTAL-REK" type="orderESS:OrderTAL-REKType"/>             
+    	</xs:choice>
+    </xs:complexType>  
+    
+      
+     <xs:complexType name="OrderTAL-ESTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>     
+		<xs:complexContent>
+	        <xs:extension base="order:OrderESSType">
+	        	<xs:sequence> 
+	        		<xs:element name="providerContractNumber" type="segmentsESS:D006-DtagContractNumberType"/> 
+	        		<xs:element name="productInfo" type="segmentsESS:ProductType"/> 
+	        		<xs:element name="contactOrderManagement" type="segmentsESS:D053-ContactCarrierType"/>
+	        		<xs:element name="contactCustomer" type="segmentsESS:D008-ContactCustomerType"/>
+		   			<xs:element name="expressClearance" minOccurs="0" type="segmentsESS:D011-ExpressFaultClearanceType"/>
+        			<xs:element name="optionalService" minOccurs="0" type="segmentsESS:D012-OptionalServiceType"/>
+        			<xs:element name="faultDetails"  type="segmentsESS:FaultDetailsTALType"/>
+  				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>	
+    
+    
+    <xs:complexType name="OrderTAL-REKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>     
+		<xs:complexContent>
+	        <xs:extension base="order:OrderESSType">
+	        	<xs:sequence> 
+	        		<xs:element name="contactOrderManagement" minOccurs="0" type="segmentsESS:D053-ContactCarrierType"/>
+	        		<xs:element name="reference" type="segmentsESS:D025-FaultClearanceReferenceType"/> 
+	        		<xs:element name="faultDetails" minOccurs="0" type="segmentsESS:FaultDetailsTALType"/>
+	        		<xs:element name="reclamationNote" minOccurs="0" type="segmentsESS:D054-ReclamationNoteType"/>
+	        		<xs:element name="contactCustomer" minOccurs="0" type="segmentsESS:D008-ContactCustomerType"/>
+  				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>	
+    
+    
+    
+    <xs:complexType name="OrderXDSLType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>        	        	
+        	<xs:element name="orderXDSL-EST" type="orderESS:OrderXDSL-ESTType"/>        	       
+            <xs:element name="orderXDSL-REK" type="orderESS:OrderXDSL-REKType"/> 
+            <xs:element name="orderXDSL-DIAG" type="orderESS:OrderXDSL-DIAGType"/>            
+    	</xs:choice>
+    </xs:complexType>  
+    
+   
+    
+    <xs:complexType name="OrderXDSL-ESTType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>     
+		<xs:complexContent>
+	        <xs:extension base="order:OrderESSType">
+	        	<xs:sequence> 
+				 	<xs:element name="providerContractNumber" type="segmentsESS:D006-DtagContractNumberType"/> 
+	        		<xs:element name="productInfo" type="segmentsESS:ProductType"/> 
+	        		<xs:element name="contactOrderManagement" type="segmentsESS:D053-ContactCarrierType"/>
+	        		<xs:element name="contactCustomerAddress" minOccurs="0" type="segmentsESS:ContactCustomerOptionalAddressType"/>
+		   			<xs:element name="expressClearance" minOccurs="0" type="segmentsESS:D011-ExpressFaultClearanceType"/>
+        			<xs:element name="optionalService" minOccurs="0" type="segmentsESS:D012-OptionalServiceType"/>
+        			<xs:element name="faultDetails"  type="segmentsESS:FaultDetailsXDSLType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>	
+    
+    
+    
+    <xs:complexType name="OrderXDSL-REKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>     
+		<xs:complexContent>
+			<xs:extension base="order:OrderESSType">
+	        	<xs:sequence> 
+					<xs:element name="contactOrderManagement" minOccurs="0" type="segmentsESS:D053-ContactCarrierType"/>
+					<xs:element name="reference" type="segmentsESS:D025-FaultClearanceReferenceType"/>
+	        		<xs:element name="faultDetails" minOccurs="0" type="segmentsESS:FaultDetailsXDSLType"/>
+	        		<xs:element name="reclamationNote"  minOccurs="0" type="segmentsESS:D027-FaultRecNoteType"/>
+	        		<xs:element name="contactCustomerAddress" minOccurs="0" type="segmentsESS:ContactCustomerOptionalAddressType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>	
+	
+
+    <xs:complexType name="OrderXDSL-DIAGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+       		<xs:element name="customerContractData" type="segmentsESS:D002-CustomerContractData"/>
+       		<xs:element name="resellerContractData" minOccurs="0" type="segmentsESS:D003-ResellerContractData"/>
+        	<xs:element name="providerContractNumber" type="segmentsESS:D006-DtagContractNumberType"/> 	
+        	<xs:element name="product" type="segmentsESS:D016-ProductType"/>  
+        	<xs:element name="faultDiscription" type="orderESS:FaultDiscriptionType"/>		
+       	</xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="FaultDiscriptionType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+    	<xs:sequence>
+    		<xs:element name="faultQuestion" minOccurs="2" maxOccurs="99" type="segmentsESS:D019-FaultQuestionType"/>
+    	</xs:sequence>
+    </xs:complexType> 
+ 
+	
+</xs:schema>

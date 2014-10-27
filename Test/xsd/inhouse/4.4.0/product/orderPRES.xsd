@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 42698 $ $LastChangedDate: 2013-12-10 11:29:36 +0100 (Di, 10 Dez 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderPRES="http://www.flexagon.de/wita/orderPRES/" 
+	xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/wita/orderPRES/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	<xs:complexType name="OrderPRESType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderPRES-NEU" type="orderPRES:OrderPRES-NEUType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderPRES-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderNEUType">
+				<xs:sequence>
+		            <xs:element name="productPRES-NEU" type="orderPRES:ProductPRES-NEUType" maxOccurs="unbounded" minOccurs="1"/> 
+		    	</xs:sequence>
+		    </xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductPRES-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoPRES-NEU" type="orderPRES:ProductInfoPRES-NEU"/>
+			<xs:element name="subproductPRES-NEU" minOccurs="0" maxOccurs="unbounded" type="orderPRES:SubproductPRES-NEUType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductPRES-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoPRES-NEU" minOccurs="0" type="orderPRES:ProductInfoPRES-NEU"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoPRES-NEU">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>            
+            <xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:choice>
+            	<xs:element name="stockSearchSingeleConnection" type="segmentsWITA:W017-StockSearchType"/>
+            	<xs:element name="stockSearchTrunkConnection" type="segmentsWITA:W056-ConnectionNumberType"/>
+            </xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+
+</xs:schema>

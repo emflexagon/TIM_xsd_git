@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:complexWAR="http://www.flexagon.de/war/complex/" 
+	xmlns:segmentsWAR="http://www.flexagon.de/war/segments/" 
+	targetNamespace="http://www.flexagon.de/war/complex/" 
+	elementFormDefault="unqualified">
+
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/war/segments/" schemaLocation="../segments/segmentsWAR.xsd"/>
+	
+	<xs:complexType name="AdressHitsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="adress" maxOccurs="unbounded" type="segmentsWAR:A003-AdressHits"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="BandwidthsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="bandwidth" maxOccurs="unbounded" type="segmentsWAR:A004-Bandwidth"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" maxOccurs="unbounded" type="segmentsWAR:A005-Product"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

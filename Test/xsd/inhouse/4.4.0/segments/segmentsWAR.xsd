@@ -1,0 +1,226 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:segmentsWAR="http://www.flexagon.de/war/segments/" 
+    targetNamespace="http://www.flexagon.de/war/segments/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+		
+	<xs:complexType name="A001-TransactionType">
+        <xs:sequence>
+            <xs:element name="businessTransactionType" type="xs:string"/>    
+            <xs:element name="businessTransaction" type="xs:string"/>
+            <xs:element name="changeIndicator" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="A001-TransactionCustomerResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWAR:A001-TransactionType">
+				<xs:sequence>
+				    <xs:element name="messagesResponseType" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="A001-TransactionCustomerRequestType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWAR:A001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="xs:string"/>
+					<!--xs:element name="messagesRequestType" type="fields:MessageCustomerRequestType"/-->
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="A001-TransactionFtboxResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWAR:A001-TransactionType">
+				<xs:sequence>
+					<!--xs:element name="messagesResponseType" type="fields:MessageFtboxResponseType"/-->
+					<xs:element name="messagesResponseType" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<xs:complexType name="A001-TransactionErrorResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWAR:A001-TransactionType">
+				<xs:sequence>
+					<!--xs:element name="messagesResponseType" type="fields:MessageErrorResponseType"/-->
+					<xs:element name="messagesResponseType" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType> 
+	
+	<!-- Adresse -->	
+    <xs:complexType name="A002-Adress">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="houseNumber" type="xs:string"/>
+            <xs:element name="houseNumberAdd" minOccurs="0" type="xs:string"/>
+            <xs:element name="postalCode" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="cityAdd" minOccurs="0" type="xs:string"/>
+            <xs:element name="KLS-Id" minOccurs="0" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>    
+    
+    <!-- Adresstreffer -->
+    <xs:complexType name="A003-AdressHits">
+        <xs:sequence>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="houseNumber" type="xs:string"/>
+            <xs:element name="houseNumberAdd" minOccurs="0" type="xs:string"/>
+            <xs:element name="postalCode" type="xs:string"/>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="cityAdd" minOccurs="0" type="xs:string"/>
+            <xs:element name="KLS-Id" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+       
+	
+    <!-- Bandbreite -->
+    <xs:complexType name="A004-Bandwidth">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="DSL-Type" type="xs:string"/>
+            <xs:element name="downstream-bandwidth" type="xs:string"/>
+            <xs:element name="upstream-bandwidth" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+    
+    
+    <!-- Produkt -->
+    <xs:complexType name="A005-Product">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="materialNumber" type="xs:string"/> 
+            <xs:element name="product" minOccurs="0" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>   
+  
+    <!-- Ergebnis -->
+    <xs:complexType name="A006-Result">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="responseKey" type="xs:string"/> 
+            <xs:element name="responseText" type="xs:string"/> 
+        </xs:sequence>
+    </xs:complexType>    
+       
+    <!-- Rufnummer -->
+    <xs:complexType name="A007-Iptn">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="cc" minOccurs="0" type="segmentsWAR:WarCcType"/>
+            <!-- ndc = national destination code = Vorwahl -->
+            <xs:element name="ndc" type="segmentsWAR:WarNdcType"/>
+            <!-- sn = subscriber number = Rufnummer -->
+            <xs:element name="sn" type="segmentsWAR:WarSnType"/>  
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <!-- Exception -->
+    <xs:complexType name="A008-Exception">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+             <xs:element name="errorCode" type="xs:string"/> 
+             <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>   
+    
+    <xs:simpleType name="WarSnType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+        E.164: 7.2.1 The ITU-T recommends that the maximum number of
+        digits of the National (Significant) Number, N(S)N, should be
+        equal to 15-n, where n is the number of digits of the country
+        code.
+
+        E.164: 7.2.2 The N(S)N is used to select the destination
+        subscriber. In selecting the destination subscriber, however,
+        it may be necessary to select a destination network. To
+        accomplish this selection, the N(S)N code field comprises a
+        National Destination Code (NDC) followed by the Subscriber s
+        Number (SN).
+
+        E.164: 7.2.4 The SN varies in length depending on the
+        requirements of the destination country.
+
+        This is a numeric string, not beginning with a '0', between 1
+        and 11 digits long.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{0,10}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="WarNdcType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        E.164: 7.2.1 The ITU-T recommends that the maximum number of
+        digits of the National (Significant) Number, N(S)N, should be
+        equal to 15-n, where n is the number of digits of the country
+        code.
+
+        E.164: 7.2.2 The N(S)N is used to select the destination
+        subscriber. In selecting the destination subscriber, however,
+        it may be necessary to select a destination network. To
+        accomplish this selection, the N(S)N code field comprises a
+        National Destination Code (NDC) followed by the Subscriber s
+        Number (SN)...
+
+        E.164: 7.2.3 The NDC field, if used, will be variable in
+        length depending upon the requirements of the destination
+        country...
+
+        This type is a numeric string, not beginning with a '0',
+        between 2 and 5 digits long.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="WarCcType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">
+
+        E.164: 7.1 Country Code for geographic areas
+        The Country Code is used to select the destination country
+        and varies in length from 1 to 3 digits.
+
+      </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]{0,2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+     
+
+</xs:schema>

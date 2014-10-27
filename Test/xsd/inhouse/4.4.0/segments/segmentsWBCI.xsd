@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:fields="http://www.flexagon.de/inhouse/fields/"
+	xmlns:segmentsWBCI="http://www.flexagon.de/wbci/segments/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="unqualified" targetNamespace="http://www.flexagon.de/wbci/segments/">
+	<!-- Imports -->
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/"
+		schemaLocation="../fields/fields.xsd" />
+
+	<xs:complexType name="F001-TransactionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				businessTransactionType:
+				VA-KUE-MRN: Kündigung mir RNP
+				VA-KUE-ORN: Kündigung ohne RNP
+				VA-RRNP: Rufnummernportierung
+				STR-AUF: Storno (Aufhebung)
+				STR-AEN: Storno(Änderung)
+				TVS-VA: Terminverschiebung
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="businessTransactionType" type="xs:string" />
+			<xs:element name="businessTransaction" type="xs:string" />
+			<xs:element name="changeIndicator" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="F001-TransactionCustomerResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWBCI:F001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="F001-TransactionCustomerRequestType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWBCI:F001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesRequestType" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="F001-TransactionFtboxResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWBCI:F001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="F001-TransactionErrorResponseType">
+		<xs:complexContent>
+			<xs:extension base="segmentsWBCI:F001-TransactionType">
+				<xs:sequence>
+					<xs:element name="messagesResponseType" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="F002-BusinessTransactionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="de">
+				businessTransactionType:
+				VA-KUE-MRN: Kündigung mir RNP
+				VA-KUE-ORN: Kündigung ohne RNP
+				VA-RRNP: Rufnummernportierung
+				STR-AUF: Storno (Aufhebung)
+				STR-AEN: Storno(Änderung)
+				TVS-VA: Terminverschiebung
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="businessTransaction" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Vorabstimmungsreferenz -->
+	<xs:complexType name="F004-PreCoordinationReferenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.V[0-9A-Z]{9}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="preCoordinationRefId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<!-- Kundenwunschtermin -->
+	<xs:complexType name="F005-CustomerDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				\d{4}-.*
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="targetDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Vorabstimmung -->
+	<xs:complexType name="F006-preCoordinationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.V[0-9A-Z]{9}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="preCoordinationId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Absender -->
+	<xs:complexType name="F007-SenderType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="carrierCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Aufnehmender -->
+	<xs:complexType name="F008-ReceivingCompanyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="carrierCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Abgebender -->
+	<xs:complexType name="F009-IssuingCompanyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="carrierCode" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<!-- Storno Reference ID -->
+	<xs:complexType name="F010-StornoReferenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.S[0-9A-Z]{9}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="stornoRefId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Aenderungs Reference ID -->
+	<xs:complexType name="F011-ChangeReferenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.S[0-9A-Z]{9}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="changeRefId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Standort -->
+	<xs:complexType name="F016-LocationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				houseNumber: \d{1,4}
+				postalCode: \d{5}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="street" type="xs:string" />
+			<xs:element name="houseNumber" type="xs:string" />
+			<xs:element name="houseNumberAdd" minOccurs="0" type="xs:string" />
+			<xs:element name="postalCode" type="xs:string" />
+			<xs:element name="city" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Projekt -->
+	<xs:complexType name="F017-ProjectType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="projectId" type="xs:string" />
+			<xs:element name="correlationId" minOccurs="0" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Portierungs Zeitfenster -->
+	<xs:complexType name="F018-ProtingTimeSlotType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				ZF1: 6 – 8 Uhr
+				ZF2: 6 – 12 Uhr (Standard)
+				ZF3: beliebiges Zeitfenster
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="timeSlot" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Einzelanschluss Rufnummer -->
+	<xs:complexType name="F019-SinglePhoneNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="cc" type="fields:CcType" />
+			<!-- ndc = national destination code = Vorwahl -->
+			<xs:element name="ndc" type="fields:NdcType" />
+			<!-- sn = subscriber number = Rufnummer -->
+			<xs:element name="sn" type="fields:SnType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- alle Rufnummern -->
+	<xs:complexType name="F020-AllNumbersType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				allNumbers:
+				true
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="allNumbers" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Rufnummernblock -->
+	<xs:complexType name="F021-NumberBlockType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				numberBlockFirst: \d{1,6}
+				numberBlockLast: \d{1,6}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numberBlockFirst" type="xs:string" />
+			<xs:element name="numberBlockLast" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Durchwahl Abfragestelle -->
+	<xs:complexType name="F022-ConnectionNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				mainNumber: \d{1,8}
+				extensionNumber: \d{1,6}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ndc" type="fields:NdcType" />
+			<xs:element name="mainNumber" type="xs:string" />
+			<xs:element name="extensionNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Meldungscode / Text -->
+	<xs:complexType name="F023-MessageCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="messageCode" type="xs:string" />
+			<xs:element name="messageText" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Anschlussidentifikation -->
+	<xs:complexType name="F024-ConnectionIdentifierType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="cc" type="fields:CcType" />
+			<!-- ndc = national destination code = Vorwahl -->
+			<xs:element name="ndc" type="fields:NdcType" />
+			<!-- sn = subscriber number = Rufnummer -->
+			<xs:element name="sn" type="fields:SnType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--Protierungskenner -->
+	<xs:complexType name="F025-PortingIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				D[0-9A-F]{3}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="portingId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Begründung -->
+	<xs:complexType name="F026-ReasonType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reason" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Firma -->
+	<xs:complexType name="F027-CompanyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				salutation: \d{1,2}
+				4: Firma
+				9: keine Anrede
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="salutation" type="xs:string" />
+			<xs:element name="companyName" type="xs:string" />
+			<xs:element name="companyNamePart2" minOccurs="0" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Person -->
+	<xs:complexType name="F028-PersonType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				salutation: \d{1,2}
+				1: Herr
+				2: Frau
+				9: keine Anrede
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="salutation" type="xs:string" />
+			<xs:element name="givenName" minOccurs="0" type="xs:string" />
+			<xs:element name="surname" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Storno ID -->
+	<xs:complexType name="F029-StornoIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.S[0-9A-Z]{9}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="stornoId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Aenderungs ID -->
+	<xs:complexType name="F030-ChangeIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.S[0-9A-Z]{9}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="changeId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- neuer Kundenwunsch Termin -->
+	<xs:complexType name="F031-NewTargetDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				\d{4}-.*
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="newTargetDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Wechsel Termin -->
+	<xs:complexType name="F033-SwitchingDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				\d{4}-.*
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="switchingDate" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Rufnummer -->
+	<xs:complexType name="F034-PhoneNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				\d{1,14}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="phonenNumber" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Adressabweichung -->
+	<xs:complexType name="F035-AdressDivergenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				houseNumber: \d{1,4}
+				postalCode: \d{5}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="street" type="xs:string" />
+			<xs:element name="houseNumber" type="xs:string" />
+			<xs:element name="houseNumberAdd" minOccurs="0" type="xs:string" />
+			<xs:element name="postalCode" type="xs:string" />
+			<xs:element name="city" type="xs:string" />
+		</xs:choice>
+	</xs:complexType>
+
+	<!-- Resourcenuebernahme -->
+	<xs:complexType name="F036-ResourceAdoptionType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				true
+				false
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="resourceAdoption" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- sicherer Hafen -->
+	<xs:complexType name="F037-SafeHavenType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				true
+				false
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="safeHaven" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Vertragsdaten -->
+	<xs:complexType name="F039-ContractNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="contractNo" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!--Line ID -->
+	<xs:complexType name="F040-LineIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9A-Z]{3}\.[0-9A-Z]{1,6}\.[0-9A-Z]{1,10}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lineId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Technology -->
+	<xs:complexType name="F041-TechnologyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				[0-9]{3} .*
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="technology" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Resource -->
+	<xs:complexType name="F042-ResourceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				lineId: [0-9A-Z]{3}\.[0-9A-Z]{1,6}\.[0-9A-Z]{1,10}
+				portingIdTNBdonating: D[0-9A-F]{3}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="contractNo" minOccurs="0" type="xs:string" />
+			<xs:element name="lineId" minOccurs="0" type="xs:string" />
+			<xs:element name="identifier" minOccurs="0" type="xs:string" />
+			<xs:element name="portingIdTNBdonating" minOccurs="0"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<!-- Rufnummernblock -->
+	<xs:complexType name="F043-NumberBlockType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				numberBlockFirst: \d{1,6}
+				numberBlockLast: \d{1,6}
+				portingId: D[0-9A-F]{3}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numberBlockFirst" type="xs:string" />
+			<xs:element name="numberBlockLast" type="xs:string" />
+			<xs:element name="portingId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Einzelanschluss Rufnummer -->
+	<xs:complexType name="F044-SinglePhoneNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				portingId: D[0-9A-F]{3}
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element minOccurs="0" name="cc" type="fields:CcType" />
+			<!-- ndc = national destination code = Vorwahl -->
+			<xs:element name="ndc" type="fields:NdcType" />
+			<!-- sn = subscriber number = Rufnummer -->
+			<xs:element name="sn" type="fields:SnType" />
+			<xs:element name="portingId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+</xs:schema>

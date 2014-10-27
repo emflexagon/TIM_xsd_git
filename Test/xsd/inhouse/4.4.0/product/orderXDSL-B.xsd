@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 47001 $ $LastChangedDate: 2014-03-13 13:04:16 +0100 (Do, 13 Mrz 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderXDSL-B="http://www.flexagon.de/wita/orderXDSL-B/" 
+	xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/wita/orderXDSL-B/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	<xs:complexType name="OrderXDSL-BType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderXDSL-B-NEU" type="orderXDSL-B:OrderXDSL-B-NEUType"/>
+			<xs:element name="orderXDSL-B-KUE-KD" type="orderXDSL-B:OrderXDSL-B-KUE-KDType"/>
+			<xs:element name="orderXDSL-B-AEN-LMAE" type="orderXDSL-B:OrderXDSL-B-AEN-LMAEType"/>
+			<xs:element name="orderXDSL-B-LAE" type="orderXDSL-B:OrderXDSL-B-LAEType"/>
+			<xs:element name="orderXDSL-B-PGW" type="orderXDSL-B:OrderXDSL-B-PGWType"/>
+			<xs:element name="orderXDSL-B-PV" type="orderXDSL-B:OrderXDSL-B-PVType"/>
+			<xs:element name="orderXDSL-B-VBL" type="orderXDSL-B:OrderXDSL-B-VBLType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderNEUType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-NEU" type="orderXDSL-B:ProductXDSL-B-NEUType"/> 
+		    	</xs:sequence>
+		    </xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderKUE-KDType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-KUE-KD" type="orderXDSL-B:ProductXDSL-B-KUE-KDType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderAEN-LMAEType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-AEN-LMAE" type="orderXDSL-B:ProductXDSL-B-AEN-LMAEType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-LAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderLAEType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-LAE" type="orderXDSL-B:ProductXDSL-B-LAEType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-PGWType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderPGWType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-PGW" type="orderXDSL-B:ProductXDSL-B-PGWType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderPVType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-PV" type="orderXDSL-B:ProductXDSL-B-PVType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderXDSL-B-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderVBLType">
+				<xs:sequence>
+		            <xs:element name="productXDSL-B-VBL" type="orderXDSL-B:ProductXDSL-B-VBLType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+
+	
+	<xs:complexType name="ProductXDSL-B-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoXDSL-B-NEU" type="orderXDSL-B:ProductInfoXDSL-B-NEU"/>
+			<xs:element name="subproductXDSL-B-NEU" minOccurs="0" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-NEUType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-NEU" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-NEU"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-NEU">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>            
+            <xs:element name="locationA" type="segmentsWITA:W010-LocationAType"/> 
+            <xs:element name="previousTenant" minOccurs="0" type="segmentsWITA:W009-PreviousTenantType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+            <xs:element name="terminationId" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="vLanId" type="segmentsWITA:W060-VLanIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductXDSL-B-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoXDSL-B-KUE-KD" type="orderXDSL-B:ProductInfoXDSL-B-KUE-KD"/>
+			<xs:element name="subproductXDSL-B-KUE-KD" minOccurs="0" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-KUE-KDType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-KUE-KD" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-KUE-KD"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-KUE-KD">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductXDSL-B-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>
+			<xs:element name="productInfoXDSL-B-AEN-LMAE" type="orderXDSL-B:ProductInfoXDSL-B-AEN-LMAE"/>
+			<xs:element name="subproductXDSL-B-AEN-LMAE" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-AEN-LMAEType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-AEN-LMAE" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-AEN-LMAE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-AEN-LMAE">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="terminationId" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="vLanId" type="segmentsWITA:W060-VLanIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductXDSL-B-LAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>
+			<xs:element name="productInfoXDSL-B-LAE" type="orderXDSL-B:ProductInfoXDSL-B-LAE"/>
+			<xs:element name="subproductXDSL-B-LAE" minOccurs="0" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-LAEType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-LAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-LAE" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-LAE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-LAE">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="terminationId" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="vLanId" type="segmentsWITA:W060-VLanIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductXDSL-B-PGWType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoXDSL-B-PGW" type="orderXDSL-B:ProductInfoXDSL-B-PGW"/>
+			<xs:element name="subproductXDSL-B-PGW" minOccurs="0" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-PGWType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-PGWType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-PGW" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-PGW"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-PGW">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="terminationId" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="vLanId" type="segmentsWITA:W060-VLanIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductXDSL-B-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoXDSL-B-PV" type="orderXDSL-B:ProductInfoXDSL-B-PV"/>
+			<xs:element name="subproductXDSL-B-PV" minOccurs="0" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-PVType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-PV" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-PV"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-PV">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="terminationId" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="vLanId" type="segmentsWITA:W060-VLanIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductXDSL-B-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoXDSL-B-VBL" type="orderXDSL-B:ProductInfoXDSL-B-VBL"/>
+			<xs:element name="subproductXDSL-B-VBL" minOccurs="0" maxOccurs="unbounded" type="orderXDSL-B:SubproductXDSL-B-VBLType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductXDSL-B-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoXDSL-B-VBL" minOccurs="0" type="orderXDSL-B:ProductInfoXDSL-B-VBL"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoXDSL-B-VBL">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockSearch" minOccurs="0" type="segmentsWITA:W017-StockSearchType"/>
+			<xs:element name="terminationId" type="segmentsWITA:W018-LineIndicationType"/>
+            <xs:element name="vLanId" type="segmentsWITA:W060-VLanIdType"/>
+			<xs:element name="numberPorting" minOccurs="0" type="segmentsWITA:NumberPortingType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

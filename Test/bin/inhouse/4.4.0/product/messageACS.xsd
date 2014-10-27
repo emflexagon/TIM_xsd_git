@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageACS="http://www.flexagon.de/acs/messageACS/"
+    xmlns:segmentsACS="http://www.flexagon.de/acs/segments/" 
+    xmlns:complexACS="http://www.flexagon.de/acs/complex/" 
+    targetNamespace="http://www.flexagon.de/acs/messageACS/"    
+    elementFormDefault="unqualified">
+    
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/acs/segments/" schemaLocation="../segments/segmentsACS.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/acs/complex/" schemaLocation="../complex/complexACS.xsd"/>
+	
+	<xs:complexType name="responseACSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="cnfGeneral" type="messageACS:cnfGeneralType"/>
+        	<xs:element name="finGeneral" type="messageACS:finGeneralType"/>
+        	<xs:element name="rejGeneral" type="messageACS:rejGeneralType"/>
+        	<xs:element name="arqGeneral" type="messageACS:arqGeneralType"/>
+        	<xs:element name="cnfPostponement" type="messageACS:cnfPostponementType"/>
+        	<xs:element name="cnfCancellation" type="messageACS:cnfCancellationType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="requestACSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="messageACS-NOT" type="messageACS:ordERMainType"/>
+        </xs:choice>
+    </xs:complexType>
+      
+    <xs:complexType name="finGeneralType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeData" minOccurs="0" maxOccurs="1" type="complexACS:CpeMsgDataType" />
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+    </xs:complexType>
+       
+    <xs:complexType name="cnfGeneralType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeData" minOccurs="0" maxOccurs="1" type="complexACS:CpeMsgDataType" />
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+	</xs:complexType>
+    
+    <xs:complexType name="cnfPostponementType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="newCheckDate" minOccurs="0" type="segmentsACS:R013-CheckDateType" />
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+	</xs:complexType>
+	    
+    <xs:complexType name="cnfCancellationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="rejGeneralType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="arqGeneralType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="missingAccountsOrIps" minOccurs="0" type="segmentsACS:R030-MissingAccountsIpsType" />
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ordERMainType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="missingAccountsOrIps" minOccurs="0" type="segmentsACS:R030-MissingAccountsIpsType" />
+			<xs:element name="cpe" type="complexACS:CpeMsgDataType" />
+			<xs:element name="replyMessage" minOccurs="1" maxOccurs="unbounded" type="segmentsACS:R012-ReplyMessageType" />
+		</xs:sequence>
+	</xs:complexType> 
+ 
+</xs:schema>

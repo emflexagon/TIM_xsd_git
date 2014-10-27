@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 53059 $ $LastChangedDate: 2014-07-29 09:42:41 +0200 (Di, 29 Jul 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageFTTH="http://www.flexagon.de/wita/messageFTTH/"
+    xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/" 
+    targetNamespace="http://www.flexagon.de/wita/messageFTTH/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/message/" schemaLocation="message.xsd"/>
+		
+	<xs:complexType name="MessageFTTHType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageFTTH-QEB" type="messageFTTH:MessageFTTH-QEBType"/>
+            <xs:element name="messageFTTH-ABM" type="messageFTTH:MessageFTTH-ABMType"/>
+            <xs:element name="messageFTTH-ERLM" type="messageFTTH:MessageFTTH-ERLMType"/>
+            <xs:element name="messageFTTH-ENTM" type="messageFTTH:MessageFTTH-ENTMType"/>
+            <xs:element name="messageFTTH-VZM" type="messageFTTH:MessageFTTH-VZMType"/>
+            <xs:element name="messageFTTH-TAM" type="messageFTTH:MessageFTTH-TAMType"/>
+            <xs:element name="messageFTTH-MTAM" type="messageFTTH:MessageFTTH-MTAMType"/>
+            <xs:element name="messageFTTH-ABBM" type="messageFTTH:MessageFTTH-ABBMType"/>           
+            <xs:element name="messageFTTH-ABM-PV" type="messageFTTH:MessageFTTH-ABM-PVType"/>
+            <xs:element name="messageFTTH-ERLM-PV" type="messageFTTH:MessageFTTH-ERLM-PVType"/>
+            <xs:element name="messageFTTH-ENTM-PV" type="messageFTTH:MessageFTTH-ENTM-PVType"/>
+            <xs:element name="messageFTTH-ABBM-PV" type="messageFTTH:MessageFTTH-ABBM-PVType"/>
+            <xs:element name="messageFTTH-VZM-PV" type="messageFTTH:MessageFTTH-VZM-PVType"/>
+        </xs:choice>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageFTTHRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageFTTH-AKM-PV" type="messageFTTH:MessageFTTH-AKM-PVType"/>
+			<xs:element name="messageFTTH-ERLM" type="messageFTTH:MessageFTTH-ERLMType"/> 
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTHResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageFTTH-RUEM-PV" type="messageFTTH:MessageFTTH-RUEM-PVType"/>
+        </xs:choice>
+    </xs:complexType> 
+    
+    
+    
+    
+    <xs:complexType name="MessageFTTH-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageQEBType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeQEB" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-QEBType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+     
+	<xs:complexType name="MessageFTTH-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="message:MessageABMType">        
+		        <xs:sequence>
+		        	<xs:element name="dtagContractNumber" type="segmentsWITA:W006-DtagContractNumberType"/>
+		        	<xs:element name="numberPorting" minOccurs="0" type="segmentsWITA:MessagePortingNumberDataType"/>
+		        	<xs:element name="productFTTH-ABM" maxOccurs="unbounded" type="messageFTTH:ProductFTTH-ABMType"/>
+		            <xs:element name="messageCodeABM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ABMType"/>
+		            <xs:element name="ipTvUserPin" type="segmentsWITA:W062-IpTvUserpinType" maxOccurs="1" minOccurs="0"/>  
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>	  
+
+    <xs:complexType name="MessageFTTH-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLMType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-ERLM" maxOccurs="unbounded" type="messageFTTH:ProductFTTH-ERLMType"/>
+                	<xs:element name="messageCodeERLM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ERLMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ERLM-KType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLM-KType">        
+                <xs:sequence>
+                    <xs:element name="messageCodeERLM-K" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ERLM-KType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageENTMType">        
+                <xs:sequence>
+                	<xs:element name="productFTTH-ENTM" maxOccurs="unbounded" type="messageFTTH:ProductFTTH-ENTMType"/>
+                	<xs:element name="messageCodeENTM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ENTMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageVZMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeVZM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-VZMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABBMType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeABBM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ABBMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageFTTH-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageTAMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeTAM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-TAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageFTTH-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageMTAMType">        
+				<xs:sequence>       
+					<xs:element name="messageCodeMTAM" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-MTAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+
+    <xs:complexType name="MessageFTTH-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageAKM-PVType">        
+                <xs:sequence>
+                	<xs:element name="numberPorting" minOccurs="0" type="segmentsWITA:MessagePortingNumberDataType"/>
+        			<xs:element name="messageCodeAKM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-AKM-PVType"/>
+        			<xs:element name="negotiationId" minOccurs="0" type="segmentsWITA:W061-NegotiationIdType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageRUEM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeRUEM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-RUEM-PVType" />
+                	<xs:element name="negotiationId" type="segmentsWITA:W061-NegotiationIdType" maxOccurs="1" minOccurs="0"></xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeABM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ABM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERLM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeERLM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ERLM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageENTM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeENTM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ENTM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTH-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageABBM-PVType">        
+                <xs:sequence>
+                	<xs:element name="messageCodeABBM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-ABBM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageFTTH-VZM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageVZM-PVType">        
+                <xs:sequence>
+                	
+                	<xs:element name="messageCodeVZM-PV" maxOccurs="unbounded" type="messageFTTH:MessageCodeFTTH-VZM-PVType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductFTTH-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductFTTH-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="ProductFTTH-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>  
+            <xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/> 
+        </xs:sequence>
+    </xs:complexType> 
+   
+    
+        
+     
+     <xs:complexType name="MessageCodeFTTH-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="contactTelekom" minOccurs="0" type="segmentsWITA:W008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeFTTH-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="contactTelekom" minOccurs="0" type="segmentsWITA:W008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeFTTH-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+            <xs:element name="closingDateOpenOrder" minOccurs="0" type="segmentsWITA:W028-TargetDateType"/>
+            <xs:element name="alternativeProduct" minOccurs="0" type="segmentsWITA:W046-AnternativProductType"/>
+            <xs:element name="locationCorrection" minOccurs="0" type="segmentsWITA:W031-LocationCorrectionType"/>
+            <xs:element name="errorOrderNumber" minOccurs="0" type="segmentsWITA:W054-ErrorOrderNumberType"/>  
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeFTTH-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeFTTH-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTH-VZM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeFTTH-ERLM-KType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsWITA:W038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>     
+     
+</xs:schema>

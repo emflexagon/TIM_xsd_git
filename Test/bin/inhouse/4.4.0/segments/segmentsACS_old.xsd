@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:segmentsACS="http://www.flexagon.de/acs/segments/"
+	xmlns:fieldsACS="http://www.flexagon.de/acs/fields/" 
+	xmlns:fields="http://www.flexagon.de/inhouse/fields/"
+	targetNamespace="http://www.flexagon.de/acs/segments/"
+	elementFormDefault="unqualified">
+	
+	<!-- Imports -->
+	<xs:import namespace="http://www.flexagon.de/acs/fields/"
+		schemaLocation="../fields/fieldsACS.xsd" />
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/"
+		schemaLocation="../fields/fields.xsd" />
+
+
+
+	<!-- Delivery Address -->
+	<xs:complexType name="C002-DeliveryAddress">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!-- TODO make names/company XOR -->
+			<xs:element name="firstName" minOccurs="0" type="xs:string" />
+			<xs:element name="lastName" minOccurs="0" type="xs:string" />
+			<xs:element name="companyName" minOccurs="0" type="xs:string" />
+			<xs:element name="street" type="xs:string" />
+			<xs:element name="houseNumber" type="xs:string" />
+			<xs:element name="houseNumberSuffix" minOccurs="0" type="xs:string" />
+			<xs:element name="town" type="xs:string" />
+			<xs:element name="townDistrict" minOccurs="0" type="xs:string" />
+			<xs:element name="postCode" type="fieldsACS:PostCodeGermanyType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="C003-DeliveryDate">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="desiredDeliveryDate" minOccurs="0"
+				type="fieldsACS:DateType" />
+			<xs:element name="trackedDeliveryDate" minOccurs="0"
+				type="fieldsACS:DateType" />
+			<xs:element name="manualDeliveryDate" minOccurs="0"
+				type="fieldsACS:DateType" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="C004-DeliveryRemark">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="remark" type="fieldsACS:DateType" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

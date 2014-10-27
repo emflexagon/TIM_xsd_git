@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 44672 $ $LastChangedDate: 2014-02-05 08:55:11 +0100 (Mi, 05 Feb 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageWBCI="http://www.flexagon.de/wbci/messageWBCI/"
+    xmlns:segmentsWBCI="http://www.flexagon.de/wbci/segments/" 
+    targetNamespace="http://www.flexagon.de/wbci/messageWBCI/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wbci/segments/" schemaLocation="../segments/segmentsWBCI.xsd"/>
+		
+	<xs:complexType name="MessageWBCIType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageWBCI-ABBM" type="messageWBCI:MessageWBCI-ABBMType"/>
+            <xs:element name="messageWBCI-ERLM" type="messageWBCI:MessageWBCI-ERLMType"/>
+            <xs:element name="messageWBCI-TEQ" type="messageWBCI:MessageWBCI-TEQType"/>
+            <xs:element name="messageWBCI-RUEM-VA" type="messageWBCI:MessageWBCI-RUEM-VAType"/>
+            <xs:element name="messageWBCI-ABBM-TR" type="messageWBCI:MessageWBCI-ABBM-TRType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageWBCIRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="messageWBCI-AKM-TR" type="messageWBCI:MessageWBCI-AKM-TRType"/>  
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageWBCIResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="messageWBCI-ABBM" type="messageWBCI:MessageWBCI-ABBMType"/>
+            <xs:element name="messageWBCI-ERLM" type="messageWBCI:MessageWBCI-ERLMType"/>
+            <xs:element name="messageWBCI-RUEM-VA" type="messageWBCI:MessageWBCI-RUEM-VAType"/> 
+             <xs:element name="messageWBCI-ABBM-TR" type="messageWBCI:MessageWBCI-ABBM-TRType"/>      
+        </xs:choice>
+    </xs:complexType> 
+     
+    <xs:complexType name="MessageWBCI2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="sender" type="segmentsWBCI:F007-SenderType"/>
+			<xs:element name="preCoordinationRef" type="segmentsWBCI:F004-PreCoordinationReferenceType"/>
+			<xs:element name="receivingCompany" type="segmentsWBCI:F008-ReceivingCompanyType"/>
+            <xs:element name="issuingCompany" type="segmentsWBCI:F009-IssuingCompanyType"/>
+			<xs:element name="businessTransaction" type="segmentsWBCI:F002-BusinessTransactionType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageWBCI3Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="sender" type="segmentsWBCI:F007-SenderType"/>
+			<xs:element name="preCoordinationRef" type="segmentsWBCI:F004-PreCoordinationReferenceType"/>
+        </xs:sequence>
+    </xs:complexType>   
+     
+     <xs:complexType name="MessageWBCI-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageWBCI:MessageWBCI2Type">        
+                <xs:sequence>
+                	<xs:element name="position" minOccurs="1" maxOccurs="99" type="messageWBCI:MessageCodeWBCI-ABBMType"/>
+                	<xs:element name="switchingDate" minOccurs="0" type="segmentsWBCI:F033-SwitchingDateType"/>
+                	<xs:element name="stornoIdRef" minOccurs="0" type="segmentsWBCI:F010-StornoReferenceType"/>
+                	<xs:element name="changeIdRef" minOccurs="0" type="segmentsWBCI:F011-ChangeReferenceType"/>
+                	<xs:element name="reason" minOccurs="0" type="segmentsWBCI:F026-ReasonType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+	<xs:complexType name="MessageWBCI-ABBM-TRType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="messageWBCI:MessageWBCI2Type">        
+		        <xs:sequence>
+		        	<xs:element name="position" minOccurs="1" maxOccurs="99" type="messageWBCI:MessageCodeWBCI-ABBM-TRType"/>
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageWBCI-AKM-TRType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageWBCI:MessageWBCI2Type">        
+                <xs:sequence>
+                	<xs:element name="position" minOccurs="1" maxOccurs="99" type="messageWBCI:MessageCodeWBCI-AKM-TRType"/>
+                	<xs:element name="resourceAdoption" type="segmentsWBCI:F036-ResourceAdoptionType"/>
+                	<xs:element name="lineAdoption" minOccurs="0" maxOccurs="99" type="messageWBCI:LineAdoptionType"/>
+                	<xs:element name="safeHaven" type="segmentsWBCI:F037-SafeHavenType"/>
+                	<xs:element name="portingIdreceiving" minOccurs="0" type="segmentsWBCI:F025-PortingIdType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageWBCI-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageWBCI:MessageWBCI2Type">        
+                <xs:sequence>
+                    <xs:element name="position" minOccurs="1" maxOccurs="99" type="messageWBCI:MessageCodeWBCI-ERLMType"/>
+                    <xs:element name="switchingDate" minOccurs="0" type="segmentsWBCI:F033-SwitchingDateType"/>
+                	<xs:element name="stornoIdRef" minOccurs="0" type="segmentsWBCI:F010-StornoReferenceType"/>
+                	<xs:element name="changeIdRef" minOccurs="0" type="segmentsWBCI:F011-ChangeReferenceType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageWBCI-RUEM-VAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageWBCI:MessageWBCI2Type">        
+                <xs:sequence>
+                	<xs:element name="position" minOccurs="1" maxOccurs="99" type="messageWBCI:MessageCodeWBCI-RUEM-VAType"/>
+                	<xs:element name="resource" minOccurs="0" maxOccurs="99" type="segmentsWBCI:F042-ResourceType"/>
+                	<xs:element name="technology" minOccurs="0" type="segmentsWBCI:F041-TechnologyType"/>
+                	<xs:element name="switchingDate" type="segmentsWBCI:F033-SwitchingDateType"/>
+                	<xs:element name="numberPorting" minOccurs="0" type="messageWBCI:NumberPortingType"/> 
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+     
+    <xs:complexType name="MessageWBCI-TEQType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageWBCI:MessageWBCI3Type">        
+                <xs:sequence>
+                	<xs:element name="position" minOccurs="1" maxOccurs="99" type="messageWBCI:MessageCodeWBCI-TEQType"/>
+                	<xs:element name="stornoIdRef" minOccurs="0" type="segmentsWBCI:F010-StornoReferenceType"/>
+                	<xs:element name="changeIdRef" minOccurs="0" type="segmentsWBCI:F011-ChangeReferenceType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+        
+     <xs:complexType name="MessageCodeWBCI-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="message" type="segmentsWBCI:F023-MessageCodeType"/>
+            <xs:element name="numbers" minOccurs="0" maxOccurs="10" type="segmentsWBCI:F034-PhoneNumberType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MessageCodeWBCI-ABBM-TRType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="message" type="segmentsWBCI:F023-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeWBCI-AKM-TRType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="message" type="segmentsWBCI:F023-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeWBCI-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="message" type="segmentsWBCI:F023-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeWBCI-RUEM-VAType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+           <xs:element name="message" type="segmentsWBCI:F023-MessageCodeType"/>
+           <xs:element name="adressDivergence" minOccurs="0" type="segmentsWBCI:F035-AdressDivergenceType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeWBCI-TEQType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+           <xs:element name="message" type="segmentsWBCI:F023-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="LineAdoptionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+           <xs:element name="contractNumber" type="segmentsWBCI:F039-ContractNumberType"/>
+           <xs:element name="lineId" type="segmentsWBCI:F040-LineIdType"/>
+        </xs:choice>
+    </xs:complexType>  
+
+	<xs:complexType name="NumberPortingType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="trunkConnection" type="messageWBCI:NumberBlockPortingType"/>
+			<xs:element name="singleConnection" type="messageWBCI:SingleNumberPortingType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="NumberBlockPortingType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="connectionNumber" type="segmentsWBCI:F022-ConnectionNumberType"/>
+			<xs:element name="numberBlock" minOccurs="1" maxOccurs="5" type="segmentsWBCI:F043-NumberBlockType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SingleNumberPortingType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SingleNumber" minOccurs="1" maxOccurs="10" type="segmentsWBCI:F044-SinglePhoneNumberType"/>
+		</xs:sequence>
+	</xs:complexType>
+    
+</xs:schema>

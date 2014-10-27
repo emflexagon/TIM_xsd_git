@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageESEP="http://www.flexagon.de/esep/messageESEP/"
+    xmlns:segmentsESEP="http://www.flexagon.de/esep/segments/" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/" 
+    targetNamespace="http://www.flexagon.de/esep/messageESEP/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/esep/segments/" schemaLocation="../segments/segmentsESEP.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/message/" schemaLocation="message.xsd"/>
+		
+	<xs:complexType name="MessageESEPType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageESEP-TAMS" type="messageESEP:MessageESEP-TAMSType"/>
+            <xs:element name="messageESEP-TAME" type="messageESEP:MessageESEP-TAMEType"/>
+            <xs:element name="messageESEP-ZM" type="messageESEP:MessageESEP-ZMType"/>
+            <xs:element name="messageESEP-ESM" type="messageESEP:MessageESEP-ESMType"/>
+            <xs:element name="messageESEP-ERR" type="messageESEP:MessageESEP-ERRType"/>
+        </xs:choice>
+    </xs:complexType>  
+
+    
+    <xs:complexType name="MessageESEPResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageESEP-TER" type="messageESEP:MessageESEP-TERType"/>       
+        </xs:choice>
+    </xs:complexType> 
+    
+     
+     <xs:complexType name="MessageESEP-TAMSType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageTAType">        
+                <xs:sequence>
+                	<xs:element name="carrier" type="segmentsESEP:E006-CarrierType"/>
+                	<xs:element name="TCOM" type="segmentsESEP:E007-TCOMType"/>
+                	<xs:element name="endCustomer" type="segmentsESEP:E008-EndCustomerType"/>
+                	<xs:element name="baseData" type="segmentsESEP:E009-BaseDataNewDateStandartType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+	<xs:complexType name="MessageESEP-TAMEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="message:MessageTAType">        
+		        <xs:sequence>
+		        	<xs:element name="carrier" type="segmentsESEP:E001-CarrierType"/>
+		        	<xs:element name="endCustomer" type="segmentsESEP:E010-EndCustomerType"/>
+        			<xs:element name="Date" type="segmentsESEP:E011-DateType"/>
+        			<xs:element name="baseData" type="segmentsESEP:E012-BaseDataNewDateExpressType"/>
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageESEP-ZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageZMType">        
+                <xs:sequence>
+                	<xs:element name="baseData" type="segmentsESEP:E013-BaseDataIntermediateMessageType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageESEP-ESMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageESMType">        
+                <xs:sequence>
+                    <xs:element name="baseData" type="segmentsESEP:E015-BaseDataEntstoermeldungType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+
+    <xs:complexType name="MessageESEP-ERRType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageERRType">        
+				<xs:sequence>       
+					<xs:element name="baseData" type="segmentsESEP:E018-ErrorMessageType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageESEP-TERType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageTERType">        
+                <xs:sequence>
+                	<xs:element name="baseData" type="segmentsESEP:E014-BaseDataDateTransactionType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+</xs:schema>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:segmentsTIM="http://www.flexagon.de/tim/segments/"
+	targetNamespace="http://www.flexagon.de/tim/segments/"
+	elementFormDefault="unqualified" >
+		
+	<xs:complexType name="I001-HeaderType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="businessTransaction" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="I002-AuthenticationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="userName" type="xs:string" />
+			<xs:element name="password" type="xs:string" />
+			<xs:element name="authentication" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="locale" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="timeZone" minOccurs="0" maxOccurs="1" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="I003-TicketIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ticketId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="I004-IdsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="transactionId" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="ticketId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="I005-TransaktionIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="transactionId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="I006-CustomerTicketIdType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="custTicketId" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="I007-GrunddatenType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="customerService" type="xs:string" />
+			<xs:element name="impactedEntity" type="xs:string" />
+			<xs:element name="statusChange" type="segmentsTIM:TimStatusType" />
+			<xs:element name="priority" type="segmentsTIM:TimPriorityType" />
+			<xs:element name="shortDescription" type="xs:string" />
+			<xs:element name="serviceAffection" type="segmentsTIM:TimServiceAffectionType" />
+			<xs:element name="express" minOccurs="0" maxOccurs="1" type="segmentsTIM:TimBooleanType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="I008-GrunddatenType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="statusChange" minOccurs="0" maxOccurs="1" type="segmentsTIM:TimStatusType" />
+			<xs:element name="priority" minOccurs="0" maxOccurs="1" type="segmentsTIM:TimPriorityType" />
+			<xs:element name="shortDescription" minOccurs="0" maxOccurs="1" type="xs:string" />			
+			<xs:element name="serviceAffection" minOccurs="0" maxOccurs="1" type="segmentsTIM:TimServiceAffectionType" />
+			<xs:element name="details" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="express" minOccurs="0" maxOccurs="1" type="segmentsTIM:TimBooleanType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="I009-GrunddatenType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="diagnosis" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="createTime" type="xs:dateTime" />
+			<xs:element name="problemStart" type="xs:dateTime" />
+			<xs:element name="details" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="escalationLevel" type="segmentsTIM:TimEscalationLevelType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	<xs:complexType name="I010-GrunddatenType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="diagnosis" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="solution" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="createTime" type="xs:dateTime" />
+			<xs:element name="closeTime" minOccurs="0" maxOccurs="1" type="xs:dateTime" />
+			<xs:element name="problemStart" minOccurs="0" maxOccurs="1" type="xs:dateTime" />
+			<xs:element name="problemEnd" minOccurs="0" maxOccurs="1" type="xs:dateTime" />
+			<xs:element name="escalationLevel" type="segmentsTIM:TimEscalationLevelType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="I011-AttachmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="number" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="name" minOccurs="0" maxOccurs="1" type="xs:string" />
+			<xs:element name="origSize" minOccurs="0" maxOccurs="1" type="xs:integer" />
+			<xs:element name="data" minOccurs="0" maxOccurs="1" type="xs:string" />		
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="I012-AttachmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="number" type="xs:string" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="origSize" type="xs:integer" />
+			<xs:element name="data" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="I013-DetailsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="problemStart" minOccurs="0" maxOccurs="1" type="xs:dateTime" />
+			<xs:element name="details" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="I014-StatusType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="aktStatus" type="segmentsTIM:TimAktStatusType" />
+			<xs:element name="lastModified" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="I015-ErrorType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="errorMessage" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:simpleType name="TimBooleanType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">          
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TimServiceAffectionType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="indeterminable"/>
+            <xs:enumeration value="total outage"/>
+            <xs:enumeration value="minor or performance problem"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="TimPriorityType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Medium"/>
+            <xs:enumeration value="High"/>
+            <xs:enumeration value="Urgent"/>
+        </xs:restriction>
+    </xs:simpleType>
+        
+    <xs:simpleType name="TimStatusType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">               
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="create"/>
+            <xs:enumeration value="dispatch"/>
+            <xs:enumeration value="resolve"/>
+            <xs:enumeration value="close"/>
+            <xs:enumeration value="reopen"/>
+            <xs:enumeration value="reject"/>
+        </xs:restriction>
+    </xs:simpleType>    
+
+	<xs:simpleType name="TimAktStatusType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Open Customer"/>
+            <xs:enumeration value="Open Telefonica"/>
+            <xs:enumeration value="Resolved"/>
+            <xs:enumeration value="Closed"/>
+            <xs:enumeration value="Cancelled"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TimEscalationLevelType">
+    	<xs:annotation>
+            <xs:documentation xml:lang="en">             
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+        
+</xs:schema>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderESEP="http://www.flexagon.de/esep/orderESEP/" 
+	xmlns:segmentsESEP="http://www.flexagon.de/esep/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/esep/orderESEP/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/esep/segments/" schemaLocation="../segments/segmentsESEP.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	<xs:complexType name="OrderESEPType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderESEP-Standard" type="orderESEP:OrderESEP-StandardType"/>
+			<xs:element name="orderESEP-Express" type="orderESEP:OrderESEP-ExpressType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderESEP-StandardType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderAUFType">
+				<xs:sequence>
+		              <xs:element name="baseData" type="segmentsESEP:E004-BaseDataOrderStandardType"/>
+		    	</xs:sequence>
+		    </xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderESEP-ExpressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderAUFType">
+				<xs:sequence>
+		            <xs:element name="baseData" type="segmentsESEP:E005-BaseDataOrderExpressType"/>
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

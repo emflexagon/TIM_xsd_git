@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageFTTX="http://www.flexagon.de/spri/messageFTTX/"
+    xmlns:segmentsFTTX="http://www.flexagon.de/spri/segments/" 
+    xmlns:message="http://www.flexagon.de/inhouse/message/" 
+    targetNamespace="http://www.flexagon.de/spri/messageFTTX/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/spri/segments/" schemaLocation="../segments/segmentsFTTX.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/message/" schemaLocation="message.xsd"/>
+		
+	<xs:complexType name="MessageFTTX2Type">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageFTTX-QEB" type="messageFTTX:MessageFTTX-QEBType"/>
+            <xs:element name="messageFTTX-ABM" type="messageFTTX:MessageFTTX-ABMType"/>
+            <xs:element name="messageFTTX-ERLM" type="messageFTTX:MessageFTTX-ERLMType"/>
+            <xs:element name="messageFTTX-ENTM" type="messageFTTX:MessageFTTX-ENTMType"/>
+            <xs:element name="messageFTTX-VZM" type="messageFTTX:MessageFTTX-VZMType"/>
+            <xs:element name="messageFTTX-TAM" type="messageFTTX:MessageFTTX-TAMType"/>
+            <xs:element name="messageFTTX-ABBM" type="messageFTTX:MessageFTTX-ABBMType"/>   
+            <xs:element name="messageFTTX-ZWM-LE" type="messageFTTX:MessageFTTX-ZWM-LEType"/>
+            <xs:element name="messageFTTX-TBK-LE" type="messageFTTX:MessageFTTX-TBK-LEType"/>
+            <xs:element name="messageFTTX-MTAM" type="messageFTTX:MessageFTTX-MTAMType"/>
+            <xs:element name="messageFTTX-ABM-PV" type="messageFTTX:MessageFTTX-ABM-PVType"/>
+            <xs:element name="messageFTTX-ERLM-PV" type="messageFTTX:MessageFTTX-ERLM-PVType"/>
+            <xs:element name="messageFTTX-ENTM-PV" type="messageFTTX:MessageFTTX-ENTM-PVType"/>
+            <xs:element name="messageFTTX-ABBM-PV" type="messageFTTX:MessageFTTX-ABBM-PVType"/>
+        </xs:choice>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageFTTXRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageFTTX-AKM-PV" type="messageFTTX:MessageFTTX-AKM-PVType"/>
+            <xs:element name="messageFTTX-KDLE" type="messageFTTX:MessageFTTX-KDLEType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTXResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageFTTX-RUEM-PV" type="messageFTTX:MessageFTTX-RUEM-PVType"/> 
+            <xs:element name="messageFTTX-ZWM-AG" type="messageFTTX:MessageFTTX-ZWM-AGType"/>   
+            <xs:element name="messageFTTX-TBK-AG" type="messageFTTX:MessageFTTX-TBK-AGType"/>  
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTX-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="derangementNumber" minOccurs="0" type="segmentsFTTX:S056-DerangementNumberType"/>
+					<xs:element name="messageCodeQEB" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-QEBType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>  
+    	
+	<xs:complexType name="MessageFTTX-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+	        <xs:extension base="message:MessageFTTXType">        
+		        <xs:sequence>
+		            <xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/> 
+                    <xs:element name="authoritativeTargetDate" type="segmentsFTTX:S028-TargetDateType"/>
+                    <xs:element name="connection" type="segmentsFTTX:S045-ConnectionType"/>
+                    <xs:element name="currentProvider" minOccurs="0" type="segmentsFTTX:S066-CurrentProviderType"/>
+		            <xs:element name="messageCodeABM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ABMType"/> 
+		        </xs:sequence>
+	        </xs:extension>
+	    </xs:complexContent>
+    </xs:complexType>	
+
+    <xs:complexType name="MessageFTTX-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+                <xs:sequence>
+                	<xs:element name="providerContractNumber" minOccurs="0" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+                	<xs:element name="authoritativeTargetDate" type="segmentsFTTX:S028-TargetDateType"/>
+                	<xs:element name="derangementResult" minOccurs="0" type="segmentsFTTX:S059-DerangementResultType"/>
+                	<xs:element name="attachment" minOccurs="0" type="segmentsFTTX:S007-AttachmentType"/>
+                	<xs:element name="messageCodeERLM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ERLMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>     
+
+    <xs:complexType name="MessageFTTX-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+                <xs:sequence>
+                	<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+                	<xs:element name="authoritativeTargetDate" type="segmentsFTTX:S028-TargetDateType"/>
+                	<xs:element name="attachment" minOccurs="0" maxOccurs="99" type="segmentsFTTX:S007-AttachmentType"/>
+                	<xs:element name="messageCodeENTM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ENTMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTX-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType"> 
+            	<xs:sequence> 
+            		<xs:element name="providerContractNumber" minOccurs="0" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+            		<xs:element name="authoritativeTargetDate" minOccurs="0" type="segmentsFTTX:S028-TargetDateType"/>
+            		<xs:element name="reason" minOccurs="0" type="segmentsFTTX:S060-ReasonType"/> 
+					<xs:element name="messageCodeVZM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-VZMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>   
+
+    <xs:complexType name="MessageFTTX-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+                <xs:sequence>
+            		<xs:element name="providerContractNumber" minOccurs="0" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+            		<xs:element name="authoritativeTargetDate" minOccurs="0" type="segmentsFTTX:S028-TargetDateType"/>                	
+                	<xs:element name="currentProvider" minOccurs="0" type="segmentsFTTX:S066-CurrentProviderType"/>
+                	<xs:element name="messageCodeABBM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ABBMType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageFTTX-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="messageCodeTAM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-TAMType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageFTTX-ZWM-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="message" type="segmentsFTTX:S061-MessageType"/>
+                	<xs:element name="contact" minOccurs="0" type="segmentsFTTX:S008-ContactType"/>
+                	<xs:element name="attachment" minOccurs="0" maxOccurs="99" type="segmentsFTTX:S007-AttachmentType"/>
+                	<xs:element name="messageCodeZWM-AG" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ZWM-AGType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTX-ZWM-LEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="message" type="segmentsFTTX:S061-MessageType"/>
+                	<xs:element name="contact" minOccurs="0" type="segmentsFTTX:S008-ContactType"/>
+                	<xs:element name="attachment" minOccurs="0" maxOccurs="99" type="segmentsFTTX:S007-AttachmentType"/>
+                	<xs:element name="shippingONT" type="segmentsFTTX:S067-ShippingONTType"/>
+                	<xs:element name="messageCodeZWM-LE" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ZWM-LEType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTX-TBK-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="Termin" type="segmentsFTTX:S062-TerminType"/>
+					<xs:element name="messageCodeTBK-AG" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-TBK-AGType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTX-TBK-LEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="Termin" type="segmentsFTTX:S062-TerminType"/>
+					<xs:element name="messageCodeTBK-LE" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-TBK-LEType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTX-KDLEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+                	<xs:element name="deactivationDate" type="segmentsFTTX:S028-TargetDateType"/>
+                	<xs:element name="disconnectionReason" minOccurs="0" type="segmentsFTTX:S063-DisconnectionReasonType"/>
+					<xs:element name="messageCodeKDLE" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-KDLEType"/>
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageFTTX-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>				
+					<xs:element name="messageCodeMTAM" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-MTAMType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageFTTX-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="attachment" minOccurs="0" type="segmentsFTTX:S007-AttachmentType"/>
+					<xs:element name="lineId" type="segmentsFTTX:S065-LineIdType"/>
+					<xs:element name="receivingProvider" type="segmentsFTTX:S069-ReceivingProviderType"/>
+					<xs:element name="coordinationId" minOccurs="0" type="segmentsFTTX:S070-CoordinationIdType"/>
+					<xs:element name="messageCodeAKM-PV" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-AKM-PVType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+     
+    <xs:complexType name="MessageFTTX-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="lineId" type="segmentsFTTX:S065-LineIdType"/>
+					<xs:element name="coordinationId" minOccurs="0" type="segmentsFTTX:S070-CoordinationIdType"/>
+					<xs:element name="currentProvider" minOccurs="0" type="segmentsFTTX:S066-CurrentProviderType"/>
+					<xs:element name="messageCodeRUEM-PV" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-RUEM-PVType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  	
+  	<xs:complexType name="MessageFTTX-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="connection" type="segmentsFTTX:S065-LineIdType"/>
+					<xs:element name="changeAcceptance" type="segmentsFTTX:S068-ChangeAcceptanceType"/>
+					<xs:element name="messageCodeABM-PV" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ABM-PVType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  	
+  	<xs:complexType name="MessageFTTX-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="authoritativeTargetDate" type="segmentsFTTX:S028-TargetDateType"/>	
+					<xs:element name="messageCodeERLM-PV" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ERLM-PVType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  	
+  	<xs:complexType name="MessageFTTX-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" type="segmentsFTTX:S006-ProviderContractNumberType"/>
+					<xs:element name="authoritativeTargetDate" type="segmentsFTTX:S028-TargetDateType"/>		
+					<xs:element name="messageCodeENTM-PV" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ENTM-PVType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  	
+  	<xs:complexType name="MessageFTTX-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="message:MessageFTTXType">        
+				<xs:sequence>       
+					<xs:element name="providerContractNumber" minOccurs="0" type="segmentsFTTX:S006-ProviderContractNumberType"/>			
+					<xs:element name="messageCodeABBM-PV" maxOccurs="unbounded" type="messageFTTX:MessageCodeFTTX-ABBM-PVType"/>					
+				</xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+  	
+    <xs:complexType name="MessageCodeFTTX-QEBType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+            <xs:element name="contactProvider" minOccurs="0" type="segmentsFTTX:S008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType>
+      
+    <xs:complexType name="MessageCodeFTTX-ABMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+            <xs:element name="contactProvider" minOccurs="0" type="segmentsFTTX:S008-ContactType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeFTTX-ERLMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-ENTMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+      
+    <xs:complexType name="MessageCodeFTTX-ABBMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>  
+    
+    <xs:complexType name="MessageCodeFTTX-VZMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-TAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeFTTX-ZWM-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+			<xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-ZWM-LEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+			<xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-TBK-AGType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+			<xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-TBK-LEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+			<xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-KDLEType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeFTTX-MTAMType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-AKM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-RUEM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="MessageCodeFTTX-ABM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-ERLM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-ENTM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageCodeFTTX-ABBM-PVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="messageCode" type="segmentsFTTX:S038-MessageCodeType"/>
+        </xs:sequence>
+    </xs:complexType>
+        
+</xs:schema>

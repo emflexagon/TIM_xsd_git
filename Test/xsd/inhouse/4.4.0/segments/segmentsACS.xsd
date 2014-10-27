@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:fields="http://www.flexagon.de/inhouse/fields/"
+	xmlns:fieldsACS="http://www.flexagon.de/acs/fields/"
+	xmlns:segmentsACS="http://www.flexagon.de/acs/segments/"
+	targetNamespace="http://www.flexagon.de/acs/segments/"
+	elementFormDefault="unqualified" >
+	
+	<!-- Imports -->
+	<xs:import namespace="http://www.flexagon.de/inhouse/fields/"
+		schemaLocation="../fields/fields.xsd" />		
+	<xs:import namespace="http://www.flexagon.de/acs/fields/"
+		schemaLocation="../fields/fieldsACS.xsd" />
+		
+	<xs:complexType name="R001-MetaDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="witaFtboxOrderNumber" minOccurs="0" maxOccurs="1" type="fieldsACS:Number10xType" />
+			<xs:element name="witaContractNumber" minOccurs="0" maxOccurs="1" type="fieldsACS:String10Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R002-DSLDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+				dsl account information
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dslAccount" type="fieldsACS:String50Type" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="CpeDetailBaseType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeID" type="fieldsACS:Number10Type" />
+			<xs:element name="cpeType" type="fieldsACS:String50Type" />
+			<xs:element name="connectionType" type="fieldsACS:String20Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R021-CpeACDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="segmentsACS:CpeDetailBaseType">
+				<xs:sequence>
+					<xs:element name="cpeMacAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:MACAdressType"/>
+					<xs:element name="onSiteInstallation" type="fieldsACS:ynType" />
+					<xs:element name="cpeAdminAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeRemoteAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeUserId" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="lanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="lanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="wanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="wanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="takeIpFromList" type="fieldsACS:FlagType" />
+					<xs:element name="dslAccount" minOccurs="0" type="fieldsACS:String50Type" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<xs:complexType name="R022-CpeRCDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="segmentsACS:CpeDetailBaseType">
+				<xs:sequence>
+					<xs:element name="cpeMacAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:MACAdressType"/>
+					<xs:element name="oldCpeMacAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:MACAdressType" />
+					<xs:element name="onSiteInstallation" type="fieldsACS:ynType" />
+					<xs:element name="cpeAdminAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeRemoteAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeUserId" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="R023-CpeCCDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="segmentsACS:CpeDetailBaseType">
+				<xs:sequence>
+					<xs:element name="cancelledCpeMacAddress" type="fieldsACS:MACAdressType" maxOccurs="1" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="R024-CpeACMacAmendmentDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="segmentsACS:CpeDetailBaseType">
+				<xs:sequence>
+					<xs:element name="cpeMacAddress" type="fieldsACS:MACAdressType"/>
+					<xs:element name="cpeAdminAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeRemoteAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeUserId" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="lanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="lanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="wanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="wanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="dslAccount" minOccurs="0" type="fieldsACS:String50Type" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="R025-CpeRCMacAmendmentDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="segmentsACS:CpeDetailBaseType">
+				<xs:sequence>
+					<xs:element name="cpeMacAddress" type="fieldsACS:MACAdressType"/>
+					<xs:element name="oldCpeMacAddress" type="fieldsACS:MACAdressType" />
+					<xs:element name="cpeAdminAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeRemoteAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeUserId" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="lanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="lanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="wanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="wanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="dslAccount" minOccurs="0" type="fieldsACS:String50Type" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="R026-CpeMsgDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="segmentsACS:CpeDetailBaseType">
+				<xs:sequence>
+					<xs:element name="cpeMacAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:MACAdressType"/>
+					<xs:element name="oldCpeMacAddress" type="fieldsACS:MACAdressType" maxOccurs="1" minOccurs="0"/>
+					<xs:element name="cancelledCpeMacAddress" type="fieldsACS:MACAdressType" maxOccurs="1" minOccurs="0"/>
+					<xs:element name="onSiteInstallation" type="fieldsACS:ynType" maxOccurs="1" minOccurs="0"/>
+					<xs:element name="cpeAdminAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeRemoteAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="cpeUserId" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+					<xs:element name="lanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="lanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="wanFixedIpAddress" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv4AdressType" />
+					<xs:element name="wanFixedIp6Address" minOccurs="0" maxOccurs="1" type="fieldsACS:Ipv6AdressType" />
+					<xs:element name="dslAccount" minOccurs="0" type="fieldsACS:String50Type" />
+					<xs:element name="dslPassword" minOccurs="0" type="fieldsACS:String50Type" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>		
+	</xs:complexType>
+	
+	<!-- Delivery Address -->
+	<xs:complexType name="R003-DeliveryAddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<!-- TODO make names/company XOR -->
+			<xs:element name="firstName" minOccurs="0" type="fieldsACS:String50Type" />
+			<xs:element name="lastName_companyName" type="fieldsACS:String50Type" />
+			<xs:element name="street" type="fieldsACS:String50Type" />
+			<xs:element name="houseNumber" type="fieldsACS:String4Type" />
+			<xs:element name="houseNumberSuffix" minOccurs="0" type="fieldsACS:String6Type" />
+			<xs:element name="town" type="fieldsACS:String50Type" />
+			<xs:element name="townDistrict" minOccurs="0" type="fieldsACS:String50Type" />
+			<xs:element name="postCode" type="fieldsACS:PostCodeGermanyType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R004-DeliveryDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="deliveryDateType" type="fieldsACS:String20Type" />
+			<xs:element name="deliveryDate" type="fieldsACS:DateType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R005-DeliveryRemarkType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="remark" type="fieldsACS:String500Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R006-VoipInformationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="voipAccountCount"  type="fieldsACS:Number10Type" />
+			<xs:element name="voipRegistrar" type="fieldsACS:String50Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R007-VoipDetailType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="voipNumber" type="fieldsACS:String20Type" />
+			<xs:element name="voipName" type="fieldsACS:String20Type" />
+			<xs:element name="voipPass" type="fieldsACS:String20Type" />
+			<xs:element name="voipPort" minOccurs="0" type="fieldsACS:PortType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R008-DslDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="dslUserId" type="fieldsACS:String50Type" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="R009-UmtsBackupType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="simCardPin" type="fieldsACS:String10Type" />
+			<xs:element name="simCardPuk" type="fieldsACS:String10Type" />
+			<xs:element name="simCardIccid" type="fieldsACS:String22Type" />
+			<xs:element name="simCardAccessPoint" type="fieldsACS:String50Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R010-CpeInitialisationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="cpeInitialisationDateTime" type="fieldsACS:DateTimeType" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R011-MissingFieldType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fieldName" type="fieldsACS:String50Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R012-ReplyMessageType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="messageCode" type="fieldsACS:NumberString4xType" />
+			<xs:element name="messageText" type="fieldsACS:String500Type" />
+		</xs:sequence>
+	</xs:complexType>
+		
+	<xs:complexType name="R013-CheckDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="latestInitialLoginDate" type="fieldsACS:DateType" />
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="R014-CancellationDateTimeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="cancellationDateTime" type="fieldsACS:DateTimeType" />
+		</xs:choice>
+	</xs:complexType>
+	
+		<xs:complexType name="R015-FinMetaDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="success" type="fieldsACS:ynType" />
+			<xs:element name="witaFtboxOrderNumber" minOccurs="0" maxOccurs="1" type="fieldsACS:Number10xType" />
+			<xs:element name="witaContractNumber" minOccurs="0" maxOccurs="1" type="fieldsACS:Number10xType" />
+			<xs:element name="dslAccount" minOccurs="0" maxOccurs="1" type="fieldsACS:String50Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+		
+	<xs:complexType name="R029-DeliveryInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="deliveryInfo" type="fieldsACS:String500Type" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="R028-StatusType">
+		<xs:sequence>
+			<xs:element name="status" type="fieldsACS:String20Type"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="R030-MissingAccountsIpsType">
+		<xs:sequence>
+			<xs:element name="numberOfMissingAccounts" minOccurs="0" maxOccurs="1" type="fieldsACS:Number10Type" />
+			<xs:element name="numberOfMissingIps" minOccurs="0" maxOccurs="1" type="fieldsACS:Number10Type" />
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

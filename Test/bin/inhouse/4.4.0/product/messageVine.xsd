@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 21167 $ $LastChangedDate: 2013-05-10 09:20:52 +0200 (Fr, 10 Mai 2013) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:messageVine="http://www.flexagon.de/vine/messageVine/"
+    xmlns:segmentsVine="http://www.flexagon.de/vine/segments/" 
+    xmlns:complexVine="http://www.flexagon.de/vine/complex/" 
+    targetNamespace="http://www.flexagon.de/vine/messageVine/"    
+    elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/vine/segments/" schemaLocation="../segments/segmentsVine.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/vine/complex/" schemaLocation="../complex/complexVine.xsd"/>
+		
+	<xs:complexType name="MessageVineKeyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="complexVine:VineKeyType">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="MessageVineType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="messageVine-CreateTT-BV" type="messageVine:MessageVine-CrTT-BVType"/>
+            <xs:element name="messageVine-SetTT-BV" type="messageVine:MessageVine-SeTT-BVType"/>
+            <xs:element name="messageVine-GetTT-BK" type="messageVine:MessageVine-GeTT-BKType"/>
+            <xs:element name="messageVine-CloseTT-BK" type="messageVine:MessageVine-CloseTT-BKType"/>
+            <xs:element name="messageVine-CancelTT-BK" type="messageVine:MessageVine-CancelTT-BKType"/>
+            <xs:element name="eventVine-TTCreate" type="messageVine:EventVine-TTCreateType"/>
+            <xs:element name="eventVine-TTClose" type="messageVine:EventVine-TTCloseType"/>
+            <xs:element name="eventVine-TTCancel" type="messageVine:EventVine-TTCancelType"/>
+            <xs:element name="eventVine-TTAVC" type="messageVine:EventVine-TTAVCType"/>
+            <xs:element name="eventVine-TTSC" type="messageVine:EventVine-TTSCType"/>
+            <xs:element name="exceptionVine-CreateTT-BV" type="messageVine:ExceptionVine-CreateTT-BVType"/>
+            <xs:element name="exceptionVine-SetTT-BV" type="messageVine:ExceptionVine-SetTT-BVType"/>
+            <xs:element name="exceptionVine-GetTT-BK" type="messageVine:ExceptionVine-GetTT-BKType"/>
+            <xs:element name="exceptionVine-CloseTT-BK" type="messageVine:ExceptionVine-CloseTT-BKType"/>
+            <xs:element name="exceptionVine-CancelTT-BK" type="messageVine:ExceptionVine-CancelTT-BKType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageVineRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="eventVine-TTCreate" type="messageVine:EventVine-TTCreateType"/>
+            <xs:element name="eventVine-TTClose" type="messageVine:EventVine-TTCloseType"/>
+            <xs:element name="eventVine-TTCancel" type="messageVine:EventVine-TTCancelType"/>
+            <xs:element name="eventVine-TTAVC" type="messageVine:EventVine-TTAVCType"/>
+            <xs:element name="eventVine-TTSC" type="messageVine:EventVine-TTSCType"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageVineResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	    
+        </xs:choice>
+    </xs:complexType> 
+     
+    <xs:complexType name="MessageVineBasisType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+        	<xs:element name="troubleTicketKey" type="complexVine:TroubleTicketKeyType"></xs:element>
+        </xs:choice>
+    </xs:complexType>  
+    
+     
+     
+     <xs:complexType name="MessageVine-CrTT-BVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageVine:MessageVineBasisType">        
+                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="MessageVine-SeTT-BVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+
+    </xs:complexType>
+
+    <xs:complexType name="MessageVine-GeTT-BKType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:complexContent>
+    		<xs:extension base="complexVine:TroubleTicketBaseType">
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="MessageVine-CloseTT-BKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        
+    </xs:complexType>
+    
+    <xs:complexType name="MessageVine-CancelTT-BKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       
+    </xs:complexType>  
+
+    <xs:complexType name="EventVine-TTCreateType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:complexContent>
+    		<xs:extension base="complexVine:TroubleTicketBaseType">
+    			<xs:sequence>
+    				<xs:element name="event" type="segmentsVine:G029-GeneralEventType"></xs:element>
+    			</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="EventVine-TTCloseType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:complexContent>
+    		<xs:extension base="complexVine:TroubleTicketBaseType">
+    			<xs:sequence>
+    				<xs:element name="event" type="segmentsVine:G029-GeneralEventType"></xs:element>
+    			</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="EventVine-TTCancelType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+         <xs:complexContent>
+            <xs:extension base="messageVine:MessageVineBasisType">        
+                <xs:sequence>
+           			<xs:element name="event" type="segmentsVine:G029-GeneralEventType"/>
+           			<xs:element name="closeOutNarr" type="segmentsVine:G027-CloseOutNarrType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+    </xs:complexType>
+     
+    <xs:complexType name="EventVine-TTAVCType">
+    	<xs:annotation>
+    		<xs:documentation xml:lang="en"></xs:documentation>
+    	</xs:annotation>
+    	<xs:complexContent>
+    		<xs:extension base="complexVine:TroubleTicketBaseType">
+    			<xs:sequence>
+    				<xs:element name="event" type="segmentsVine:G029-GeneralEventType"></xs:element>
+    			</xs:sequence>
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="EventVine-TTSCType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="messageVine:MessageVineBasisType">        
+                <xs:sequence>
+                	<xs:element name="event" type="segmentsVine:G028-GeneralChangeEventType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="ExceptionVine-CreateTT-BVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       		<xs:sequence>
+       			<xs:element name="exception" type="segmentsVine:G037-ExceptionType"/>
+       		</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ExceptionVine-SetTT-BVType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       		<xs:sequence>
+       			<xs:element name="exception" type="segmentsVine:G037-ExceptionType"/>
+       			<xs:element name="managedEntityKey" minOccurs="0" type="complexVine:ManagedEntityKeyType"/>
+       		</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ExceptionVine-GetTT-BKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       		<xs:sequence>
+       			<xs:element name="exception" type="segmentsVine:G037-ExceptionType"/>
+       		</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ExceptionVine-CloseTT-BKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       		<xs:sequence>
+       			<xs:element name="exception" type="segmentsVine:G037-ExceptionType"/>
+       		</xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="ExceptionVine-CancelTT-BKType">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>
+       		<xs:sequence>
+       			<xs:element name="exception" type="segmentsVine:G037-ExceptionType"/>
+       		</xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

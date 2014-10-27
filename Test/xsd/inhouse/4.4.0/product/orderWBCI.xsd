@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 52139 $ $LastChangedDate: 2014-05-23 09:28:10 +0200 (Fr, 23 Mai 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderWBCI="http://www.flexagon.de/wbci/orderWBCI/" 
+	xmlns:segmentsWBCI="http://www.flexagon.de/wbci/segments/" 
+	targetNamespace="http://www.flexagon.de/wbci/orderWBCI/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wbci/segments/" schemaLocation="../segments/segmentsWBCI.xsd"/>
+	
+	<xs:complexType name="OrderWBCIaufType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderWBCI-VA-KUE-MRN" type="orderWBCI:OrderWBCI-VA-KUE-MRNType"/>
+			<xs:element name="orderWBCI-VA-KUE-ORN" type="orderWBCI:OrderWBCI-VA-KUE-ORNType"/>
+			<xs:element name="orderWBCI-VA-RRNP" type="orderWBCI:OrderWBCI-VA-RRNPType"/>
+			<xs:element name="orderWBCI-STO-AUF" type="orderWBCI:OrderWBCI-STO-AUFaufType"/>
+			<xs:element name="orderWBCI-STO-AEN" type="orderWBCI:OrderWBCI-STO-AENaufType"/>
+			<xs:element name="orderWBCI-TVS-VA" type="orderWBCI:OrderWBCI-TVS-VAType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCIabgType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderWBCI-STO-AUF" type="orderWBCI:OrderWBCI-STO-AUFabgType"/>
+			<xs:element name="orderWBCI-STO-AEN" type="orderWBCI:OrderWBCI-STO-AENabgType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWbci2Type" abstract="true">
+        <xs:annotation>
+            <xs:documentation xml:lang="en">                
+            </xs:documentation>
+        </xs:annotation>        
+            <xs:sequence>
+            	<xs:element name="sender" type="segmentsWBCI:F007-SenderType"/>
+            	<xs:element name="receivingCompany" type="segmentsWBCI:F008-ReceivingCompanyType"/>
+            	<xs:element name="issuingCompany" type="segmentsWBCI:F009-IssuingCompanyType"/>
+            </xs:sequence>
+    </xs:complexType> 
+    
+    <xs:complexType name="OrderWbciStoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbci2Type">
+				<xs:sequence>
+					<xs:element name="stornoId" type="segmentsWBCI:F029-StornoIdType"/>
+					<xs:element name="preCoordinationData" type="orderWBCI:PreCoordinationDataType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-VORABSType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbci2Type">
+				<xs:sequence>
+					<xs:element name="preCoordination" type="segmentsWBCI:F006-preCoordinationType"/>
+					<xs:element name="date" type="segmentsWBCI:F005-CustomerDateType"/>
+					<xs:element name="endCustomer" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="connectionOwner" minOccurs="0" maxOccurs="99" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="project" minOccurs="0" type="segmentsWBCI:F017-ProjectType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-VA-KUE-MRNType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbci2Type">
+				<xs:sequence>
+					<xs:element name="preCoordination" type="segmentsWBCI:F006-preCoordinationType"/>
+					<xs:element name="date" type="segmentsWBCI:F005-CustomerDateType"/>
+					<xs:element name="endCustomer" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="connectionOwner" minOccurs="0" maxOccurs="99" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="project" minOccurs="0" type="segmentsWBCI:F017-ProjectType"/>
+					<xs:element name="location" type="segmentsWBCI:F016-LocationType"/>
+					<xs:element name="numberPorting" type="orderWBCI:NumberPortingType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-VA-KUE-ORNType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbci2Type">
+				<xs:sequence>
+					<xs:element name="preCoordination" type="segmentsWBCI:F006-preCoordinationType"/>
+					<xs:element name="date" type="segmentsWBCI:F005-CustomerDateType"/>
+					<xs:element name="endCustomer" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="connectionOwner" minOccurs="0" maxOccurs="99" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="project" minOccurs="0" type="segmentsWBCI:F017-ProjectType"/>
+					<xs:element name="location" type="segmentsWBCI:F016-LocationType"/>
+					<xs:element name="connectionIdentifier" minOccurs="0" type="segmentsWBCI:F024-ConnectionIdentifierType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-VA-RRNPType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbci2Type">
+				<xs:sequence>
+					<xs:element name="preCoordination" type="segmentsWBCI:F006-preCoordinationType"/>
+					<xs:element name="date" type="segmentsWBCI:F005-CustomerDateType"/>
+					<xs:element name="endCustomer" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="connectionOwner" minOccurs="0" maxOccurs="99" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="project" minOccurs="0" type="segmentsWBCI:F017-ProjectType"/>
+					<xs:element name="numberPorting" type="orderWBCI:NumberPortingType"/>
+					<xs:element name="portingIdPKIreceiving" type="segmentsWBCI:F025-PortingIdType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-STO-AUFaufType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbciStoType">
+				
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-STO-AENaufType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbciStoType">
+				<xs:sequence>
+					<xs:element name="name" minOccurs="0" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="location" minOccurs="0" type="segmentsWBCI:F016-LocationType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-STO-AUFabgType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbciStoType">
+				<xs:sequence>
+					<xs:element name="name" minOccurs="0" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="location" minOccurs="0" type="segmentsWBCI:F016-LocationType"/>
+					<xs:element name="stornoReason" type="segmentsWBCI:F026-ReasonType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-STO-AENabgType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbciStoType">
+				<xs:sequence>
+					<xs:element name="name" minOccurs="0" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="location" minOccurs="0" type="segmentsWBCI:F016-LocationType"/>
+					<xs:element name="stornoReason" type="segmentsWBCI:F026-ReasonType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderWBCI-TVS-VAType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="orderWBCI:OrderWbci2Type">
+				<xs:sequence>
+					<xs:element name="changeId" type="segmentsWBCI:F030-ChangeIdType"/>
+					<xs:element name="preCoordinationData" type="orderWBCI:PreCoordinationDataType"/>
+					<xs:element name="name" minOccurs="0" type="orderWBCI:PersonCompanyType"/>
+					<xs:element name="newTargetDate" type="segmentsWBCI:F031-NewTargetDateType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="PersonCompanyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="Company" type="segmentsWBCI:F027-CompanyType"/>
+			<xs:element name="Person" type="segmentsWBCI:F028-PersonType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="NumberPortingType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="trunkConnection" type="orderWBCI:NumberBlockPortingType"/>
+				<xs:element name="singleConnection" type="orderWBCI:SingleNumberPortingType"/>
+			</xs:choice>
+			<xs:element name="portingTimeSlot" type="segmentsWBCI:F018-ProtingTimeSlotType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="NumberPortingMitPkiAufType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="trunkConnection" type="orderWBCI:NumberBlockPortingType"/>
+				<xs:element name="singleConnection" type="orderWBCI:SingleNumberPortingType"/>
+			</xs:choice>
+			<xs:element name="portingTimeSlot" type="segmentsWBCI:F018-ProtingTimeSlotType"/>
+			<xs:element name="portingIdPKIreceiving" minOccurs="0" type="segmentsWBCI:F025-PortingIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="NumberBlockPortingType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="connectionNumber" type="segmentsWBCI:F022-ConnectionNumberType"/>
+			<xs:element name="numberBlock" minOccurs="1" maxOccurs="5" type="segmentsWBCI:F021-NumberBlockType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SingleNumberPortingType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="numberList" type="orderWBCI:NumberListType"/>
+			<xs:element name="allNumbers" minOccurs="0" type="segmentsWBCI:F020-AllNumbersType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="PreCoordinationDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="preCoordinationRef" type="segmentsWBCI:F004-PreCoordinationReferenceType"/>
+			<xs:element name="originalOrder" type="orderWBCI:OriginalOrderType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OriginalOrderType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="sender" type="segmentsWBCI:F007-SenderType"/>
+            <xs:element name="receivingCompany" type="segmentsWBCI:F008-ReceivingCompanyType"/>
+            <xs:element name="issuingCompany" type="segmentsWBCI:F009-IssuingCompanyType"/>
+			<xs:element name="preCoordination" type="segmentsWBCI:F006-preCoordinationType"/>
+			<xs:element name="date" type="segmentsWBCI:F005-CustomerDateType"/>
+			<xs:element name="endCustomer" type="orderWBCI:PersonCompanyType"/>
+			<xs:element name="connectionOwner" minOccurs="0" maxOccurs="99" type="orderWBCI:PersonCompanyType"/>
+			<xs:element name="project" minOccurs="0" type="segmentsWBCI:F017-ProjectType"/>
+			<xs:element name="location" minOccurs="0" type="segmentsWBCI:F016-LocationType"/>
+			<xs:element name="numberPorting" minOccurs="0" type="orderWBCI:NumberPortingMitPkiAufType"/>
+			<xs:element name="connectionIdentifier" minOccurs="0" type="segmentsWBCI:F024-ConnectionIdentifierType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="NumberListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="singleNumber" minOccurs="1" maxOccurs="10" type="segmentsWBCI:F019-SinglePhoneNumberType"/>
+		</xs:choice>
+	</xs:complexType>	
+		
+
+</xs:schema>

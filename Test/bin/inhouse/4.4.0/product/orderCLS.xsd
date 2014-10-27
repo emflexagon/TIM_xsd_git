@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Revision: 47001 $ $LastChangedDate: 2014-03-13 13:04:16 +0100 (Do, 13 Mrz 2014) $ -->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:orderCLS="http://www.flexagon.de/wita/orderCLS/" 
+	xmlns:segmentsWITA="http://www.flexagon.de/wita/segments/" 
+	xmlns:order="http://www.flexagon.de/inhouse/order/" 
+	targetNamespace="http://www.flexagon.de/wita/orderCLS/" 
+	elementFormDefault="unqualified">
+	<!-- 
+	   Imports 
+	-->
+	<xs:import namespace="http://www.flexagon.de/wita/segments/" schemaLocation="../segments/segmentsWITA.xsd"/>
+	<xs:import namespace="http://www.flexagon.de/inhouse/order/" schemaLocation="order.xsd"/>
+	
+	<xs:complexType name="OrderCLSType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="orderCLS-NEU" type="orderCLS:OrderCLS-NEUType"/>
+			<xs:element name="orderCLS-KUE-KD" type="orderCLS:OrderCLS-KUE-KDType"/>
+			<xs:element name="orderCLS-AEN-LMAE" type="orderCLS:OrderCLS-AEN-LMAEType"/>
+			<xs:element name="orderCLS-PV" type="orderCLS:OrderCLS-PVType"/>
+			<xs:element name="orderCLS-VBL" type="orderCLS:OrderCLS-VBLType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderCLS-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderNEUType">
+				<xs:sequence>
+		            <xs:element name="productCLS-NEU" type="orderCLS:ProductCLS-NEUType"/> 
+		    	</xs:sequence>
+		    </xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderCLS-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderKUE-KDType">
+				<xs:sequence>
+		            <xs:element name="productCLS-KUE-KD" type="orderCLS:ProductCLS-KUE-KDType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderCLS-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderAEN-LMAEType">
+				<xs:sequence>
+		            <xs:element name="productCLS-AEN-LMAE" type="orderCLS:ProductCLS-AEN-LMAEType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderCLS-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderPVType">
+				<xs:sequence>
+		            <xs:element name="productCLS-PV" type="orderCLS:ProductCLS-PVType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:complexType name="OrderCLS-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="order:OrderVBLType">
+				<xs:sequence>
+		            <xs:element name="productCLS-VBL" type="orderCLS:ProductCLS-VBLType"/> 
+		    	</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+
+
+	
+	<xs:complexType name="ProductCLS-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoCLS-NEU" type="orderCLS:ProductInfoCLS-NEU"/>
+			<xs:element name="subproductCLS-NEU" minOccurs="0" maxOccurs="unbounded" type="orderCLS:SubproductCLS-NEUType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductCLS-NEUType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoCLS-NEU" minOccurs="0" type="orderCLS:ProductInfoCLS-NEU"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoCLS-NEU">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>            
+            <xs:element name="locationA" type="segmentsWITA:W010-LocationAType"/>
+            <xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/> 
+            <xs:element name="previousTenant" minOccurs="0" type="segmentsWITA:W009-PreviousTenantType"/>
+            <xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+            <xs:element name="stockSearch" type="segmentsWITA:W017-StockSearchType"/>
+            <xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" type="segmentsWITA:W021-SwitchDataCopperType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductCLS-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoCLS-KUE-KD" type="orderCLS:ProductInfoCLS-KUE-KD"/>
+			<xs:element name="subproductCLS-KUE-KD" minOccurs="0" maxOccurs="unbounded" type="orderCLS:SubproductCLS-KUE-KDType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductCLS-KUE-KDType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoCLS-KUE-KD" minOccurs="0" type="orderCLS:ProductInfoCLS-KUE-KD"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoCLS-KUE-KD">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductCLS-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductWithActionCodeType"/>
+			<xs:element name="productInfoCLS-AEN-LMAE" type="orderCLS:ProductInfoCLS-AEN-LMAE"/>
+			<xs:element name="subproductCLS-AEN-LMAE" maxOccurs="unbounded" type="orderCLS:SubproductCLS-AEN-LMAEType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductCLS-AEN-LMAEType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoCLS-AEN-LMAE" minOccurs="0" type="orderCLS:ProductInfoCLS-AEN-LMAE"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoCLS-AEN-LMAE">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" minOccurs="0" type="segmentsWITA:W010-LocationAType"/>
+			<xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/> 
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+			<xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" minOccurs="0" type="segmentsWITA:W021-SwitchDataCopperType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductCLS-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoCLS-PV" type="orderCLS:ProductInfoCLS-PV"/>
+			<xs:element name="subproductCLS-PV" minOccurs="0" maxOccurs="unbounded" type="orderCLS:SubproductCLS-PVType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductCLS-PVType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoCLS-PV" minOccurs="0" type="orderCLS:ProductInfoCLS-PV"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoCLS-PV">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+			<xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+            <xs:element name="switchingData" type="segmentsWITA:W021-SwitchDataCopperType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductCLS-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="product" type="segmentsWITA:W016-ProductType"/>
+			<xs:element name="productInfoCLS-VBL" type="orderCLS:ProductInfoCLS-VBL"/>
+			<xs:element name="subproductCLS-VBL" minOccurs="0" maxOccurs="unbounded" type="orderCLS:SubproductCLS-VBLType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="SubproductCLS-VBLType">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="subproduct" type="segmentsWITA:W050-SubproductType"/>
+			<xs:element name="productInfoCLS-VBL" minOccurs="0" type="orderCLS:ProductInfoCLS-VBL"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProductInfoCLS-VBL">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">                
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="locationA" type="segmentsWITA:W010-LocationAType" maxOccurs="1" minOccurs="0"/>
+			<xs:element name="locationB" type="segmentsWITA:W011-LocationBType"/>
+			<xs:element name="locationConnectionOwner" minOccurs="0" type="segmentsWITA:W012-LocationConnectionOwnerType"/>
+			<xs:element name="installationServices" minOccurs="0" type="segmentsWITA:W014-InstallationServicesType"/>
+			<xs:element name="stockSearch" minOccurs="0" type="segmentsWITA:W017-StockSearchType"/>
+			<xs:element name="stockValidation" minOccurs="0" type="segmentsWITA:W044-Id1StockValidationType"/>
+			<xs:element name="transmissionCoding" minOccurs="0" type="segmentsWITA:W020-TransmissionCodingType"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
